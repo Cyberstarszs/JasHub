@@ -15,49 +15,74 @@ document.addEventListener("DOMContentLoaded", () => {
   const rotateValue = document.getElementById("rotateValue");
 
   const resetBtn = document.getElementById("resetTransform");
+  const fitBtn = document.getElementById("fitToFrame");
+  const centerBtn = document.getElementById("centerPhoto");
+  const flipBtn = document.getElementById("flipHorizontal");
+
   const downloadBtn = document.getElementById("downloadBtn");
   const downloadFormat = document.getElementById("downloadFormat");
 
   const templateThumbs = document.querySelectorAll(".template-thumb");
 
-  // State object
+  // Filter controls
+  const brightnessSlider = document.getElementById("brightnessSlider");
+  const contrastSlider = document.getElementById("contrastSlider");
+  const saturateSlider = document.getElementById("saturateSlider");
+  const grayscaleSlider = document.getElementById("grayscaleSlider");
+
+  const brightnessValue = document.getElementById("brightnessValue");
+  const contrastValue = document.getElementById("contrastValue");
+  const saturateValue = document.getElementById("saturateValue");
+  const grayscaleValue = document.getElementById("grayscaleValue");
+
+  const presetButtons = document.querySelectorAll(".filter-preset");
+
+  // State utama
   const state = {
     photoImage: null,
     templateImage: null,
     photoScale: 1,
-    photoRotation: 0, // in degrees
+    photoRotation: 0, // degrees
     offsetX: 0,
     offsetY: 0,
+    flipX: 1,
     isDragging: false,
     dragStartX: 0,
     dragStartY: 0,
     initialOffsetX: 0,
     initialOffsetY: 0,
+    filters: {
+      brightness: 1,
+      contrast: 1,
+      saturation: 1,
+      grayscale: 0,
+    },
+    activePreset: "original",
   };
 
-  // Default templates map (id -> src)
+  // Map template default
   const templateMap = {
     1: "assets/img/twibbon-1.png",
     2: "assets/img/twibbon-2.png",
     3: "assets/img/twibbon-3.png",
   };
 
-  // Helper: load image from src, return Promise<HTMLImageElement>
+  // Helper load image
   function loadImage(src) {
     return new Promise((resolve, reject) => {
       const img = new Image();
-      img.crossOrigin = "anonymous"; // safer for canvas
+      img.crossOrigin = "anonymous";
       img.onload = () => resolve(img);
       img.onerror = (err) => reject(err);
       img.src = src;
     });
   }
 
-  // Initialize default template based on URL param or first one
+  // Template dari URL
   async function initTemplateFromUrl() {
     const params = new URLSearchParams(window.location.search);
     const templateId = params.get("template");
-    let chosenId = templateId && templateMap[templateId] ? templateId : "1";
+    const chosenId = templateId && templateMap[templateId] ? templateId : "1";
 
     try {
       const img = await loadImage(templateMap[chosenId]);
@@ -81,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function markActiveTemplateThumb(id) {
     templateThumbs.forEach((btn) => {
-      if (btn.dataset.template === String(id)) {
+      if (id && btn.dataset.template === String(id)) {
         btn.classList.add("active");
       } else {
         btn.classList.remove("active");
@@ -89,22 +114,95 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Draw function
+  // Gabung filter jadi string CSS filter
+  function buildFilterString() {
+    const f = state.filters;
+    return [
+      `brightness(${f.brightness})`,
+      `contrast(${f.contrast})`,
+      `saturate(${f.saturation})`,
+      `grayscale(${f.grayscale})`,
+    ].join(" ");
+  }
+
+  function updateFilterLabelsFromState() {
+    if (brightnessSlider && brightnessValue) {
+      brightnessSlider.value = String(state.filters.brightness);
+      brightnessValue.textContent = Math.round(state.filters.brightness * 100) + "%";
+    }
+    if (contrastSlider && contrastValue) {
+      contrastSlider.value = String(state.filters.contrast);
+      contrastValue.textContent = Math.round(state.filters.contrast * 100) + "%";
+    }
+    if (saturateSlider && saturateValue) {
+      saturateSlider.value = String(state.filters.saturation);
+      saturateValue.textContent = Math.round(state.filters.saturation * 100) + "%";
+    }
+    if (grayscaleSlider && grayscaleValue) {
+      grayscaleSlider.value = String(state.filters.grayscale);
+      grayscaleValue.textContent = Math.round(state.filters.grayscale * 100) + "%";
+    }
+  }
+
+  function setActivePresetButton(name) {
+    presetButtons.forEach((btn) => {
+      if (btn.dataset.preset === name) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    });
+  }
+
+  function applyPreset(name) {
+    switch (name) {
+      case "soft":
+        state.filters.brightness = 1.05;
+        state.filters.contrast = 0.95;
+        state.filters.saturation = 1.15;
+        state.filters.grayscale = 0.1;
+        break;
+      case "vibrant":
+        state.filters.brightness = 1.05;
+        state.filters.contrast = 1.2;
+        state.filters.saturation = 1.4;
+        state.filters.grayscale = 0;
+        break;
+      case "mono":
+        state.filters.brightness = 1.0;
+        state.filters.contrast = 1.05;
+        state.filters.saturation = 0;
+        state.filters.grayscale = 1;
+        break;
+      default:
+        // original
+        state.filters.brightness = 1;
+        state.filters.contrast = 1;
+        state.filters.saturation = 1;
+        state.filters.grayscale = 0;
+        break;
+    }
+    state.activePreset = name;
+    updateFilterLabelsFromState();
+    setActivePresetButton(name);
+    redraw();
+  }
+
+  // Gambar ulang canvas
   function redraw() {
     if (!ctx || !canvas) return;
     const { width, height } = canvas;
 
-    // Clear canvas
     ctx.clearRect(0, 0, width, height);
 
-    // Background
+    // Background gradient
     const gradient = ctx.createLinearGradient(0, 0, width, height);
     gradient.addColorStop(0, "#050509");
     gradient.addColorStop(1, "#151522");
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, width, height);
 
-    // Draw photo first
+    // Foto (dengan filter)
     if (state.photoImage) {
       const img = state.photoImage;
       const centerX = width / 2 + state.offsetX;
@@ -113,19 +211,20 @@ document.addEventListener("DOMContentLoaded", () => {
       ctx.save();
       ctx.translate(centerX, centerY);
       ctx.rotate((state.photoRotation * Math.PI) / 180);
+      ctx.scale(state.flipX, 1);
 
       const scaledW = img.width * state.photoScale;
       const scaledH = img.height * state.photoScale;
 
+      ctx.filter = buildFilterString();
       ctx.drawImage(img, -scaledW / 2, -scaledH / 2, scaledW, scaledH);
       ctx.restore();
+      ctx.filter = "none";
     }
 
-    // Draw template on top
+    // Template overlay di atas foto (tanpa filter)
     if (state.templateImage) {
       const tImg = state.templateImage;
-
-      // Fit template to canvas while preserving aspect ratio
       const scale = Math.max(
         canvas.width / tImg.width,
         canvas.height / tImg.height
@@ -139,12 +238,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Reset transform values
+  // Reset transform
   function resetTransform() {
     state.photoScale = 1;
     state.photoRotation = 0;
     state.offsetX = 0;
     state.offsetY = 0;
+    state.flipX = 1;
 
     if (zoomSlider) zoomSlider.value = "1";
     if (rotateSlider) rotateSlider.value = "0";
@@ -154,9 +254,44 @@ document.addEventListener("DOMContentLoaded", () => {
     redraw();
   }
 
-  // Handlers: upload photo
+  // Fit foto ke frame
+  function fitPhotoToFrame() {
+    if (!state.photoImage || !canvas) return;
+    const img = state.photoImage;
+
+    const scale = Math.max(
+      canvas.width / img.width,
+      canvas.height / img.height
+    );
+
+    state.photoScale = scale;
+    state.offsetX = 0;
+    state.offsetY = 0;
+
+    if (zoomSlider) {
+      zoomSlider.value = String(scale);
+      zoomValue.textContent = Math.round(scale * 100) + "%";
+    }
+
+    redraw();
+  }
+
+  // Pusatkan foto
+  function centerPhoto() {
+    state.offsetX = 0;
+    state.offsetY = 0;
+    redraw();
+  }
+
+  // Flip horizontal
+  function flipHorizontal() {
+    state.flipX *= -1;
+    redraw();
+  }
+
+  // Upload foto
   if (photoInput) {
-    photoInput.addEventListener("change", async (e) => {
+    photoInput.addEventListener("change", (e) => {
       const file = e.target.files && e.target.files[0];
       if (!file) return;
 
@@ -166,6 +301,8 @@ document.addEventListener("DOMContentLoaded", () => {
           const img = await loadImage(ev.target.result);
           state.photoImage = img;
           resetTransform();
+          // Auto fit sedikit lebih nyaman untuk resolusi tinggi
+          fitPhotoToFrame();
           updatePhotoInfo(`Foto terpasang: ${file.name}`);
         } catch (err) {
           console.error("Gagal memuat foto:", err);
@@ -177,7 +314,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Handlers: upload template
+  // Upload template custom
   if (templateInput) {
     templateInput.addEventListener("change", (e) => {
       const file = e.target.files && e.target.files[0];
@@ -200,7 +337,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Handlers: default template thumbnails
+  // Template default
   if (templateThumbs.length > 0) {
     templateThumbs.forEach((btn) => {
       btn.addEventListener("click", async () => {
@@ -241,14 +378,76 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Reset button
+  // Reset, fit, center, flip buttons
   if (resetBtn) {
-    resetBtn.addEventListener("click", () => {
-      resetTransform();
+    resetBtn.addEventListener("click", resetTransform);
+  }
+  if (fitBtn) {
+    fitBtn.addEventListener("click", fitPhotoToFrame);
+  }
+  if (centerBtn) {
+    centerBtn.addEventListener("click", centerPhoto);
+  }
+  if (flipBtn) {
+    flipBtn.addEventListener("click", flipHorizontal);
+  }
+
+  // Filter sliders
+  if (brightnessSlider && brightnessValue) {
+    brightnessSlider.addEventListener("input", () => {
+      state.filters.brightness = parseFloat(brightnessSlider.value);
+      brightnessValue.textContent =
+        Math.round(state.filters.brightness * 100) + "%";
+      state.activePreset = "custom";
+      setActivePresetButton(null);
+      redraw();
     });
   }
 
-  // Dragging on canvas (mouse)
+  if (contrastSlider && contrastValue) {
+    contrastSlider.addEventListener("input", () => {
+      state.filters.contrast = parseFloat(contrastSlider.value);
+      contrastValue.textContent =
+        Math.round(state.filters.contrast * 100) + "%";
+      state.activePreset = "custom";
+      setActivePresetButton(null);
+      redraw();
+    });
+  }
+
+  if (saturateSlider && saturateValue) {
+    saturateSlider.addEventListener("input", () => {
+      state.filters.saturation = parseFloat(saturateSlider.value);
+      saturateValue.textContent =
+        Math.round(state.filters.saturation * 100) + "%";
+      state.activePreset = "custom";
+      setActivePresetButton(null);
+      redraw();
+    });
+  }
+
+  if (grayscaleSlider && grayscaleValue) {
+    grayscaleSlider.addEventListener("input", () => {
+      state.filters.grayscale = parseFloat(grayscaleSlider.value);
+      grayscaleValue.textContent =
+        Math.round(state.filters.grayscale * 100) + "%";
+      state.activePreset = "custom";
+      setActivePresetButton(null);
+      redraw();
+    });
+  }
+
+  // Preset buttons
+  if (presetButtons.length > 0) {
+    presetButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const name = btn.dataset.preset || "original";
+        applyPreset(name);
+      });
+    });
+  }
+
+  // Drag mouse
   if (canvas) {
     canvas.addEventListener("mousedown", (e) => {
       if (!state.photoImage) return;
@@ -272,7 +471,7 @@ document.addEventListener("DOMContentLoaded", () => {
       state.isDragging = false;
     });
 
-    // Dragging on canvas (touch)
+    // Drag touch
     canvas.addEventListener(
       "touchstart",
       (e) => {
@@ -308,7 +507,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Download merged image
+  // Download HD
   if (downloadBtn && downloadFormat) {
     downloadBtn.addEventListener("click", () => {
       if (!state.photoImage || !state.templateImage) {
@@ -320,23 +519,23 @@ document.addEventListener("DOMContentLoaded", () => {
       let dataUrl;
 
       if (format === "png") {
-        dataUrl = canvas.toDataURL("image/png");
+        dataUrl = canvas.toDataURL("image/png"); // lossless
       } else {
         dataUrl = canvas.toDataURL("image/jpeg", 0.95);
       }
 
       const link = document.createElement("a");
       link.href = dataUrl;
-      link.download = `twibbon-${Date.now()}.${format}`;
+      link.download = `twibbon-hd-${Date.now()}.${format}`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     });
   }
 
-  // Initialize template from URL if possible
+  // Init
+  updateFilterLabelsFromState();
   initTemplateFromUrl().finally(() => {
-    // initial draw
     redraw();
   });
 });
