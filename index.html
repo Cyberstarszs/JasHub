@@ -1166,6 +1166,42 @@
                 gap: 24px;
             }
         }
+        /* Tombol CTA Navbar */
+.nav-cta {
+  padding: 10px 22px;
+  background: linear-gradient(135deg, #6a2de6, #8e44ff);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.25s ease-in-out;
+  box-shadow: 0 4px 14px rgba(106, 45, 230, 0.3);
+}
+
+/* Hover Style */
+.nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(106, 45, 230, 0.45);
+  background: linear-gradient(135deg, #7d3df0, #9f54ff);
+}
+
+/* Active (ditekan) */
+.nav-cta:active {
+  transform: scale(0.96);
+  box-shadow: 0 3px 10px rgba(106, 45, 230, 0.35);
+}
+
+/* Responsif mobile */
+@media (max-width: 768px) {
+  .nav-cta {
+    padding: 9px 18px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+}
+
     </style>
 </head>
 <body>
@@ -1194,6 +1230,9 @@
                         <li><a href="#contact">Kontak</a></li>
                         <li><a href="#products" class="btn btn-primary">Beli Sekarang</a></li>
                     </ul>
+                    <button class="nav-cta" onclick="window.location.href='twibbon.html'">
+        Buat Twibbon
+      </button>
                 </nav>
             </div>
         </div>
