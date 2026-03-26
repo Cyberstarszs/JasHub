@@ -1,0 +1,1801 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>JASHUB - Daftar Paket Premium & Data</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0f1a 0%, #0c1220 100%);
+            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, 'Inter', sans-serif;
+            color: #eef2ff;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        /* Container utama */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFD966, #FFA500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            font-size: 1rem;
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            color: #94a3b8;
+            font-weight: 400;
+        }
+
+        .subtitle {
+            color: #9ca3af;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+
+        /* Statistik */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(4px);
+            border-radius: 40px;
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat-card strong {
+            color: #FFA500;
+            font-size: 1.1rem;
+        }
+
+        /* Search & Filter */
+        .search-section {
+            background: rgba(15, 25, 45, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 60px;
+            padding: 6px 6px 6px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+            border: 1px solid rgba(255,215,0,0.3);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .search-icon {
+            color: #FFA500;
+            font-size: 1.2rem;
+        }
+
+        .search-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 14px 0;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            min-width: 180px;
+        }
+
+        .search-input::placeholder {
+            color: #6c7a8e;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255,255,255,0.08);
+            border: none;
+            padding: 8px 18px;
+            border-radius: 40px;
+            color: #e2e8f0;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn.active {
+            background: #FFA500;
+            color: #0a0f1a;
+            box-shadow: 0 0 8px rgba(255,165,0,0.5);
+        }
+
+        .reset-btn {
+            background: rgba(255,80,80,0.2);
+            border: 1px solid #ff5555;
+            color: #ffaaaa;
+        }
+
+        .reset-btn:hover {
+            background: #ff5555;
+            color: white;
+        }
+
+        /* Grid Paket */
+        .paket-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 24px;
+            margin-top: 16px;
+        }
+
+        /* Card */
+        .card {
+            background: rgba(18, 25, 45, 0.85);
+            backdrop-filter: blur(4px);
+            border-radius: 28px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid rgba(255,215,0,0.2);
+            box-shadow: 0 12px 24px -12px rgba(0,0,0,0.5);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255,165,0,0.5);
+            box-shadow: 0 20px 30px -12px black;
+        }
+
+        .card-header {
+            background: linear-gradient(95deg, #1e2a3a, #0f172a);
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255,200,100,0.3);
+        }
+
+        .card-key {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            background: linear-gradient(120deg, #FFD966, #FFB347);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .card-badge {
+            display: inline-block;
+            background: rgba(255,165,0,0.2);
+            border-radius: 40px;
+            padding: 4px 12px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #FFD966;
+            margin-top: 8px;
+        }
+
+        .card-content {
+            padding: 18px 20px 20px;
+            font-family: 'Courier New', 'Fira Code', monospace;
+            font-size: 0.85rem;
+            line-height: 1.55;
+            white-space: pre-wrap;
+            word-break: break-word;
+            color: #cddcff;
+            max-height: 520px;
+            overflow-y: auto;
+            background: #0b1018;
+        }
+
+        /* Scrollbar kustom */
+        .card-content::-webkit-scrollbar {
+            width: 5px;
+        }
+        .card-content::-webkit-scrollbar-track {
+            background: #1e2a3a;
+            border-radius: 10px;
+        }
+        .card-content::-webkit-scrollbar-thumb {
+            background: #FFA500;
+            border-radius: 10px;
+        }
+
+        /* Teks respons */
+        .no-result {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 60px 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 40px;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 48px;
+            padding: 24px;
+            font-size: 0.75rem;
+            color: #5b6e8c;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 12px;
+            }
+            .paket-grid {
+                grid-template-columns: 1fr;
+            }
+            .search-section {
+                flex-direction: column;
+                align-items: stretch;
+                border-radius: 28px;
+                padding: 12px;
+            }
+            .filter-group {
+                justify-content: center;
+            }
+            .card-key {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* efek loading */
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="logo">JASHUB <span>• PREMIUM & DATA PACKS</span></div>
+        <div class="subtitle">Alight Motion • Streaming • VPN • Paket Data All Operator</div>
+    </div>
+
+    <div class="stats" id="stats-area">
+        <div class="stat-card">📦 Total Paket: <strong id="total-count">0</strong></div>
+        <div class="stat-card">🔍 Tampil: <strong id="visible-count">0</strong></div>
+    </div>
+
+    <div class="search-section">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="searchInput" placeholder="Cari paket... contoh: xl pure, tri happy, netflix, axis apps" autocomplete="off">
+        <div class="filter-group" id="filter-group">
+            <button class="filter-btn active" data-filter="all">Semua</button>
+            <button class="filter-btn" data-filter="xl">XL</button>
+            <button class="filter-btn" data-filter="axis">Axis</button>
+            <button class="filter-btn" data-filter="indosat">Indosat</button>
+            <button class="filter-btn" data-filter="telkomsel">Telkomsel</button>
+            <button class="filter-btn" data-filter="tri">Tri</button>
+            <button class="filter-btn" data-filter="smartfren">Smartfren</button>
+            <button class="filter-btn reset-btn" id="resetBtn">Reset</button>
+        </div>
+    </div>
+
+    <div class="paket-grid" id="paketGrid">
+        <div class="loading">⚡ Memuat data paket...</div>
+    </div>
+    <div class="footer">
+        © JASHUB STORE • Garansi Terpercaya • 24 Jam Support
+    </div>
+</div>
+
+<script>
+    // DATA PAKET (SESUAI PERMINTAAN DENGAN KEY SIMPLE + RESPONSE RAPI)
+    const paketData = [
+        { key: "xl pure", category: "xl", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+DATA PURE XL
+
+┌ 1GB • 30 Hari
+└ Rp12.085
+
+┌ 2GB • 30 Hari
+└ Rp19.135
+
+┌ 3GB • 30 Hari
+└ Rp26.035
+
+┌ 4GB • 30 Hari
+└ Rp32.935
+
+┌ 5GB • 30 Hari
+└ Rp35.600
+
+┌ 6GB • 30 Hari
+└ Rp46.485
+
+┌ 8GB • 30 Hari
+└ Rp55.050
+
+┌ 10GB • 30 Hari
+└ Rp54.700
+
+┌ 30GB • 28 Hari
+└ Rp64.600
+
+┌ 50GB • 28 Hari
+└ Rp81.450
+
+Info:
+• Kuota: Nasional
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "xl harian", category: "xl", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+PAKET HARIAN XL
+
+┌ 2,5GB/4GB • 3 Hari
+└ Rp17.300
+
+┌ 2GB/3,5GB • 5 Hari
+└ Rp18.700
+
+┌ 4,5GB/6,5GB • 3 Hari
+└ Rp19.600
+
+┌ 3GB/5GB • 5 Hari
+└ Rp21.100
+
+┌ 3GB/5,5GB • 7 Hari
+└ Rp22.500
+
+┌ 5,5GB/8,5GB • 5 Hari
+└ Rp23.200
+
+┌ 4,5GB/7,5GB • 7 Hari
+└ Rp26.200
+
+┌ 6,5GB/11,5GB • 7 Hari
+└ Rp32.000
+
+┌ 12GB/20GB • 7 Hari
+└ Rp37.800
+
+Info:
+• Kuota: Nasional
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "xl flex", category: "xl", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+PAKET FLEX XL
+
+┌ 3,5GB/6,5GB • 21 Hari
+└ Rp32.300
+
+┌ 8GB • 14 Hari
+└ Rp32.500
+
+┌ 15GB • 7 Hari
+└ Rp33.100
+
+┌ 3,5GB/6,5GB • 28 Hari
+└ Rp36.900
+
+┌ 7GB • 28 Hari
+└ Rp37.300
+
+┌ 6,5GB/10GB • 28 Hari
+└ Rp38.900
+
+┌ 10GB • 28 Hari
+└ Rp42.300
+
+┌ 15GB • 14 Hari
+└ Rp41.400
+
+┌ 15GB • 28 Hari
+└ Rp47.200
+
+┌ 16GB • 28 Hari
+└ Rp50.300
+
+┌ 20GB • 28 Hari
+└ Rp51.200
+
+┌ 33GB • 14 Hari
+└ Rp52.400
+
+┌ 10GB/15GB • 28 Hari
+└ Rp53.000
+
+┌ 23GB • 28 Hari
+└ Rp59.700
+
+┌ 13GB/20GB • 28 Hari
+└ Rp59.900
+
+Info:
+• Kuota: Nasional
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "xl bebas puas", category: "xl", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+BEBAS PUAS XL
+
+┌ 500MB • 2 Hari
+└ Rp7.300
+
+┌ 1,8GB • 1 Hari
+└ Rp8.100
+
+┌ 750MB • 3 Hari
+└ Rp8.900
+
+┌ 1GB • 2 Hari
+└ Rp9.400
+
+┌ 1GB • 4 Hari
+└ Rp11.300
+
+┌ 1,5GB • 3 Hari
+└ Rp12.500
+
+┌ 1,25GB • 5 Hari
+└ Rp12.600
+
+┌ 3,6GB • 2 Hari
+└ Rp15.500
+
+┌ 1,5GB • 6 Hari
+└ Rp17.500
+
+┌ 2GB • 4 Hari
+└ Rp17.600
+
+┌ 5,4GB • 3 Hari
+└ Rp19.500
+
+┌ 2,5GB • 5 Hari
+└ Rp20.700
+
+┌ 3GB • 6 Hari
+└ Rp23.800
+
+Info:
+• Kuota: Nasional
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "xl combo", category: "xl", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+COMBO XL
+
+┌ 8GB • 30 Hari
+└ Rp45.700
+
+┌ 5GB+10GB • 30 Hari
+└ Rp63.400
+
+┌ 14GB • 30 Hari
+└ Rp67.900
+
+┌ 10GB+20GB • 30 Hari
+└ Rp92.100
+
+┌ 20GB + Lokal • 30 Hari
+└ Rp93.700
+
+┌ 10GB+20GB • 30 Hari
+└ Rp96.400
+
+┌ 15GB+30GB • 30 Hari
+└ Rp127.600
+
+┌ 30GB + Lokal • 30 Hari
+└ Rp136.200
+
+┌ 20GB+40GB • 30 Hari
+└ Rp173.100
+
+┌ 52GB + Lokal • 30 Hari
+└ Rp180.000
+
+Info:
+• Kuota: Nasional + Lokal
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "xl xtra", category: "xl", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+XTRA XL
+
+┌ Edukasi 5GB • 3 Hari
+└ Rp5.800
+
+┌ Conference 5GB • 3 Hari
+└ Rp7.300
+
+┌ Facebook 2GB • 3 Hari
+└ Rp8.800
+
+┌ YouTube 2GB • 3 Hari
+└ Rp8.800
+
+┌ Edukasi 15GB • 7 Hari
+└ Rp10.800
+
+┌ Facebook 3GB • 7 Hari
+└ Rp12.200
+
+┌ YouTube 3GB • 7 Hari
+└ Rp12.200
+
+┌ Instagram 2GB • 30 Hari
+└ Rp15.300
+
+┌ Midnight 5GB • 30 Hari
+└ Rp15.300
+
+┌ Conference 15GB • 7 Hari
+└ Rp15.400
+
+Info:
+• Kuota: Aplikasi
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "axis apps", category: "axis", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+APPS AXIS
+
+┌ YouTube 1GB • 30 Hari
+└ Rp6.900
+
+┌ Edukasi 5GB • 7 Hari
+└ Rp8.800
+
+┌ Konferensi 5GB • 7 Hari
+└ Rp8.900
+
+┌ Sosmed 1GB • 30 Hari
+└ Rp9.800
+
+┌ YouTube 2GB • 30 Hari
+└ Rp10.000
+
+┌ Sosmed 2GB • 30 Hari
+└ Rp11.300
+
+┌ Kuota Malam 5GB • 5 Hari
+└ Rp16.800
+
+┌ Konferensi 15GB • 7 Hari
+└ Rp20.300
+
+┌ Edukasi 15GB • 7 Hari
+└ Rp20.400
+
+Info:
+• Kuota: Aplikasi
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "axis bronet", category: "axis", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+BRONET AXIS
+
+┌ Sulutra 10GB • 30 Hari
+└ Rp37.000
+
+┌ Jateng 7,5GB • 30 Hari
+└ Rp37.200
+
+┌ Banyuwangi 15GB • 15 Hari
+└ Rp45.300
+
+┌ Jatim 10GB • 30 Hari
+└ Rp47.300
+
+┌ Sukabumi 15GB • 30 Hari
+└ Rp49.400
+
+┌ Jateng 12GB • 30 Hari
+└ Rp49.600
+
+┌ Banyuwangi 50GB • 30 Hari
+└ Rp65.400
+
+┌ Banyuwangi 100GB • 30 Hari
+└ Rp88.500
+
+Info:
+• Kuota: Regional
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "axis aigo mini", category: "axis", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+AIGO MINI AXIS
+
+┌ 2GB • 5 Hari
+└ Rp10.700
+
+┌ 2,5GB + Lokal • 1 Hari
+└ Rp11.200
+
+┌ 2GB + Lokal • 3 Hari
+└ Rp12.300
+
+┌ 3GB • 5 Hari
+└ Rp16.800
+
+┌ 3,5GB + West • 5 Hari
+└ Rp17.400
+
+┌ 6GB + Lokal • 3 Hari
+└ Rp18.100
+
+┌ 4GB + Lokal • 5 Hari
+└ Rp19.300
+
+┌ 10GB + Lokal • 3 Hari
+└ Rp20.800
+
+┌ 15GB + Lokal • 3 Hari
+└ Rp26.700
+
+┌ 7,5GB + Lokal • 5 Hari
+└ Rp27.400
+
+┌ 5GB + Lokal • 15 Hari
+└ Rp31.900
+
+Info:
+• Kuota: Nasional + Lokal
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "axis data pure", category: "axis", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+DATA PURE AXIS
+
+┌ 1GB • 30 Hari
+└ Rp10.300
+
+┌ 2GB • 30 Hari
+└ Rp19.400
+
+┌ 3GB • 30 Hari
+└ Rp26.000
+
+┌ 4GB • 30 Hari
+└ Rp33.200
+
+┌ 5GB • 30 Hari
+└ Rp40.200
+
+┌ 6GB • 30 Hari
+└ Rp36.900
+
+┌ 8GB • 30 Hari
+└ Rp43.500
+
+┌ 14GB • 30 Hari
+└ Rp53.100
+
+┌ 30GB • 28 Hari
+└ Rp64.600
+
+┌ 50GB • 28 Hari
+└ Rp81.500
+
+┌ 100GB • 28 Hari
+└ Rp123.200
+
+Info:
+• Kuota: Nasional
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "axis aigo bronet", category: "axis", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+AIGO BRONET AXIS
+
+┌ 3GB + Lokal • 30 Hari
+└ Rp24.300
+
+┌ 5GB + Lokal • 30 Hari
+└ Rp32.700
+
+┌ 2GB • 60 Hari
+└ Rp33.300
+
+┌ 7GB • 28 Hari
+└ Rp34.300
+
+┌ 6GB + Lokal • 30 Hari
+└ Rp36.800
+
+┌ 10GB • 28 Hari
+└ Rp41.500
+
+┌ 8GB + Lokal • 30 Hari
+└ Rp43.400
+
+┌ 16GB • 28 Hari
+└ Rp43.600
+
+┌ 5GB • 60 Hari
+└ Rp57.800
+
+┌ 14GB + Lokal • 30 Hari
+└ Rp62.500
+
+┌ 26GB • 28 Hari
+└ Rp63.100
+
+┌ 20GB + Lokal • 30 Hari
+└ Rp76.800
+
+┌ 40GB • 28 Hari
+└ Rp77.900
+
+Info:
+• Kuota: Nasional + Lokal
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "axis warnet", category: "axis", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+WARNET AXIS
+
+┌ 1,5GB • 2 Jam
+└ Rp5.000
+
+┌ 3GB • 3 Jam
+└ Rp6.000
+
+┌ 3GB • 6 Jam
+└ Rp6.800
+
+┌ Unlimited • 3 Jam
+└ Rp6.900
+
+┌ Unlimited • 24 Jam
+└ Rp10.100
+
+┌ Unlimited • 48 Jam
+└ Rp22.400
+
+┌ Unlimited • 72 Jam
+└ Rp27.900
+
+Info:
+• Kuota: Unlimited (FUP)
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "indosat pure", category: "indosat", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+DATA PURE INDOSAT
+
+┌ 250MB • 30 Hari
+└ Rp4.600
+
+┌ 400MB • 30 Hari
+└ Rp5.500
+
+┌ 500MB • 30 Hari
+└ Rp6.000
+
+┌ 600MB • 30 Hari
+└ Rp6.800
+
+┌ 800MB • 30 Hari
+└ Rp8.000
+
+┌ 1GB • 30 Hari
+└ Rp8.900
+
+┌ 2GB • 30 Hari
+└ Rp16.700
+
+┌ 3GB • 30 Hari
+└ Rp22.400
+
+┌ 4GB • 30 Hari
+└ Rp28.000
+
+┌ 5GB • 30 Hari
+└ Rp33.500
+
+┌ 6GB • 30 Hari
+└ Rp38.900
+
+┌ 7GB • 30 Hari
+└ Rp38.500
+
+┌ 8GB • 30 Hari
+└ Rp42.500
+
+┌ 9GB • 30 Hari
+└ Rp40.000
+
+┌ 10GB • 30 Hari
+└ Rp48.000
+
+Info:
+• Kuota: Nasional
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "indosat freedom mini", category: "indosat", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+FREEDOM MINI INDOSAT
+
+┌ 1GB • 2 Hari
+└ Rp9.100
+
+┌ 1GB • 7 Hari
+└ Rp9.100
+
+┌ 1GB • 15 Hari
+└ Rp9.700
+
+┌ 2GB • 1 Hari
+└ Rp9.900
+
+┌ 1,5GB • 1 Hari
+└ Rp9.900
+
+┌ 3GB • 1 Hari
+└ Rp10.100
+
+┌ 5GB • 2 Hari
+└ Rp12.200
+
+┌ 3GB • 3 Hari
+└ Rp17.000
+
+┌ 2,5GB • 5 Hari
+└ Rp17.600
+
+┌ 5GB • 3 Hari
+└ Rp17.700
+
+┌ 2GB • 5 Hari
+└ Rp18.000
+
+┌ 4GB • 5 Hari
+└ Rp18.100
+
+┌ 5GB • 5 Hari
+└ Rp19.500
+
+┌ 6GB • 5 Hari
+└ Rp19.600
+
+Info:
+• Kuota: Nasional
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "indosat freedom inet", category: "indosat", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+FREEDOM INET INDOSAT
+
+┌ 3GB + Bonus • 28 Hari
+└ Rp25.600
+
+┌ 5GB • 28 Hari
+└ Rp30.000
+
+┌ 6GB • 28 Hari
+└ Rp34.600
+
+┌ 5,5GB • 28 Hari
+└ Rp35.400
+
+┌ 8GB • 28 Hari
+└ Rp35.500
+
+┌ 7GB • 28 Hari
+└ Rp35.600
+
+┌ 9GB • 28 Hari
+└ Rp38.400
+
+┌ 10GB • 28 Hari
+└ Rp38.800
+
+┌ 12GB • 28 Hari
+└ Rp49.200
+
+┌ 16GB • 28 Hari
+└ Rp49.400
+
+┌ 13GB • 28 Hari
+└ Rp54.800
+
+┌ 20GB • 28 Hari
+└ Rp58.200
+
+┌ 24GB • 28 Hari
+└ Rp59.700
+
+┌ 25GB • 28 Hari
+└ Rp65.200
+
+┌ 30GB • 28 Hari
+└ Rp65.200
+
+Info:
+• Kuota: Nasional
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "indosat freedom u", category: "indosat", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+FREEDOM U INDOSAT
+
+┌ 5,5GB • 30 Hari
+└ Rp40.300
+
+┌ 10GB • 30 Hari
+└ Rp59.300
+
+┌ 20GB • 30 Hari
+└ Rp82.100
+
+┌ 35GB • 30 Hari
+└ Rp104.300
+
+┌ 45GB • 30 Hari
+└ Rp117.100
+
+┌ Jumbo • 30 Hari
+└ Rp151.700
+
+Info:
+• Kuota: Nasional
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "indosat combo", category: "indosat", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+COMBO INDOSAT
+
+┌ 2GB • 30 Hari
+└ Rp30.400
+
+┌ 4GB • 30 Hari
+└ Rp30.600
+
+┌ 6GB • 30 Hari
+└ Rp40.800
+
+┌ 10GB • 30 Hari
+└ Rp53.000
+
+┌ 13GB • 30 Hari
+└ Rp47.900
+
+┌ 16GB • 30 Hari
+└ Rp59.700
+
+┌ 20GB • 30 Hari
+└ Rp74.700
+
+┌ 30GB • 30 Hari
+└ Rp98.100
+
+┌ 40GB • 30 Hari
+└ Rp108.000
+
+Info:
+• Kuota: Nasional + Aplikasi
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "indosat apps", category: "indosat", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+APPS INDOSAT
+
+┌ YouTube 2GB • 1 Hari
+└ Rp8.200
+
+┌ Edukasi 3GB • 7 Hari
+└ Rp12.800
+
+┌ Fun 3GB • 7 Hari
+└ Rp12.800
+
+┌ TikTok 3GB • 3 Hari
+└ Rp12.900
+
+┌ YouTube 3GB • 3 Hari
+└ Rp12.900
+
+┌ Meta 3GB • 3 Hari
+└ Rp12.900
+
+┌ Meta 5GB • 7 Hari
+└ Rp19.700
+
+┌ TikTok 5GB • 7 Hari
+└ Rp19.700
+
+┌ YouTube 5GB • 7 Hari
+└ Rp19.700
+
+┌ Fun 12GB • 30 Hari
+└ Rp24.200
+
+Info:
+• Kuota: Aplikasi
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "smartfren data", category: "smartfren", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+DATA SMARTREN
+
+┌ 4GB • 3 Hari
+└ Rp12.500
+
+┌ 1GB • 7 Hari
+└ Rp12.600
+
+┌ 4GB • 3 Hari
+└ Rp12.800
+
+┌ 1,5GB • 7 Hari
+└ Rp16.500
+
+┌ 4GB • 5 Hari
+└ Rp18.600
+
+┌ 3GB • 5 Hari
+└ Rp18.900
+
+┌ 6GB • 7 Hari
+└ Rp20.000
+
+┌ 6GB • 7 Hari
+└ Rp20.200
+
+┌ 4GB • 14 Hari
+└ Rp24.300
+
+┌ 10GB • 6 Hari
+└ Rp25.100
+
+┌ 5GB • 14 Hari
+└ Rp25.500
+
+┌ 15GB • 10 Hari
+└ Rp30.400
+
+┌ 11GB • 30 Hari
+└ Rp35.100
+
+┌ 24GB • 30 Hari
+└ Rp39.400
+
+┌ 22GB • 30 Hari
+└ Rp43.100
+
+┌ 26GB • 30 Hari
+└ Rp53.300
+
+Info:
+• Kuota: Nasional
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "smartfren unlimited", category: "smartfren", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+UNLIMITED SMARTREN
+
+┌ 2GB • 3 Hari
+└ Rp16.800
+
+┌ 3GB • 1 Hari
+└ Rp18.100
+
+┌ 1GB • 3 Hari
+└ Rp18.300
+
+┌ 3GB • 3 Hari
+└ Rp20.100
+
+┌ 1GB • 7 Hari
+└ Rp21.800
+
+┌ 5GB • 1 Hari
+└ Rp23.200
+
+┌ 5GB • 3 Hari
+└ Rp24.800
+
+┌ 2GB • 7 Hari
+└ Rp28.600
+
+┌ 3GB • 7 Hari
+└ Rp35.400
+
+┌ 1GB • 14 Hari
+└ Rp37.000
+
+┌ 5GB • 7 Hari
+└ Rp43.700
+
+┌ 1GB • 28 Hari
+└ Rp69.500
+
+┌ 1,5GB • 28 Hari
+└ Rp81.400
+
+┌ 2GB • 28 Hari
+└ Rp95.400
+
+┌ 3GB • 28 Hari
+└ Rp123.800
+
+┌ 5GB • 28 Hari
+└ Rp147.300
+
+Info:
+• Kuota: Unlimited (FUP)
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "smartfren nonstop", category: "smartfren", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+NONSTOP SMARTREN
+
+┌ 2GB • 10 Hari
+└ Rp17.600
+
+┌ 10GB • 3 Hari
+└ Rp19.500
+
+┌ 10GB • 7 Hari
+└ Rp23.600
+
+┌ 4GB • 14 Hari
+└ Rp24.100
+
+┌ 20GB • 3 Hari
+└ Rp24.500
+
+┌ 12GB • 14 Hari
+└ Rp32.900
+
+┌ 7GB • 28 Hari
+└ Rp36.900
+
+┌ 20GB • 14 Hari
+└ Rp41.900
+
+┌ 40GB • 7 Hari
+└ Rp43.600
+
+┌ 10GB • 28 Hari
+└ Rp44.100
+
+┌ 16GB • 28 Hari
+└ Rp51.700
+
+┌ 24GB • 28 Hari
+└ Rp60.600
+
+┌ 30GB • 28 Hari
+└ Rp69.400
+
+┌ 40GB • 28 Hari
+└ Rp78.200
+
+┌ 100GB • 28 Hari
+└ Rp123.600
+
+Info:
+• Kuota: Nasional
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "smartfren combo", category: "smartfren", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+COMBO SMARTREN
+
+┌ 5GB+20GB • 7 Hari
+└ Rp43.900
+
+┌ 14GB • 30 Hari
+└ Rp48.600
+
+┌ 24GB • 30 Hari
+└ Rp66.600
+
+┌ 40GB • 14 Hari
+└ Rp67.700
+
+┌ 45GB • 30 Hari
+└ Rp96.400
+
+┌ 25GB+75GB • 30 Hari
+└ Rp111.600
+
+┌ 32GB + Apps • 30 Hari
+└ Rp135.200
+
+┌ 85GB • 30 Hari
+└ Rp147.200
+
+┌ 60GB+140GB • 30 Hari
+└ Rp199.900
+
+Info:
+• Kuota: Nasional + Aplikasi
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "telkomsel flash", category: "telkomsel", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+DATA FLASH TELKOMSEL
+
+┌ 1GB • 30 Hari
+└ Rp16.200
+
+┌ 1GB • 30 Hari
+└ Rp16.400
+
+┌ 2GB • 30 Hari
+└ Rp25.300
+
+┌ 3GB • 30 Hari
+└ Rp25.500
+
+┌ 2GB • 30 Hari
+└ Rp26.400
+
+┌ 3GB • 30 Hari
+└ Rp27.600
+
+┌ 5GB • 30 Hari
+└ Rp36.700
+
+┌ 4GB • 30 Hari
+└ Rp37.100
+
+┌ 5GB • 30 Hari
+└ Rp37.900
+
+┌ 8GB • 30 Hari
+└ Rp40.800
+
+┌ 8GB • 30 Hari
+└ Rp41.600
+
+┌ 10GB • 30 Hari
+└ Rp43.900
+
+Info:
+• Kuota: Nasional
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "telkomsel lokal", category: "telkomsel", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+LOKAL TELKOMSEL
+
+┌ Jabotabek 5GB • 30 Hari
+└ Rp36.800
+
+┌ Jatim 9GB • 30 Hari
+└ Rp37.100
+
+┌ Jabar 5GB • 30 Hari
+└ Rp38.800
+
+┌ Jabotabek 9GB • 30 Hari
+└ Rp42.700
+
+┌ Jateng/DIY 9GB • 30 Hari
+└ Rp44.100
+
+┌ Jabar 9GB • 30 Hari
+└ Rp44.400
+
+┌ Jatim 18GB • 30 Hari
+└ Rp54.300
+
+┌ Jateng/DIY 18GB • 30 Hari
+└ Rp56.900
+
+┌ Jabotabek 18GB • 30 Hari
+└ Rp57.400
+
+┌ Jabar 18GB • 30 Hari
+└ Rp57.400
+
+┌ Jatim 26GB • 30 Hari
+└ Rp69.600
+
+┌ Jatim 33GB • 30 Hari
+└ Rp80.700
+
+Info:
+• Kuota: Regional
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "telkomsel harian", category: "telkomsel", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+PAKET HARIAN TELKOMSEL
+
+┌ 1GB • 3 Hari
+└ Rp10.600
+
+┌ 1GB • 7 Hari
+└ Rp11.400
+
+┌ 2GB • 1 Hari
+└ Rp12.900
+
+┌ 2,5GB • 5 Hari
+└ Rp16.100
+
+┌ 2GB • 3 Hari
+└ Rp16.300
+
+┌ 3GB • 3 Hari
+└ Rp17.500
+
+┌ 3GB • 5 Hari
+└ Rp17.500
+
+┌ 1,5GB • 7 Hari
+└ Rp19.800
+
+┌ 3GB • 7 Hari
+└ Rp20.700
+
+┌ 2GB • 7 Hari
+└ Rp21.800
+
+┌ 5GB • 7 Hari
+└ Rp23.600
+
+Info:
+• Kuota: Nasional
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "telkomsel lokal harian", category: "telkomsel", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+LOKAL HARIAN TELKOMSEL
+
+┌ Jatim 1,5GB • 3 Hari
+└ Rp12.100
+
+┌ Jateng 2GB • 3 Hari
+└ Rp12.200
+
+┌ Jabar 1,5GB • 3 Hari
+└ Rp12.200
+
+┌ Jabar 2GB • 3 Hari
+└ Rp12.600
+
+┌ Jabotabek 2GB • 3 Hari
+└ Rp12.600
+
+┌ Jatim 2GB • 3 Hari
+└ Rp16.300
+
+┌ Jatim 2,5GB • 5 Hari
+└ Rp16.600
+
+┌ Jabar 2,5GB • 5 Hari
+└ Rp16.600
+
+┌ Jabotabek 2,5GB • 5 Hari
+└ Rp16.600
+
+┌ Jatim 3GB • 3 Hari
+└ Rp17.600
+
+┌ Jabotabek 3GB • 3 Hari
+└ Rp17.700
+
+┌ Jabar 3GB • 3 Hari
+└ Rp17.800
+
+Info:
+• Kuota: Regional
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "tri pure", category: "tri", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+DATA PURE TRI
+
+┌ 300MB • 30 Hari
+└ Rp5.200
+
+┌ 400MB • 30 Hari
+└ Rp5.500
+
+┌ 500MB • 30 Hari
+└ Rp6.600
+
+┌ 750MB • 30 Hari
+└ Rp8.400
+
+┌ 1GB • 14 Hari
+└ Rp9.100
+
+┌ 2,5GB • 14 Hari
+└ Rp19.800
+
+┌ 3GB • 30 Hari
+└ Rp22.300
+
+┌ 4GB • 30 Hari
+└ Rp28.000
+
+┌ 5GB • 30 Hari
+└ Rp30.100
+
+┌ 7GB • 30 Hari
+└ Rp44.900
+
+┌ 10GB • 30 Hari
+└ Rp61.400
+
+┌ 15GB • 30 Hari
+└ Rp58.200
+
+Info:
+• Kuota: Nasional
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "tri happy", category: "tri", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+HAPPY MINI TRI
+
+┌ 2GB • 1 Hari
+└ Rp9.400
+
+┌ 2,5GB • 1 Hari
+└ Rp9.500
+
+┌ 1,5GB • 1 Hari
+└ Rp9.600
+
+┌ 3GB • 1 Hari
+└ Rp10.200
+
+┌ 5GB • 1 Hari
+└ Rp12.000
+
+┌ 1GB • 5 Hari
+└ Rp12.000
+
+┌ 1,5GB • 7 Hari
+└ Rp12.300
+
+┌ 3GB • 3 Hari
+└ Rp17.000
+
+┌ 3GB + Lokal • 3 Hari
+└ Rp17.100
+
+┌ 5GB • 3 Hari
+└ Rp17.800
+
+┌ 4GB • 3 Hari
+└ Rp18.000
+
+┌ 3,5GB • 5 Hari
+└ Rp20.400
+
+┌ 2GB • 5 Hari
+└ Rp20.800
+
+┌ 5GB • 5 Hari
+└ Rp21.700
+
+Info:
+• Kuota: Nasional + Lokal
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "tri happy bulanan", category: "tri", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+HAPPY BULANAN TRI
+
+┌ 3,5GB • 28 Hari
+└ Rp26.800
+
+┌ 6GB • 28 Hari
+└ Rp36.600
+
+┌ 7GB + Lokal • 28 Hari
+└ Rp36.900
+
+┌ 11GB • 28 Hari
+└ Rp38.900
+
+┌ 14GB • 28 Hari
+└ Rp50.200
+
+┌ 15GB • 28 Hari
+└ Rp50.100
+
+┌ 18GB • 28 Hari
+└ Rp51.600
+
+┌ 20GB • 28 Hari
+└ Rp59.300
+
+┌ 30GB • 28 Hari
+└ Rp67.400
+
+┌ 42GB • 28 Hari
+└ Rp78.600
+
+┌ 45GB + Lokal • 28 Hari
+└ Rp93.900
+
+┌ 55GB • 60 Hari
+└ Rp101.200
+
+┌ 65GB • 28 Hari
+└ Rp95.800
+
+┌ 100GB • 28 Hari
+└ Rp120.900
+
+Info:
+• Kuota: Nasional + Lokal
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "tri aon", category: "tri", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+ALWAYSON TRI
+
+┌ 3,5GB + Lokal
+└ Rp30.000
+
+┌ 6GB + Lokal
+└ Rp36.400
+
+┌ 9GB + Lokal
+└ Rp51.400
+
+┌ 12GB + Lokal
+└ Rp62.800
+
+┌ 6GB+20GB • 30 Hari
+└ Rp77.800
+
+┌ 40GB + Lokal
+└ Rp114.300
+
+Info:
+• Kuota: Nasional + Lokal
+• Stok: Tanya Admin
+
+╰┈┈┈┈` },
+        { key: "tri combo", category: "tri", response: `⣤⣿⣶⣄⣠⣾⣿⣤
+⠻⣻⣿⡟⢻⣿⣟⠋
+⣴⣿⡟   𐤏 JASHUB
+
+COMBO TRI
+
+┌ 8GB • 30 Hari
+└ Rp36.000
+
+┌ 10GB • 30 Hari
+└ Rp41.000
+
+┌ 6GB+15GB • 30 Hari
+└ Rp47.900
+
+┌ 8GB+2GB • 30 Hari
+└ Rp50.400
+
+┌ 10GB+5GB • 30 Hari
+└ Rp60.400
+
+┌ 15GB+5GB • 30 Hari
+└ Rp90.600
+
+┌ 20GB+10GB • 30 Hari
+└ Rp100.600
+
+┌ 30GB+20GB • 30 Hari
+└ Rp125.600
+
+Info:
+• Kuota: Nasional + Aplikasi
+• Stok: Tanya Admin
+
+╰┈┈┈┈` }
+    ];
+
+    // DOM elements
+    const grid = document.getElementById('paketGrid');
+    const searchInput = document.getElementById('searchInput');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const totalSpan = document.getElementById('total-count');
+    const visibleSpan = document.getElementById('visible-count');
+    const resetBtn = document.getElementById('resetBtn');
+
+    let activeFilter = 'all';
+    let searchTerm = '';
+
+    function renderCards() {
+        const filtered = paketData.filter(item => {
+            // filter kategori
+            if (activeFilter !== 'all' && item.category !== activeFilter) return false;
+            // search by key
+            if (searchTerm.trim() !== '') {
+                return item.key.toLowerCase().includes(searchTerm.toLowerCase());
+            }
+            return true;
+        });
+
+        visibleSpan.innerText = filtered.length;
+        totalSpan.innerText = paketData.length;
+
+        if (filtered.length === 0) {
+            grid.innerHTML = `<div class="no-result">😕 Tidak ada paket ditemukan untuk "${searchTerm}" atau filter ini.</div>`;
+            return;
+        }
+
+        grid.innerHTML = filtered.map(item => `
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-key">${escapeHtml(item.key)}</div>
+                    <div class="card-badge">${item.category.toUpperCase()}</div>
+                </div>
+                <div class="card-content"><pre style="font-family: inherit; margin:0; white-space: pre-wrap;">${escapeHtml(item.response)}</pre></div>
+            </div>
+        `).join('');
+    }
+
+    function escapeHtml(str) {
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+            return c;
+        });
+    }
+
+    function handleSearch() {
+        searchTerm = searchInput.value;
+        renderCards();
+    }
+
+    function handleFilter(category) {
+        activeFilter = category;
+        filterBtns.forEach(btn => {
+            if (btn.dataset.filter === category) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+        renderCards();
+    }
+
+    // Event listeners
+    searchInput.addEventListener('input', handleSearch);
+    filterBtns.forEach(btn => {
+        if (btn.id === 'resetBtn') return;
+        btn.addEventListener('click', () => handleFilter(btn.dataset.filter));
+    });
+    resetBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        searchTerm = '';
+        handleFilter('all');
+    });
+
+    // initial render
+    renderCards();
+</script>
+</body>
+</html>
