@@ -11,7 +11,7 @@
     <!-- Open Graph -->
     <meta property="og:title" content="Jashub Store - Aplikasi Premium Murah & Bergaransi">
     <meta property="og:description" content="Belanja aplikasi premium murah hanya di Jashub Store. Bergaransi dan proses cepat!">
-    <meta property="og:image" content="logo.webp">
+    <meta property="og:image" content="logo.jpeg">
     <meta property="og:url" content="https://jashub.web.id">
     <meta property="og:type" content="website">
 
@@ -75,6 +75,8 @@
             --transition-slow: 320ms ease;
 
             --header-height: 72px;
+            --logo-height: clamp(34px, 3.2vw, 44px);
+            --logo-max-width: 170px;
         }
 
         * {
@@ -203,11 +205,20 @@
             gap: 24px;
         }
 
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            min-width: 0;
+        }
+
         .logo-img {
-            height: 38px;
+            height: var(--logo-height);
             width: auto;
+            max-width: var(--logo-max-width);
             border-radius: 12px;
             object-fit: contain;
+            object-position: left center;
+            display: block;
             transition: transform 160ms ease-out, filter 160ms ease-out;
         }
 
@@ -1052,6 +1063,11 @@
         }
 
         @media (max-width: 768px) {
+            :root {
+                --header-height: 68px;
+                --logo-max-width: 150px;
+            }
+
             .hero {
                 padding-top: calc(var(--header-height) + 18px);
                 padding-bottom: 60px;
@@ -1132,6 +1148,12 @@
         }
 
         @media (max-width: 576px) {
+            :root {
+                --header-height: 64px;
+                --logo-height: clamp(30px, 8vw, 36px);
+                --logo-max-width: 132px;
+            }
+
             .container {
                 padding-inline: 16px;
             }
@@ -1215,7 +1237,7 @@
         <div class="container">
             <div class="header-inner">
                 <a href="#home" class="logo" aria-label="Jashub Store">
-                    <img src="logo.webp" alt="Jashub Logo" class="logo-img">
+                    <img src="logo.jpeg" alt="Jashub Logo" class="logo-img">
                 </a>
 
                 <button class="mobile-menu-btn" aria-label="Toggle navigation">
@@ -1276,7 +1298,7 @@
 
                 <div class="hero-image">
                     <div class="hero-card">
-                        <img src="aplikasi.webp"
+                        <img src="aplikasi.jpg"
                              alt="Aplikasi Premium"
                              class="hero-img"
                              loading="lazy"
@@ -1399,7 +1421,7 @@
                     <p>Penyedia aplikasi premium berkualitas dengan harga terjangkau. Dapatkan pengalaman terbaik menggunakan aplikasi favorit Anda.</p>
                     <div class="social-links">
                         <a href="https://www.instagram.com/x.shybb?igsh=eWM0cGUwc2hycWR6" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-                        <a href="https://wa.me/qr/EKRCO2G2B75DC1" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/6281324919799" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
                         <a href="https://www.tiktok.com/@x.shybb?_t=ZS-90TQvwsJJGK&_r=1" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
@@ -1428,7 +1450,7 @@
                     <ul>
                         <li><i class="fas fa-globe"></i> jashub.web.id</li>
                         <li><i class="fas fa-envelope"></i> jashubpremium@gmail.com</li>
-                        <li><i class="fas fa-phone"></i> +6287759808899</li>
+                        <li><i class="fas fa-phone"></i> 6281324919799</li>
                     </ul>
                 </div>
             </div>
@@ -1440,123 +1462,57 @@
 
     <script>
         const products = [
-            {id: "1", name: "Alight Motion 1 Tahun", category: "video", price: "Rp 5.000", originalPrice: "Rp 150.000", description: "Private Akun, Garansi 6 Bulan, Support Android & iOS, Include Cara Login", stock: "Tanya Admin", badge: "HOT", image: "https://play-lh.googleusercontent.com/OU0BlP8C9-V7ECl2crma7B48nzDbK7liSLjn0j_fpTlyWG6qyEE-mw_KFZ9aOXF0a3w"},
-            {id: "2", name: "Apple Music Individual 1 Bulan", category: "music", price: "Rp 7.500", originalPrice: "Rp 60.000", description: "Full Garansi, Reg Indonesia, Support Android Only", stock: "Tanya Admin", badge: "POPULER", image: "https://www.apple.com/v/apple-music/ae/images/shared/og__ckjrh2mu8b2a_image.png?202507232359"},
-            {id: "3", name: "Apple Music Family 1 Bulan", category: "music", price: "Rp 8.500", originalPrice: "Rp 90.000", description: "Full Garansi, Reg Indonesia, Support Android Only, Bisa Invite 5 Member", stock: "Tanya Admin", badge: "FAMILY", image: "https://www.apple.com/v/apple-music/ae/images/shared/og__ckjrh2mu8b2a_image.png?202507232359"},
-            {id: "4", name: "Kode Redeem Apple Music 2 Bulan", category: "music", price: "Rp 13.500", originalPrice: "Rp 120.000", description: "Berbentuk Kode, Garansi Jika Gagal Redeem, Durasi 2 Bulan jika belum pernah trial", stock: "Tanya Admin", badge: "KODE", image: "https://www.apple.com/v/apple-music/ae/images/shared/og__ckjrh2mu8b2a_image.png?202507232359"},
-            {id: "5", name: "BStation Private 1 Bulan", category: "entertainment", price: "Rp 28.500", originalPrice: "Rp 50.000", description: "Full Garansi", stock: "Tanya Admin", badge: "ENTERTAINMENT", image: "https://toploker.com/assets/images/perusahaan/profile/1725252601453567.png"},
-            {id: "6", name: "Canva Edu Lifetime", category: "design", price: "Rp 10.000", originalPrice: "Rp 300.000", description: "Via Invite, Bergaransi 5 Bulan", stock: "Tanya Admin", badge: "LIFETIME", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGGeJK7Q7pSOzEx_PRPk-AVFDUYyg6HAbjJw&s"},
-            {id: "7", name: "Canva Edu Lifetime Head/Owner", category: "design", price: "Rp 353.500", originalPrice: "Rp 1.500.000", description: "Bisa Invite 500 Member, Garansi 3 Bulan", stock: "Tanya Admin", badge: "BUSINESS", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGGeJK7Q7pSOzEx_PRPk-AVFDUYyg6HAbjJw&s"},
-            {id: "8", name: "Canva Pro Owner 30 Day", category: "design", price: "Rp 6.500", originalPrice: "Rp 150.000", description: "No Garansi", stock: "Tanya Admin", badge: "DESIGN", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGGeJK7Q7pSOzEx_PRPk-AVFDUYyg6HAbjJw&s"},
-            {id: "9", name: "CapCut Pro 7 Day", category: "video", price: "Rp 5.500", originalPrice: "Rp 50.000", description: "Private Akun, Bergaransi", stock: "Tanya Admin", badge: "VIDEO", image: "https://img.utdstc.com/icon/9c4/58d/9c458dc566d565f67010dd63299a838474526f43f3ac00fca211b970daf7d42d:200"},
-            {id: "10", name: "CapCut Pro 30 Day Best Seller", category: "video", price: "Rp 7.000", originalPrice: "Rp 100.000", description: "Private Akun, Bergaransi 7 Day", stock: "Tanya Admin", badge: "BEST SELLER", image: "https://img.utdstc.com/icon/9c4/58d/9c458dc566d565f67010dd63299a838474526f43f3ac00fca211b970daf7d42d:200"},
-            {id: "11", name: "CapCut Pro 6 Bulan", category: "video", price: "Rp 128.500", originalPrice: "Rp 500.000", description: "No Garansi, Private Akun", stock: "Tanya Admin", badge: "LONG TERM", image: "https://img.utdstc.com/icon/9c4/58d/9c458dc566d565f67010dd63299a838474526f43f3ac00fca211b970daf7d42d:200"},
-            {id: "12", name: "CapCut Pro 30 Day Garansi", category: "video", price: "Rp 13.500", originalPrice: "Rp 100.000", description: "Private Akun, Full Garansi", stock: "Tanya Admin", badge: "FULL GARANSI", image: "https://img.utdstc.com/icon/9c4/58d/9c458dc566d565f67010dd63299a838474526f43f3ac00fca211b970daf7d42d:200"},
-            {id: "13", name: "CapCut Kosongan Trial 7 Day", category: "video", price: "Rp 4.000", originalPrice: "Rp 30.000", description: "Region France, Akses generator.email", stock: "Tanya Admin", badge: "TRIAL", image: "https://img.utdstc.com/icon/9c4/58d/9c458dc566d565f67010dd63299a838474526f43f3ac00fca211b970daf7d42d:200"},
-            {id: "14", name: "AI Chat GPT+ 1 Minggu", category: "ai", price: "Rp 10.500", originalPrice: "Rp 80.000", description: "Full Garansi, Sharing 8 User", stock: "Tanya Admin", badge: "AI", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMdM9MEQ0ExL1PmInT3U5I8v63YXBEdoIT0Q&s"},
-            {id: "15", name: "AI Chat GPT+ 1 Bulan", category: "ai", price: "Rp 18.500", originalPrice: "Rp 150.000", description: "Full Garansi, Sharing 8 User", stock: "Tanya Admin", badge: "AI", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMdM9MEQ0ExL1PmInT3U5I8v63YXBEdoIT0Q&s"},
-            {id: "16", name: "AI ChatGPT Private 1 Bulan", category: "ai", price: "Rp 53.500", originalPrice: "Rp 300.000", description: "Via Invite email GPT, Full Garansi, Akun Buyer", stock: "Tanya Admin", badge: "PREMIUM", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMdM9MEQ0ExL1PmInT3U5I8v63YXBEdoIT0Q&s"},
-            {id: "17", name: "Disney+ Sharing 1 Bulan", category: "entertainment", price: "Rp 12.500", originalPrice: "Rp 90.000", description: "Sharing 5 User, Premium Plan, All Device", stock: "Tanya Admin", badge: "STREAMING", image: "https://cdn.antaranews.com/cache/1200x800/2021/03/10/share-default.png"},
-            {id: "18", name: "Gemini AI + GDrive2TB + Veo3 12 Bulan", category: "ai", price: "Rp 17.500", originalPrice: "Rp 200.000", description: "Plan Indplan, Akun Seller, No Garansi", stock: "Tanya Admin", badge: "BUNDLE", image: "https://www.gstatic.com/lamda/images/gemini_aurora_thumbnail_4g_e74822ff0ca4259beb718.png"},
-            {id: "19", name: "HBO Max Sharing 1 Bulan", category: "entertainment", price: "Rp 16.500", originalPrice: "Rp 120.000", description: "Bergaransi, Plan Ultimate", stock: "Tanya Admin", badge: "STREAMING", image: "https://play-lh.googleusercontent.com/WBH8B97jBYuKXhY-wmsjvHPg_tbJbgFg_N2cmAks7i92xuuJ9oLnoeBTfOEibBnrhEJM"},
-            {id: "20", name: "HBO Max Ultimate Private 1 Bulan", category: "entertainment", price: "Rp 73.500", originalPrice: "Rp 250.000", description: "Garansi Backfree, Akun Seller, Plan Ultimate", stock: "Tanya Admin", badge: "PREMIUM", image: "https://play-lh.googleusercontent.com/WBH8B97jBYuKXhY-wmsjvHPg_tbJbgFg_N2cmAks7i92xuuJ9oLnoeBTfOEibBnrhEJM"},
-            {id: "21", name: "Perplexity Pro Sharing 1 Bulan", category: "ai", price: "Rp 8.500", originalPrice: "Rp 100.000", description: "Sharing 5 User, Bergaransi", stock: "Tanya Admin", badge: "AI", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJqHmImBXbu2JKGmj_V912C9VPmCOjF0i4ow&s"},
-            {id: "22", name: "Perplexity Pro Private 1 Bulan", category: "ai", price: "Rp 13.500", originalPrice: "Rp 150.000", description: "Dapet Email Akses, Bergaransi", stock: "Tanya Admin", badge: "PREMIUM", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJqHmImBXbu2JKGmj_V912C9VPmCOjF0i4ow&s"},
-            {id: "23", name: "PicsArt Pro 1 Bulan", category: "design", price: "Rp 9.000", originalPrice: "Rp 80.000", description: "Garansi Backfree, Private Akun", stock: "Tanya Admin", badge: "PHOTO", image: "https://i.pinimg.com/280x280_RS/5f/d1/85/5fd1852c99c37bb190598ce41a730b23.jpg"},
-            {id: "24", name: "Prime Video 1 Bulan", category: "entertainment", price: "Rp 10.000", originalPrice: "Rp 50.000", description: "Private Akun, Bergaransi, Include Email Akses", stock: "Tanya Admin", badge: "STREAMING", image: "https://play-lh.googleusercontent.com/04rBJNzGde7ZS3Il2UTM-xZ1HueDTTiHiYzGtl2Ie_INZM-JK-n1EVKI5J74ZFgCGPg"},
-            {id: "25", name: "RCTI+ Ultimate Private 1 Bulan", category: "entertainment", price: "Rp 48.500", originalPrice: "Rp 150.000", description: "Private Akun, All Device, Bisa Untuk Nonton Timnas", stock: "Tanya Admin", badge: "LOCAL", image: "https://play-lh.googleusercontent.com/0-OaInb-BcRP_O61RucT9fpt-nCQWqQ-XDpOT_xPaBFRZe2HVT8TkW5XGriaYUivCBk=w600-h300-pc0xffffff-pd"},
-            {id: "26", name: "Scribd Premium 2 Bulan", category: "education", price: "Rp 9.500", originalPrice: "Rp 60.000", description: "Private Akun, Bergaransi, Ada Limit Download", stock: "Tanya Admin", badge: "EDUCATION", image: "https://www.rentoday.id/uploads/dsense_produk/20240918151646-2024-09-18dsense_produk151450.jpg"},
-            {id: "27", name: "Spotify FamPlan 1 Bulan FullGar", category: "music", price: "Rp 15.500", originalPrice: "Rp 70.000", description: "Akun Seller, Full Garansi, Bisa Perpanjang di Akun yang sama", stock: "Tanya Admin", badge: "POPULER", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png"},
-            {id: "28", name: "Spotify FamPlan 2 Bulan FullGar", category: "music", price: "Rp 23.500", originalPrice: "Rp 140.000", description: "Akun Seller, Full Garansi, Bisa Perpanjang di Akun yang sama", stock: "Tanya Admin", badge: "POPULER", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png"},
-            {id: "29", name: "Spotify IndPlan 3 Bulan", category: "music", price: "Rp 31.500", originalPrice: "Rp 120.000", description: "Full Garansi, Payment Bill Vcc, Region UK", stock: "Tanya Admin", badge: "INDIVIDUAL", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png"},
-            {id: "30", name: "Spotify IndPlan Student 1 Bulan FullGar", category: "music", price: "Rp 13.500", originalPrice: "Rp 50.000", description: "Full Garansi, DEVICE IOS DILARANG MEMBELI PRODUK INI!!!", stock: "Tanya Admin", badge: "STUDENT", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png"},
-            {id: "31", name: "Spotify IndPlan Student 1 Bulan NoGar", category: "music", price: "Rp 7.500", originalPrice: "Rp 50.000", description: "No Garansi, Private Akun, All Device", stock: "Tanya Admin", badge: "STUDENT", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png"},
-            {id: "32", name: "Vidio Platinum 1 Bulan Best Seller", category: "entertainment", price: "Rp 31.500", originalPrice: "Rp 120.000", description: "ALL DEVICE, PRIVATE AKUN, GARANSI BACKFREE", stock: "Tanya Admin", badge: "BEST SELLER", image: "https://cdn.unipin.com/images/icon_product_pages/1599529891-icon-Vidio.png"},
-            {id: "33", name: "Vidio Platinum Mobile 1 Bulan", category: "entertainment", price: "Rp 22.500", originalPrice: "Rp 80.000", description: "Mobile Only, Garansi Backfree, Private Akun", stock: "Tanya Admin", badge: "MOBILE", image: "https://cdn.unipin.com/images/icon_product_pages/1599529891-icon-Vidio.png"},
-            {id: "34", name: "Vidio Platinum TV 1 Tahun", category: "entertainment", price: "Rp 5.500", originalPrice: "Rp 100.000", description: "Garansi 1 Bulan, TV Only, Private Akun", stock: "Tanya Admin", badge: "TV", image: "https://cdn.unipin.com/images/icon_product_pages/1599529891-icon-Vidio.png"},
-            {id: "35", name: "Viu 1 Bulan", category: "entertainment", price: "Rp 4.000", originalPrice: "Rp 40.000", description: "FULLGAR BACKFREE, PRIVATE ANTI LIMIT, ALL DEVICE", stock: "Tanya Admin", badge: "STREAMING", image: "https://yt3.googleusercontent.com/ytc/AIdro_mGgWUT-KZejIMSOL4h8Mu5_y3g6rIw7qcg8b3NwsBpHA=s900-c-k-c0x00ffffff-no-rj"},
-            {id: "36", name: "Viu 2 Bulan", category: "entertainment", price: "Rp 4.000", originalPrice: "Rp 80.000", description: "FULLGAR BACKFREE, PRIVATE ANTI LIMIT, ALL DEVICE", stock: "Tanya Admin", badge: "STREAMING", image: "https://yt3.googleusercontent.com/ytc/AIdro_mGgWUT-KZejIMSOL4h8Mu5_y3g6rIw7qcg8b3NwsBpHA=s900-c-k-c0x00ffffff-no-rj"},
-            {id: "37", name: "Viu 3 Bulan", category: "entertainment", price: "Rp 4.000", originalPrice: "Rp 120.000", description: "FULLGAR BACKFREE, PRIVATE ANTI LIMIT, ALL DEVICE", stock: "Tanya Admin", badge: "STREAMING", image: "https://yt3.googleusercontent.com/ytc/AIdro_mGgWUT-KZejIMSOL4h8Mu5_y3g6rIw7qcg8b3NwsBpHA=s900-c-k-c0x00ffffff-no-rj"},
-            {id: "38", name: "Viu 6 Bulan", category: "entertainment", price: "Rp 4.000", originalPrice: "Rp 240.000", description: "FULLGAR BACKFREE, PRIVATE ANTI LIMIT, ALL DEVICE", stock: "Tanya Admin", badge: "STREAMING", image: "https://yt3.googleusercontent.com/ytc/AIdro_mGgWUT-KZejIMSOL4h8Mu5_y3g6rIw7qcg8b3NwsBpHA=s900-c-k-c0x00ffffff-no-rj"},
-            {id: "39", name: "Viu 12 Bulan", category: "entertainment", price: "Rp 4.500", originalPrice: "Rp 480.000", description: "FULLGAR BACKFREE, PRIVATE ANTI LIMIT, ALL DEVICE", stock: "Tanya Admin", badge: "STREAMING", image: "https://yt3.googleusercontent.com/ytc/AIdro_mGgWUT-KZejIMSOL4h8Mu5_y3g6rIw7qcg8b3NwsBpHA=s900-c-k-c0x00ffffff-no-rj"},
-            {id: "40", name: "Viu Premium Lifetime", category: "entertainment", price: "Rp 5.000", originalPrice: "Rp 500.000", description: "Private Akun, Garansi 6 Bulan", stock: "Tanya Admin", badge: "LIFETIME", image: "https://yt3.googleusercontent.com/ytc/AIdro_mGgWUT-KZejIMSOL4h8Mu5_y3g6rIw7qcg8b3NwsBpHA=s900-c-k-c0x00ffffff-no-rj"},
-            {id: "41", name: "Vision+ Ultimate Private 1 Bulan", category: "entertainment", price: "Rp 48.500", originalPrice: "Rp 150.000", description: "Garansi Backfree, All Device, Bisa Untuk Nonton Timnas", stock: "Tanya Admin", badge: "LOCAL", image: "https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,f_auto,q_auto:best,w_640/v1634025439/01hfn7s5h05npnkfwt7eczf5t7.jpg"},
-            {id: "42", name: "VPN Express 30 Day", category: "utility", price: "Rp 7.500", originalPrice: "Rp 100.000", description: "PRIVATE AKUN", stock: "Tanya Admin", badge: "VPN", image: "https://cdn.vpninfo.dk/wp-content/uploads/2018/04/ExpressVPN-logo-1.png"},
-            {id: "43", name: "VPN HMA 1 Bulan", category: "utility", price: "Rp 6.000", originalPrice: "Rp 80.000", description: "PRIVATE AKUN, FULLGAR, LOGIN BY KODE", stock: "Tanya Admin", badge: "VPN", image: "https://i.pinimg.com/474x/0f/3d/23/0f3d234572358e98fb27fd74c20ab3ac.jpg"},
-            {id: "44", name: "VPN Surfshark 2 Bulan", category: "utility", price: "Rp 13.500", originalPrice: "Rp 120.000", description: "Private Akun, Bergaransi", stock: "Tanya Admin", badge: "VPN", image: "https://images-eds-ssl.xboxlive.com/image?url=4rt9.lXDC4H_93laV1_eHM0OYfiFeMI2p9MWie0CvL99U4GA1gf6_kayTt_kBblFwHwo8BW8JXlqfnYxKPmmBQL6rQ.t1ROrV3aQLfeHkx_2ABcK3ZHy88sIRHoJaupmPT3f8accy0r5xIyvFCuS6TLxNxvVTcM51fBRkgZRcN0-&format=source"},
-            {id: "45", name: "We TV Private 1 Bulan", category: "entertainment", price: "Rp 30.500", originalPrice: "Rp 100.000", description: "Private Akun, Bergaransi", stock: "Tanya Admin", badge: "STREAMING", image: "https://img.lazcdn.com/g/p/138758cff3d19a3c2e4d91d6a8b268bb.jpg_720x720q80.jpg"},
-            {id: "46", name: "YouTube IndPlan 1 Bulan", category: "entertainment", price: "Rp 7.500", originalPrice: "Rp 70.000", description: "Gsuite, Full Garansi", stock: "Tanya Admin", badge: "STREAMING", image: "https://upload.wikimedia.org/wikipedia/commons/6/62/YouTube_social_white_square_%282024%29.svg"},
-            {id: "47", name: "YouTube IndPlan 3 Bulan Best Seller", category: "entertainment", price: "Rp 17.500", originalPrice: "Rp 210.000", description: "No Garansi, Langsung 3 Bulan", stock: "Tanya Admin", badge: "BEST SELLER", image: "https://upload.wikimedia.org/wikipedia/commons/6/62/YouTube_social_white_square_%282024%29.svg"},
-            {id: "48", name: "YouTube IndPlan 44 Day", category: "entertainment", price: "Rp 8.500", originalPrice: "Rp 100.000", description: "No Garansi, Individual Plan", stock: "Tanya Admin", badge: "STREAMING", image: "https://upload.wikimedia.org/wikipedia/commons/6/62/YouTube_social_white_square_%282024%29.svg"},
-            {id: "49", name: "YouTube FamHead 1 Bulan", category: "entertainment", price: "Rp 8.500", originalPrice: "Rp 110.000", description: "No Garansi", stock: "Tanya Admin", badge: "FAMILY", image: "https://upload.wikimedia.org/wikipedia/commons/6/62/YouTube_social_white_square_%282024%29.svg"},
-            {id: "50", name: "Zoom Meeting Pro 7 Day", category: "utility", price: "Rp 5.000", originalPrice: "Rp 150.000", description: "Private Akun, 100 Peserta, Full Garansi", stock: "Tanya Admin", badge: "MEETING", image: "https://smb-padiumkm-images-public-prod.oss-ap-southeast-5.aliyuncs.com/product/image/30082024/656b3694164693f3807fece9/66d133bde856606d2e4c87ca/ccb30537da7ef90b07828a353c3ef3.jpg?x-oss-process=image/resize,m_pad,w_432,h_432/quality,Q_70"},
-            {id: "51", name: "Zoom Meeting Pro 14 Day", category: "utility", price: "Rp 5.500", originalPrice: "Rp 150.000", description: "Private Akun, 100 Peserta, Full Garansi", stock: "Tanya Admin", badge: "MEETING", image: "https://smb-padiumkm-images-public-prod.oss-ap-southeast-5.aliyuncs.com/product/image/30082024/656b3694164693f3807fece9/66d133bde856606d2e4c87ca/ccb30537da7ef90b07828a353c3ef3.jpg?x-oss-process=image/resize,m_pad,w_432,h_432/quality,Q_70"},
-            {
-                "id": "101",
-                "name": "Netflix Private 1 Bulan",
-                "category": "entertainment",
-                "price": "Rp 27.000",
-                "originalPrice": "-",
-                "description": "PREMIUM 4K ULTRA HD NO LIMIT, 1P 1U Max Login 2 Device (Bergantian), Garansi 28-30 Hari",
-                "stock": "Tanya Admin",
-                "badge": "NETFLIX",
-                "image": "https://images.ctfassets.net/y2ske730sjqp/5QQ9SVIdc1tmkqrtFnG9U1/de758bba0f65dcc1c6bc1f31f161003d/BrandAssets_Logos_02-NSymbol.jpg?w=940"
-            },
-            {
-                "id": "102",
-                "name": "Netflix Private 2 Bulan",
-                "category": "entertainment",
-                "price": "Rp 40.000",
-                "originalPrice": "-",
-                "description": "PREMIUM 4K ULTRA HD NO LIMIT, 1P 1U Max Login 2 Device (Bergantian), Garansi 55-60 Hari",
-                "stock": "Tanya Admin",
-                "badge": "NETFLIX",
-                "image": "https://images.ctfassets.net/y2ske730sjqp/5QQ9SVIdc1tmkqrtFnG9U1/de758bba0f65dcc1c6bc1f31f161003d/BrandAssets_Logos_02-NSymbol.jpg?w=940"
-            },
-            {
-                "id": "103",
-                "name": "Netflix Private 3 Bulan",
-                "category": "entertainment",
-                "price": "Rp 69.000",
-                "originalPrice": "-",
-                "description": "PREMIUM 4K ULTRA HD NO LIMIT, 1P 1U Max Login 2 Device (Bergantian), Garansi 85-90 Hari",
-                "stock": "Tanya Admin",
-                "badge": "NETFLIX",
-                "image": "https://images.ctfassets.net/y2ske730sjqp/5QQ9SVIdc1tmkqrtFnG9U1/de758bba0f65dcc1c6bc1f31f161003d/BrandAssets_Logos_02-NSymbol.jpg?w=940"
-            },
-            {
-                "id": "104",
-                "name": "Netflix Sharing 1 Bulan",
-                "category": "entertainment",
-                "price": "Rp 17.000",
-                "originalPrice": "-",
-                "description": "PREMIUM 4K ULTRA HD NO LIMIT, 1P 2U Max Login 1 Device, Garansi 28-30 Hari",
-                "stock": "Tanya Admin",
-                "badge": "NETFLIX",
-                "image": "https://images.ctfassets.net/y2ske730sjqp/5QQ9SVIdc1tmkqrtFnG9U1/de758bba0f65dcc1c6bc1f31f161003d/BrandAssets_Logos_02-NSymbol.jpg?w=940"
-            },
-            {
-                "id": "105",
-                "name": "Netflix Sharing 2 Bulan",
-                "category": "entertainment",
-                "price": "Rp 32.000",
-                "originalPrice": "-",
-                "description": "PREMIUM 4K ULTRA HD NO LIMIT, 1P 2U Max Login 1 Device, Garansi 55-60 Hari",
-                "stock": "Tanya Admin",
-                "badge": "NETFLIX",
-                "image": "https://images.ctfassets.net/y2ske730sjqp/5QQ9SVIdc1tmkqrtFnG9U1/de758bba0f65dcc1c6bc1f31f161003d/BrandAssets_Logos_02-NSymbol.jpg?w=940"
-            },
-            {
-                "id": "106",
-                "name": "Netflix Sharing 3 Bulan",
-                "category": "entertainment",
-                "price": "Rp 49.000",
-                "originalPrice": "-",
-                "description": "PREMIUM 4K ULTRA HD NO LIMIT, 1P 2U Max Login 1 Device, Garansi 85-90 Hari",
-                "stock": "Tanya Admin",
-                "badge": "NETFLIX",
-                "image": "https://images.ctfassets.net/y2ske730sjqp/5QQ9SVIdc1tmkqrtFnG9U1/de758bba0f65dcc1c6bc1f31f161003d/BrandAssets_Logos_02-NSymbol.jpg?w=940"
-            }
+            {id: "1", code: "am", name: "Alight Motion 1 Tahun", category: "video", price: "Rp 5.000", originalPrice: "-", description: "Private Akun, Garansi 6 Bulan, Support Android & iOS, Include Cara Login", stock: "221", badge: "HOT", image: "https://play-lh.googleusercontent.com/OU0BlP8C9-V7ECl2crma7B48nzDbK7liSLjn0j_fpTlyWG6qyEE-mw_KFZ9aOXF0a3w"},
+            {id: "2", code: "appmus", name: "Apple Music Individual 1 Bulan", category: "music", price: "Rp 8.500", originalPrice: "-", description: "No Garansi, Reg Indonesia, Support Android Only", stock: "13", badge: "MUSIC", image: "https://www.apple.com/v/apple-music/ae/images/shared/og__ckjrh2mu8b2a_image.png?202507232359"},
+            {id: "3", code: "appmushead", name: "Apple Music FamHead 1 Bulan", category: "music", price: "Rp 8.500", originalPrice: "-", description: "No Garansi, Reg Indonesia, Support Android Only, Bisa Invite 5 Member", stock: "20", badge: "FAMILY", image: "https://www.apple.com/v/apple-music/ae/images/shared/og__ckjrh2mu8b2a_image.png?202507232359"},
+            {id: "4", code: "bstation", name: "BStation Private 1 Bulan", category: "entertainment", price: "Rp 29.500", originalPrice: "-", description: "Full Garansi", stock: "5", badge: "ENTERTAINMENT", image: "https://toploker.com/assets/images/perusahaan/profile/1725252601453567.png"},
+            {id: "5", code: "canva", name: "Canva Edu Lifetime", category: "design", price: "Rp 8.500", originalPrice: "-", description: "Via Invit, Bergaransi 5 Bulan", stock: "344", badge: "LIFETIME", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGGeJK7Q7pSOzEx_PRPk-AVFDUYyg6HAbjJw&s"},
+            {id: "6", code: "cc28", name: "CapCut Pro 28 Days Member", category: "video", price: "Rp 7.000", originalPrice: "-", description: "Private Akun, Garansi 7 Day, New Method Full Seat", stock: "72", badge: "VIDEO", image: "https://img.utdstc.com/icon/9c4/58d/9c458dc566d565f67010dd63299a838474526f43f3ac00fca211b970daf7d42d:200"},
+            {id: "7", code: "cc35", name: "CapCut Pro 35 Day Member FullGar", category: "video", price: "Rp 8.000", originalPrice: "-", description: "Full Garansi, Private Akun", stock: "50", badge: "FULL GARANSI", image: "https://img.utdstc.com/icon/9c4/58d/9c458dc566d565f67010dd63299a838474526f43f3ac00fca211b970daf7d42d:200"},
+            {id: "8", code: "cc6b", name: "CapCut Pro 6 Bulan Individual", category: "video", price: "Rp 113.000", originalPrice: "-", description: "No Garansi, Private Akun", stock: "10", badge: "LONG TERM", image: "https://img.utdstc.com/icon/9c4/58d/9c458dc566d565f67010dd63299a838474526f43f3ac00fca211b970daf7d42d:200"},
+            {id: "9", code: "cc7", name: "CapCut Pro 7 Day", category: "video", price: "Rp 4.500", originalPrice: "-", description: "Private Akun, Bergaransi", stock: "124", badge: "VIDEO", image: "https://img.utdstc.com/icon/9c4/58d/9c458dc566d565f67010dd63299a838474526f43f3ac00fca211b970daf7d42d:200"},
+            {id: "10", code: "ccgar", name: "CapCut Pro 28 Days Member FullGar", category: "video", price: "Rp 7.500", originalPrice: "-", description: "Private Akun, Full Garansi", stock: "39", badge: "FULL GARANSI", image: "https://img.utdstc.com/icon/9c4/58d/9c458dc566d565f67010dd63299a838474526f43f3ac00fca211b970daf7d42d:200"},
+            {id: "11", code: "chatgpt1", name: "AI Chat GPT+ 1 Bulan", category: "ai", price: "Rp 14.000", originalPrice: "-", description: "Full Garansi, Sharing 8 User", stock: "14", badge: "AI", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMdM9MEQ0ExL1PmInT3U5I8v63YXBEdoIT0Q&s"},
+            {id: "12", code: "chatgpt7", name: "AI Chat GPT+ 1 Minggu", category: "ai", price: "Rp 8.500", originalPrice: "-", description: "Full Garansi, Sharing 8 User", stock: "9", badge: "AI", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMdM9MEQ0ExL1PmInT3U5I8v63YXBEdoIT0Q&s"},
+            {id: "13", code: "cowner", name: "Canva Pro Owner 30 Day", category: "design", price: "Rp 6.500", originalPrice: "-", description: "No Garansi", stock: "31", badge: "DESIGN", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGGeJK7Q7pSOzEx_PRPk-AVFDUYyg6HAbjJw&s"},
+            {id: "14", code: "duolingo", name: "Duolingo Super 1 Bulan", category: "education", price: "Rp 4.500", originalPrice: "-", description: "Private Akun, Garansi Login", stock: "53", badge: "EDUCATION", image: "https://upload.wikimedia.org/wikipedia/commons/0/05/Duolingo_logo.svg"},
+            {id: "15", code: "exp", name: "VPN Express 30 Day", category: "utility", price: "Rp 7.500", originalPrice: "-", description: "Private Akun, All Device", stock: "23", badge: "VPN", image: "https://cdn.vpninfo.dk/wp-content/uploads/2018/04/ExpressVPN-logo-1.png"},
+            {id: "16", code: "gpt", name: "AI ChatGPT Plus Private FullGar 1 Bulan", category: "ai", price: "Rp 29.500", originalPrice: "-", description: "Bergaransi, Akun Seller, Private Akun", stock: "29", badge: "AI", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMdM9MEQ0ExL1PmInT3U5I8v63YXBEdoIT0Q&s"},
+            {id: "17", code: "gpthead", name: "AI ChatGPT Head 1 Bulan FullGar", category: "ai", price: "Rp 69.000", originalPrice: "-", description: "Full Garansi, Bisa Invite 4 Member.", stock: "5", badge: "AI", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMdM9MEQ0ExL1PmInT3U5I8v63YXBEdoIT0Q&s"},
+            {id: "18", code: "gptinv", name: "AI Chat GPT Invite 1 Bulan FullGar", category: "ai", price: "Rp 24.500", originalPrice: "-", description: "Full Garansi, Private Akun, Member Paket Business, Akun Buyer", stock: "19", badge: "AI", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMdM9MEQ0ExL1PmInT3U5I8v63YXBEdoIT0Q&s"},
+            {id: "19", code: "grok", name: "AI Grok Super 15 Day", category: "ai", price: "Rp 8.500", originalPrice: "-", description: "Garansi Login, Private Akun", stock: "46", badge: "AI", image: "logo.jpeg"},
+            {id: "20", code: "hbo", name: "HBO Max Sharing 1 Bulan", category: "entertainment", price: "Rp 14.000", originalPrice: "-", description: "Bergaransi, Plan Ultimate", stock: "16", badge: "STREAMING", image: "https://play-lh.googleusercontent.com/WBH8B97jBYuKXhY-wmsjvHPg_tbJbgFg_N2cmAks7i92xuuJ9oLnoeBTfOEibBnrhEJM"},
+            {id: "21", code: "hbopriv", name: "HBO Max Ultimate Private 1 Bulan", category: "entertainment", price: "Rp 64.000", originalPrice: "-", description: "Garansi Backfree, Akun Seller, Plan Ultimate", stock: "9", badge: "PREMIUM", image: "https://play-lh.googleusercontent.com/WBH8B97jBYuKXhY-wmsjvHPg_tbJbgFg_N2cmAks7i92xuuJ9oLnoeBTfOEibBnrhEJM"},
+            {id: "22", code: "hma", name: "VPN HMA 1 Bulan", category: "utility", price: "Rp 7.000", originalPrice: "-", description: "Private Akun, Full Garansi", stock: "15", badge: "VPN", image: "https://i.pinimg.com/474x/0f/3d/23/0f3d234572358e98fb27fd74c20ab3ac.jpg"},
+            {id: "23", code: "iqiyi", name: "iQIYI VIP Standar Private 1 Bulan", category: "entertainment", price: "Rp 19.500", originalPrice: "-", description: "Region Indonesia, Private Akun, Garansi Backfree", stock: "13", badge: "STREAMING", image: "logo.jpeg"},
+            {id: "24", code: "iqiyiprem", name: "iQIYI VIP Premium Private 1 Bulan", category: "entertainment", price: "Rp 25.500", originalPrice: "-", description: "Region Indonesia, Private Akun, Garansi Backfree", stock: "26", badge: "STREAMING", image: "logo.jpeg"},
+            {id: "25", code: "lokbasic", name: "Loklok VIP Basic 40 Day", category: "entertainment", price: "Rp 37.500", originalPrice: "-", description: "Private Akun, Garansi Backfree", stock: "2", badge: "STREAMING", image: "logo.jpeg"},
+            {id: "26", code: "lokstd", name: "Loklok VIP Standar 30 Day", category: "entertainment", price: "Rp 64.000", originalPrice: "-", description: "Private Akun, Garansi Backfree", stock: "0", badge: "STREAMING", image: "logo.jpeg"},
+            {id: "27", code: "netpriv", name: "Netflix Premium 28 Day Private", category: "entertainment", price: "Rp 174.000", originalPrice: "-", description: "Private Akun, Full Garansi", stock: "0", badge: "NETFLIX", image: "https://images.ctfassets.net/y2ske730sjqp/5QQ9SVIdc1tmkqrtFnG9U1/de758bba0f65dcc1c6bc1f31f161003d/BrandAssets_Logos_02-NSymbol.jpg?w=940"},
+            {id: "28", code: "perplexity", name: "Perplexity Pro Sharing 1 Bulan", category: "ai", price: "Rp 14.000", originalPrice: "-", description: "Sharing Akun, Full Garansi", stock: "0", badge: "AI", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJqHmImBXbu2JKGmj_V912C9VPmCOjF0i4ow&s"},
+            {id: "29", code: "picsart", name: "PicsArt Pro 1 Bulan", category: "design", price: "Rp 7.000", originalPrice: "-", description: "Garansi Login, Private Akun", stock: "0", badge: "PHOTO", image: "https://i.pinimg.com/280x280_RS/5f/d1/85/5fd1852c99c37bb190598ce41a730b23.jpg"},
+            {id: "30", code: "prime1b", name: "Prime Video 1 Bulan", category: "entertainment", price: "Rp 10.500", originalPrice: "-", description: "Private Akun, Bergaransi, Include Email Akses", stock: "131", badge: "STREAMING", image: "https://play-lh.googleusercontent.com/04rBJNzGde7ZS3Il2UTM-xZ1HueDTTiHiYzGtl2Ie_INZM-JK-n1EVKI5J74ZFgCGPg"},
+            {id: "31", code: "scribd", name: "Scribd Premium 1 Bulan", category: "education", price: "Rp 7.000", originalPrice: "-", description: "Private Akun, Bergaransi, Ada Limit Download", stock: "19", badge: "EDUCATION", image: "https://www.rentoday.id/uploads/dsense_produk/20240918151646-2024-09-18dsense_produk151450.jpg"},
+            {id: "32", code: "spo1b", name: "Spotify FamPlan 1 Bulan FullGar", category: "music", price: "Rp 18.500", originalPrice: "-", description: "Private Akun, Full Garansi, All Device, Bisa Perpanjang di Akun yang sama", stock: "75", badge: "POPULER", image: "https://www.figma.com/community/file/1183467274732585056/spotify-logo"},
+            {id: "33", code: "spo2b", name: "Spotify FamPlan 2 Bulan FullGar", category: "music", price: "Rp 27.500", originalPrice: "-", description: "Private Akun, Full Garansi, All Device, Bisa Perpanjang di Akun yang sama", stock: "58", badge: "POPULER", image: "https://www.figma.com/community/file/1183467274732585056/spotify-logo"},
+            {id: "34", code: "spo3b", name: "Spotify FamPlan 3 Bulan FullGar", category: "music", price: "Rp 41.500", originalPrice: "-", description: "Private Akun, Full Garansi, All Device, Bisa Perpanjang di Akun yang sama", stock: "24", badge: "POPULER", image: "https://www.figma.com/community/file/1183467274732585056/spotify-logo"},
+            {id: "35", code: "spoind1b", name: "Spotify IndPlan 1 Bulan NoGar", category: "music", price: "Rp 9.500", originalPrice: "-", description: "Private Akun, No Garansi, All Device", stock: "20", badge: "INDIVIDUAL", image: "https://www.figma.com/community/file/1183467274732585056/spotify-logo"},
+            {id: "36", code: "surf", name: "VPN Surfshark Private 2 Bulan", category: "utility", price: "Rp 27.000", originalPrice: "-", description: "Garansi Login", stock: "9", badge: "VPN", image: "https://images-eds-ssl.xboxlive.com/image?url=4rt9.lXDC4H_93laV1_eHM0OYfiFeMI2p9MWie0CvL99U4GA1gf6_kayTt_kBblFwHwo8BW8JXlqfnYxKPmmBQL6rQ.t1ROrV3aQLfeHkx_2ABcK3ZHy88sIRHoJaupmPT3f8accy0r5xIyvFCuS6TLxNxvVTcM51fBRkgZRcN0-&format=source"},
+            {id: "37", code: "vid1b", name: "Vidio Platinum All Device 1 Bulan", category: "entertainment", price: "Rp 30.500", originalPrice: "-", description: "All Device, Private Akun, Bergaransi", stock: "13", badge: "BEST SELLER", image: "https://cdn.unipin.com/images/icon_product_pages/1599529891-icon-Vidio.png"},
+            {id: "38", code: "vidmob", name: "Vidio Platinum Mobile 1 Bulan", category: "entertainment", price: "Rp 25.000", originalPrice: "-", description: "Mobile Only, Garansi Backfree, Private Akun", stock: "35", badge: "MOBILE", image: "https://cdn.unipin.com/images/icon_product_pages/1599529891-icon-Vidio.png"},
+            {id: "39", code: "vidtv", name: "Vidio Platinum TV 1 Tahun", category: "entertainment", price: "Rp 4.500", originalPrice: "-", description: "Garansi 1 Bulan, TV Only, Private Akun", stock: "127", badge: "TV", image: "https://cdn.unipin.com/images/icon_product_pages/1599529891-icon-Vidio.png"},
+            {id: "40", code: "vision", name: "Vision+ Premium + Bein 1 Bulan", category: "entertainment", price: "Rp 19.500", originalPrice: "-", description: "Garansi Backfree, All Device", stock: "14", badge: "LOCAL", image: "https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,f_auto,q_auto:best,w_640/v1634025439/01hfn7s5h05npnkfwt7eczf5t7.jpg"},
+            {id: "41", code: "viu12b", name: "Viu 12 Bulan", category: "entertainment", price: "Rp 4.500", originalPrice: "-", description: "Private Akun, All Device, Garansi 1 bulan (hanya berlaku untuk kendala backfree)", stock: "122", badge: "STREAMING", image: "https://yt3.googleusercontent.com/ytc/AIdro_mGgWUT-KZejIMSOL4h8Mu5_y3g6rIw7qcg8b3NwsBpHA=s900-c-k-c0x00ffffff-no-rj"},
+            {id: "42", code: "viu1b", name: "Viu 1 Bulan", category: "entertainment", price: "Rp 4.200", originalPrice: "-", description: "Private Akun, All Device, Garansi 1 bulan (hanya berlaku untuk kendala backfree)", stock: "146", badge: "STREAMING", image: "https://yt3.googleusercontent.com/ytc/AIdro_mGgWUT-KZejIMSOL4h8Mu5_y3g6rIw7qcg8b3NwsBpHA=s900-c-k-c0x00ffffff-no-rj"},
+            {id: "43", code: "viu3b", name: "Viu 3 Bulan", category: "entertainment", price: "Rp 4.500", originalPrice: "-", description: "Private Akun, All Device, Garansi 1 bulan (hanya berlaku untuk kendala backfree)", stock: "137", badge: "STREAMING", image: "https://yt3.googleusercontent.com/ytc/AIdro_mGgWUT-KZejIMSOL4h8Mu5_y3g6rIw7qcg8b3NwsBpHA=s900-c-k-c0x00ffffff-no-rj"},
+            {id: "44", code: "viu6b", name: "Viu 6 Bulan", category: "entertainment", price: "Rp 4.500", originalPrice: "-", description: "Private Akun, All Device, Garansi 1 bulan (hanya berlaku untuk kendala backfree)", stock: "125", badge: "STREAMING", image: "https://yt3.googleusercontent.com/ytc/AIdro_mGgWUT-KZejIMSOL4h8Mu5_y3g6rIw7qcg8b3NwsBpHA=s900-c-k-c0x00ffffff-no-rj"},
+            {id: "45", code: "viulife", name: "Viu Premium Lifetime", category: "entertainment", price: "Rp 5.500", originalPrice: "-", description: "Private Akun, All Device, Garansi 1 bulan (hanya berlaku untuk kendala backfree)", stock: "35", badge: "LIFETIME", image: "https://yt3.googleusercontent.com/ytc/AIdro_mGgWUT-KZejIMSOL4h8Mu5_y3g6rIw7qcg8b3NwsBpHA=s900-c-k-c0x00ffffff-no-rj"},
+            {id: "46", code: "wetv", name: "We TV Private 1 Bulan", category: "entertainment", price: "Rp 24.500", originalPrice: "-", description: "Private Akun, Bergaransi", stock: "0", badge: "STREAMING", image: "https://img.lazcdn.com/g/p/138758cff3d19a3c2e4d91d6a8b268bb.jpg_720x720q80.jpg"},
+            {id: "47", code: "wink", name: "WINK Private 7D Android", category: "video", price: "Rp 8.000", originalPrice: "-", description: "Private Akun, Garansi Backfree, Android Only", stock: "0", badge: "VIDEO", image: "logo.jpeg"},
+            {id: "48", code: "yt1b", name: "YouTube IndPlan 1 Bulan", category: "entertainment", price: "Rp 16.500", originalPrice: "-", description: "Include Youtube Music, Bergaransi", stock: "54", badge: "STREAMING", image: "https://upload.wikimedia.org/wikipedia/commons/6/62/YouTube_social_white_square_%282024%29.svg"},
+            {id: "49", code: "yt3b", name: "YouTube IndPlan 3 Bulan", category: "entertainment", price: "Rp 18.500", originalPrice: "-", description: "No Garansi, Langsung 3 Bulan", stock: "0", badge: "STREAMING", image: "https://upload.wikimedia.org/wikipedia/commons/6/62/YouTube_social_white_square_%282024%29.svg"},
+            {id: "50", code: "z7", name: "Zoom Meeting Pro 7 Day", category: "utility", price: "Rp 5.000", originalPrice: "-", description: "Private Akun, 100 Peserta, Full Garansi.", stock: "30", badge: "MEETING", image: "https://smb-padiumkm-images-public-prod.oss-ap-southeast-5.aliyuncs.com/product/image/30082024/656b3694164693f3807fece9/66d133bde856606d2e4c87ca/ccb30537da7ef90b07828a353c3ef3.jpg?x-oss-process=image/resize,m_pad,w_432,h_432/quality,Q_70"},
+            {id: "51", code: "zoom", name: "Zoom Meeting Pro 14 Day", category: "utility", price: "Rp 5.500", originalPrice: "-", description: "Private Akun, 100 Peserta, Full Garansi.", stock: "84", badge: "MEETING", image: "https://smb-padiumkm-images-public-prod.oss-ap-southeast-5.aliyuncs.com/product/image/30082024/656b3694164693f3807fece9/66d133bde856606d2e4c87ca/ccb30537da7ef90b07828a353c3ef3.jpg?x-oss-process=image/resize,m_pad,w_432,h_432/quality,Q_70"}
         ];
 
         const productsGrid = document.querySelector('.products-grid');
@@ -1597,7 +1553,7 @@ Ketik .payment untuk melakukan pembayaran.`;
 
         function openWhatsAppWithOrder(product) {
             const orderText = createOrderText(product);
-            const url = `https://wa.me/6287759808899?text=${encodeURIComponent(orderText)}`;
+            const url = `https://wa.me/6281324919799?text=${encodeURIComponent(orderText)}`;
             window.open(url, '_blank');
         }
 
@@ -1727,3 +1683,5 @@ Ketik .payment untuk melakukan pembayaran.`;
     </script>
 </body>
 </html>
+
+
