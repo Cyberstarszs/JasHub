@@ -1,1308 +1,2047 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PremiumMurah Mail </title>
-    <link rel="icon" href="https://i.ibb.co.com/67Vm9jJf/favicon-64-1-1-1.png">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Jashub Store | Jual Aplikasi Premium Murah & Bergaransi</title>
+    <meta name="description" content="Jashub Store menyediakan berbagai aplikasi premium seperti Spotify, Canva, CapCut, Netflix, dan lainnya dengan harga murah dan bergaransi.">
+    <meta name="keywords" content="jual aplikasi premium, spotify murah, canva pro murah, capcut pro, netflix sharing, beli aplikasi murah, akun premium garansi">
+    <meta name="author" content="Jashub Store">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Jashub Store - Aplikasi Premium Murah & Bergaransi">
+    <meta property="og:description" content="Belanja aplikasi premium murah hanya di Jashub Store. Bergaransi dan proses cepat!">
+    <meta property="og:image" content="logo.jpeg">
+    <meta property="og:url" content="https://jashub.web.id">
+    <meta property="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta name="theme-color" content="#e0e5ec">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Jashub Store">
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;600;700&family=Balsamiq+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JHQ1Y3T4LF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JHQ1Y3T4LF');
+    </script>
+    <script>
+      (function(w,d,s,l,i){
+        w[l]=w[l]||[];
+        w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),
+            dl=l!='dataLayer'?'&l='+l:'';
+        j.async=true;
+        j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+        f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-5M9V2HKQ');
+    </script>
 
-   <style>
-    :root { 
-        --bg: #e0e5ec; 
-        --text: #4a4a4a; 
-        --shadow-light: #ffffff; 
-        --shadow-dark: #a3b1c6; 
-        --accent-1: #214d2e; 
-        --accent-2: #4caf50; 
-        --accent-3: #76c86b;
-    }
-    [data-theme="dark"] { 
-        --bg: #292d32; 
-        --text: #eeeeee; 
-        --shadow-light: #3a3f46; 
-        --shadow-dark: #181b1e; 
-        --accent-1: #214d2e; 
-        --accent-2: #4caf50; 
-        --accent-3: #76c86b;
-    }
+    <style>
+        :root {
+            --primary: #214d2e;
+            --primary-soft: rgba(33,77,46,0.14);
+            --primary-dark: #173923;
+            --secondary: #4caf50;
 
-    /* --- 1. GLOBAL RESET & ANTI-SCROLLBAR --- */
-    * { 
-        transition: background 0.3s, color 0.3s, box-shadow 0.3s; 
-        -webkit-tap-highlight-color: transparent; /* Ilangin kotak biru pas di-klik (Mobile) */
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;     /* Firefox */
-    }
+            --bg-main: #e0e5ec;
+            --bg-elevated: #e0e5ec;
+            --bg-card: #e0e5ec;
+            --bg-soft: #d9dfe8;
 
-    *::-webkit-scrollbar {
-        display: none !important;  /* Chrome, Safari and Opera - Hapus Garis Scroll */
-    }
+            --shadow-light: #ffffff;
+            --shadow-dark: #a3b1c6;
+            --border-subtle: rgba(255,255,255,0.35);
+            --border-strong: rgba(163,177,198,0.65);
 
-    body { 
-        background: var(--bg); 
-        color: var(--text); 
-        min-height: 100vh; 
-        display: flex; 
-        flex-direction: column; 
-        font-family: 'Balsamiq Sans', sans-serif; 
-        overflow-x: hidden; /* Anti-goyang kanan kiri */
-        touch-action: manipulation; /* Gak delay pas di-tap */
-    }
+            --text-primary: #4a4a4a;
+            --text-secondary: #5e6775;
+            --text-muted: #7b8597;
 
-    h1, h2, h3, h4, h5, h6 { font-family: 'Sniglet', sans-serif; }
-    
-    /* --- 2. NEUMORPHISM CORE --- */
-    .neu { background: var(--bg); box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light); border-radius: 16px; }
-    .neu-inset { background: var(--bg); box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light); border-radius: 12px; }
-    .neu-btn { background: var(--bg); box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light); border: none; border-radius: 12px; color: var(--text); font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
-    .neu-btn:active { box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light); }
-    
-    /* --- 3. UI COMPONENTS (Toast, Tabs, Toggle) --- */
-    #toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-150px); opacity: 0; transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.4s; z-index: 9999; width: 90%; max-width: 380px; }
-    #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+            --radius-lg: 16px;
+            --radius-xl: 22px;
+            --shadow-soft: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light);
+            --shadow-card: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
 
-    .tab-content { display: none; opacity: 0; transition: opacity 0.3s; }
-    .tab-content.active { display: block; opacity: 1; animation: fadeIn 0.4s ease-in-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    .nav-link.active { color: var(--accent-1); border-bottom: 3px solid var(--accent-1); }
+            --transition-fast: 180ms ease-out;
+            --transition: 240ms ease;
+            --transition-slow: 320ms ease;
 
-    .toggle-checkbox:checked { right: 0; border-color: var(--accent-1); }
-    .toggle-checkbox:checked + .toggle-label { background-color: var(--accent-1); }
-    .toggle-checkbox:checked + .toggle-label:after { transform: translateX(100%); border-color: white; }
-    .toggle-label { width: 3rem; height: 1.5rem; background-color: var(--shadow-dark); border-radius: 9999px; position: relative; cursor: pointer; transition: background-color 0.3s; }
-    .toggle-label:after { content: ''; position: absolute; top: 0.125rem; left: 0.125rem; width: 1.25rem; height: 1.25rem; background-color: white; border-radius: 50%; transition: transform 0.3s; box-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
-
-   /* --- 4. SWEETALERT NEUMORPHISM CUSTOM --- */
-    .neu-swal-popup {
-        width: 85% !important;
-        max-width: 320px !important;
-        padding: 1.5rem !important;
-        border-radius: 20px !important;
-        background: var(--bg) !important;
-        box-shadow: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light) !important;
-        border: none !important;
-        color: var(--text) !important;
-    }
-    /* Tambahan .swal2-confirm biar tombol ungu bawaannya musnah */
-    .neu-swal-button, .swal2-confirm {
-        background: var(--accent-1) !important;
-        color: #ffffff !important;
-        border-radius: 12px !important;
-        padding: 10px 25px !important;
-        font-weight: 600 !important;
-        box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light) !important;
-        border: none !important;
-        transition: all 0.2s ease !important;
-        margin-top: 10px !important;
-    }
-    .neu-swal-button:hover, .swal2-confirm:hover { 
-        transform: scale(0.95) !important; 
-        filter: brightness(1.1) !important; 
-    }
-    .swal2-icon.swal2-error {
-        border-color: #ef4444 !important;
-        color: #ef4444 !important;
-        box-shadow: inset 2px 2px 5px var(--shadow-dark), inset -2px -2px 5px var(--shadow-light) !important;
-    }
-    .neu-swal-popup .swal2-icon {
-        transform: scale(0.65) !important; 
-        margin: 0.5em auto 0 !important;
-    }
-    .neu-swal-popup .swal2-title {
-        font-size: 1.25rem !important; 
-        margin-top: 0 !important;
-    }
-    .neu-swal-popup .swal2-html-container {
-        font-size: 0.9rem !important;
-    }
-    .swal2-validation-message {
-        background: var(--bg) !important;
-        color: #ef4444 !important;
-        margin-top: 15px !important;
-        border-radius: 12px !important;
-        box-shadow: inset 2px 2px 5px var(--shadow-dark), inset -2px -2px 5px var(--shadow-light) !important;
-        font-weight: 600 !important;
-        border: none !important;
-    }
-
-    /* --- 5. MOBILE FIXES (Garis-garis Bocor) --- */
-    @media (max-width: 768px) {
-        .neu-inset, .neu {
-            border: none !important; /* Hapus border sisa di mobile */
+            --header-height: 72px;
+            --logo-height: clamp(34px, 3.2vw, 44px);
+            --logo-max-width: 170px;
         }
-    }
 
-    /* --- NETFLIX DEEP DARK NEUMORPHISM --- */
-    body[data-netflix="true"] { 
-        --bg: #141414 !important; 
-        --text: #ffffff !important; 
-        --shadow-light: #1f1f1f !important; 
-        --shadow-dark: #0a0a0a !important; 
-        --accent-1: #E50914 !important; 
-        background: var(--bg) !important;
-        color: var(--text) !important;
-    }
-    .net-logo { filter: drop-shadow(0 0 10px rgba(229, 9, 20, 0.4)); }
-    .net-card { 
-        background: #141414; 
-        box-shadow: 10px 10px 20px #0a0a0a, -10px -10px 20px #1f1f1f; 
-        border-radius: 24px; 
-        transition: all 0.3s ease; 
-        border: 2px solid transparent;
-    }
-    .net-card:hover { transform: translateY(-5px); border-color: #E50914; }
-    .net-card:active { box-shadow: inset 6px 6px 12px #0a0a0a, inset -6px -6px 12px #1f1f1f; }
-    .net-card-inset { 
-        background: #141414; 
-        box-shadow: inset 6px 6px 12px #0a0a0a, inset -6px -6px 12px #1f1f1f; 
-        border-radius: 16px; 
-    }
-        /* Trik Sulap: Ilangin Dark Mode, Munculin Tombol Back */
-    body[data-netflix="true"] #darkModeBtn { display: none !important; }
-    body[data-netflix="true"] #backInboxBtn { display: flex !important; }
+        [data-theme="dark"] {
+            --primary: #76c86b;
+            --primary-soft: rgba(118,200,107,0.16);
+            --primary-dark: #5dad53;
+            --secondary: #4caf50;
+
+            --bg-main: #292d32;
+            --bg-elevated: #292d32;
+            --bg-card: #292d32;
+            --bg-soft: #2f343a;
+
+            --shadow-light: #3a3f46;
+            --shadow-dark: #181b1e;
+            --border-subtle: rgba(255,255,255,0.08);
+            --border-strong: rgba(0,0,0,0.46);
+
+            --text-primary: #eeeeee;
+            --text-secondary: #c7c7c7;
+            --text-muted: #9ba3ad;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Balsamiq Sans', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            -webkit-tap-highlight-color: transparent;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            transition: background-color var(--transition), color var(--transition);
+        }
+
+        *::-webkit-scrollbar {
+            display: none !important;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Sniglet', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding-inline: 20px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 11px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.78rem;
+            border: 0;
+            cursor: pointer;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+            transition: transform var(--transition-fast),
+                        box-shadow var(--transition-fast),
+                        background-color var(--transition-fast),
+                        border-color var(--transition-fast),
+                        color var(--transition-fast);
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--bg-main);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--bg-main);
+            color: var(--text-secondary);
+        }
+
+        .btn-secondary:hover {
+            color: var(--primary);
+        }
+
+        .btn:active {
+            box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            inset-inline: 0;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: var(--bg-main);
+            border-bottom: 1px solid var(--border-subtle);
+            transition: padding var(--transition-fast),
+                        box-shadow var(--transition-fast),
+                        backdrop-filter var(--transition-fast),
+                        background-color var(--transition-fast),
+                        transform var(--transition-fast);
+        }
+
+        header.scrolled {
+            box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+            background: var(--bg-main);
+        }
+
+        .header-inner {
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            min-width: 0;
+        }
+
+        .logo-img {
+            height: var(--logo-height);
+            width: auto;
+            max-width: var(--logo-max-width);
+            border-radius: 12px;
+            object-fit: contain;
+            object-position: left center;
+            display: block;
+            transition: transform 160ms ease-out, filter 160ms ease-out;
+        }
+
+        .logo-img:hover {
+            transform: translateY(-1px) scale(1.02);
+            filter: drop-shadow(0 0 10px rgba(33,77,46,0.3));
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        nav ul {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        nav a {
+            position: relative;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            padding-block: 4px;
+            transition: color var(--transition-fast), opacity var(--transition-fast);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 999px;
+            transition: width var(--transition-fast);
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav li:last-child a.btn {
+            padding-inline: 18px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: var(--bg-main);
+            border-radius: 12px;
+            border: 0;
+            color: var(--text-primary);
+            font-size: 1.15rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+            transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--primary);
+            transform: translateY(-1px);
+        }
+
+        .theme-toggle {
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            border: 0;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+            transition: transform var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary);
+            transform: translateY(-1px);
+        }
+
+        .theme-toggle:active {
+            box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+        }
+
+        .theme-toggle .theme-text {
+            display: none;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            padding: calc(var(--header-height) + 36px) 0 90px;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at top right, rgba(255,255,255,0.55), transparent 55%),
+                radial-gradient(circle at bottom left, rgba(163,177,198,0.26), transparent 58%);
+            opacity: 1;
+        }
+
+        .hero-overlay-ring {
+            position: absolute;
+            inset: 30% 10%;
+            border-radius: 999px;
+            border: 1px dashed rgba(33,77,46,0.26);
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+            gap: 46px;
+            align-items: center;
+        }
+
+        .hero-text {
+            animation: fadeInUp 640ms var(--transition) both;
+        }
+
+        .hero-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 11px;
+            border-radius: 999px;
+            border: 0;
+            background: var(--bg-main);
+            color: var(--text-secondary);
+            font-size: 0.74rem;
+            margin-bottom: 16px;
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+        }
+
+        .hero-kicker-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 20%, #76c86b, #214d2e);
+            box-shadow: 0 0 0 5px rgba(33,77,46,0.12);
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.2rem, 3.4vw, 3.4rem);
+            line-height: 1.1;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .hero-highlight {
+            color: var(--primary);
+        }
+
+        .hero-text p {
+            font-size: 0.98rem;
+            max-width: 540px;
+            color: var(--text-secondary);
+            margin-bottom: 22px;
+        }
+
+        .hero-metrics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 26px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .hero-metrics span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 13px;
+            border-radius: 999px;
+            background: var(--bg-main);
+            border: 0;
+            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .hero-note {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        .hero-image {
+            position: relative;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .hero-card {
+            position: relative;
+            padding: 16px;
+            border-radius: var(--radius-xl);
+            background: var(--bg-card);
+            border: 0;
+            box-shadow: var(--shadow-soft);
+            max-width: 480px;
+            width: 100%;
+        }
+
+        .hero-app-board {
+            position: relative;
+            width: 100%;
+            min-height: 430px;
+            border-radius: 22px;
+            overflow: hidden;
+            padding: 18px;
+            background:
+                radial-gradient(circle at 16% 12%, rgba(255, 255, 255, 0.68), transparent 40%),
+                radial-gradient(circle at 86% 88%, rgba(163, 177, 198, 0.3), transparent 45%),
+                linear-gradient(150deg, var(--bg-soft), var(--bg-main));
+            box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-app-board-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                repeating-linear-gradient(
+                    115deg,
+                    rgba(163, 177, 198, 0.12) 0 1px,
+                    transparent 1px 44px
+                ),
+                repeating-linear-gradient(
+                    32deg,
+                    rgba(76, 175, 80, 0.08) 0 1px,
+                    transparent 1px 58px
+                );
+            opacity: 0.7;
+        }
+
+        .hero-icons-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .hero-app-tile {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 14px;
+            background: rgba(241, 245, 251, 0.92);
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .hero-app-tile:hover {
+            transform: translateY(-2px);
+            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+        }
+
+        .hero-app-tile img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .hero-app-fallback {
+            font-size: 1rem;
+            color: #0e2a1f;
+            background: rgba(240, 255, 247, 0.92);
+            border: 1px solid rgba(20, 55, 38, 0.15);
+        }
+
+        [data-theme="dark"] .hero-app-board {
+            background:
+                radial-gradient(circle at 16% 12%, rgba(84, 95, 109, 0.42), transparent 40%),
+                radial-gradient(circle at 86% 88%, rgba(24, 27, 30, 0.6), transparent 45%),
+                linear-gradient(150deg, var(--bg-soft), var(--bg-main));
+        }
+
+        [data-theme="dark"] .hero-app-board-overlay {
+            background:
+                repeating-linear-gradient(
+                    115deg,
+                    rgba(118, 200, 107, 0.1) 0 1px,
+                    transparent 1px 44px
+                ),
+                repeating-linear-gradient(
+                    32deg,
+                    rgba(120, 155, 196, 0.12) 0 1px,
+                    transparent 1px 58px
+                );
+        }
+
+        [data-theme="dark"] .hero-app-tile {
+            background: rgba(52, 58, 66, 0.95);
+        }
+
+        [data-theme="dark"] .hero-app-fallback {
+            color: #d8f3d2;
+            background: rgba(33, 77, 46, 0.45);
+            border-color: rgba(118, 200, 107, 0.32);
+        }
+
+        .hero-chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 14px;
+            align-items: center;
+        }
+
+        .hero-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: linear-gradient(160deg, rgba(255,255,255,0.42), rgba(255,255,255,0.08));
+            border: 1px solid var(--border-subtle);
+            font-size: 0.84rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            line-height: 1;
+            color: var(--text-secondary);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.06);
+            transition: transform var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+        }
+
+        .hero-chip i {
+            color: var(--primary);
+            font-size: 0.82rem;
+            opacity: 0.9;
+        }
+
+        .hero-chip:hover {
+            transform: translateY(-1px);
+            border-color: rgba(33,77,46,0.25);
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .hero-chip {
+            background: linear-gradient(160deg, rgba(90,100,112,0.32), rgba(60,66,74,0.18));
+            border-color: rgba(255,255,255,0.1);
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+
+        [data-theme="dark"] .hero-chip:hover {
+            border-color: rgba(118,200,107,0.35);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-app-board {
+                animation: none;
+            }
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-title h2 {
+            font-size: clamp(1.6rem, 2.2vw, 2.1rem);
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            max-width: 520px;
+            margin: 0 auto;
+            font-size: 0.9rem;
+        }
+
+        /* Products */
+        .products {
+            padding: 40px 0 80px;
+        }
+
+        .products-header {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .products-filter {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            background: var(--bg-main);
+            color: var(--text-secondary);
+            border: 0;
+            padding: 7px 15px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.78rem;
+            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+            transition: background var(--transition-fast),
+                        color var(--transition-fast),
+                        border-color var(--transition-fast),
+                        transform var(--transition-fast),
+                        box-shadow var(--transition-fast);
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-1px);
+            color: var(--primary);
+        }
+
+        .filter-btn.active {
+            color: var(--primary);
+            box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+        }
+
+        .search-container {
+            max-width: 460px;
+            margin: 0 auto;
+        }
+
+        .search-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 11px 14px 11px 38px;
+            background: var(--bg-main);
+            border-radius: 999px;
+            border: 0;
+            color: var(--text-primary);
+            font-size: 0.84rem;
+            outline: none;
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+            transition: border-color var(--transition-fast),
+                        box-shadow var(--transition-fast),
+                        background-color var(--transition-fast);
+        }
+
+        .search-box input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-box input:focus {
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light), 0 0 0 2px rgba(33,77,46,0.15);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 18px;
+            margin-top: 28px;
+        }
+
+        .product-card {
+            position: relative;
+            border-radius: 18px;
+            background: var(--bg-card);
+            border: 0;
+            padding: 14px 14px 14px;
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+            transition: transform var(--transition-fast),
+                        box-shadow var(--transition-fast),
+                        border-color var(--transition-fast),
+                        background var(--transition-fast);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            inset: -40%;
+            background: radial-gradient(circle at 0 0, rgba(118,200,107,0.22), transparent 55%);
+            opacity: 0;
+            transition: opacity var(--transition-slow);
+            pointer-events: none;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light);
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 2;
+            padding: 4px 10px;
+            font-size: 0.66rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            border-radius: 999px;
+            text-transform: uppercase;
+            color: #fff;
+            background: linear-gradient(135deg, var(--secondary), #76c86b);
+            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+        }
+
+        .product-image {
+            position: relative;
+            height: 120px;
+            border-radius: 14px;
+            overflow: hidden;
+            background: var(--bg-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+        }
+
+        .product-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(163,177,198,0.15));
+            pointer-events: none;
+        }
+
+        .product-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: #fff;
+            font-size: 1.4rem;
+        }
+
+        .product-thumb {
+            width: 68px;
+            height: 68px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+        }
+
+        .product-content {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .product-content h3 {
+            font-size: 0.95rem;
+            line-height: 1.3;
+            color: var(--text-primary);
+            word-break: break-word;
+            min-height: 2.4em;
+        }
+
+        .product-content p {
+            color: var(--text-secondary);
+            font-size: 0.78rem;
+            line-height: 1.4;
+            min-height: 2.6em;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .price {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--primary);
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: var(--text-muted);
+            font-size: 0.72rem;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .product-meta span i {
+            margin-right: 4px;
+        }
+
+        .product-actions {
+            margin-top: 6px;
+        }
+
+        .product-actions .btn {
+            width: 100%;
+            padding-block: 7px;
+            font-size: 0.7rem;
+            letter-spacing: 0.09em;
+        }
+
+        /* Features */
+        .features {
+            padding: 80px 0 90px;
+            background: var(--bg-main);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 18px;
+        }
+
+        .feature-card {
+            position: relative;
+            padding: 20px 18px 18px;
+            border-radius: 20px;
+            background: var(--bg-card);
+            border: 0;
+            box-shadow: var(--shadow-soft);
+            transition: transform var(--transition-fast),
+                        box-shadow var(--transition-fast),
+                        border-color var(--transition-fast),
+                        background var(--transition-fast),
+                        translate var(--transition-fast);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(circle at 0 0, rgba(118,200,107,0.18), transparent 60%);
+            opacity: 0;
+            transition: opacity var(--transition-slow);
+            pointer-events: none;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 17px;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 4px;
+            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+        }
+
+        .feature-card h3 {
+            font-size: 0.98rem;
+        }
+
+        .feature-card p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* CTA */
+        .cta {
+            padding: 80px 0 90px;
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-main);
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0,0V100H1000V0C750,50 500,100 250,50S0,0,0,0Z" fill="rgba(163,177,198,0.24)"/></svg>');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: clamp(1.7rem, 2.3vw, 2.2rem);
+            margin-bottom: 14px;
+            color: var(--text-primary);
+        }
+
+        .cta p {
+            max-width: 540px;
+            margin: 0 auto 24px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-main);
+            padding: 70px 0 24px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 28px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1rem;
+            margin-bottom: 14px;
+            position: relative;
+            padding-bottom: 6px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 34px;
+            height: 2px;
+            border-radius: 999px;
+            background: var(--primary);
+        }
+
+        .footer-col p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-size: 0.82rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 8px;
+            font-size: 0.82rem;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-secondary);
+            transition: color var(--transition-fast), transform var(--transition-fast);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary);
+            transform: translateX(2px);
+        }
+
+        .footer-col ul li i {
+            margin-right: 8px;
+            color: var(--text-muted);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-links a {
+            width: 34px;
+            height: 34px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-main);
+            border: 0;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+            transition: background var(--transition-fast),
+                        color var(--transition-fast),
+                        transform var(--transition-fast),
+                        border-color var(--transition-fast);
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 18px;
+            border-top: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            font-size: 0.78rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-inner {
+                grid-template-columns: minmax(0, 1fr);
+                text-align: center;
+            }
+
+            .hero-text p,
+            .hero-metrics,
+            .hero-note {
+                margin-inline: auto;
+            }
+
+            .hero-metrics {
+                justify-content: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-image {
+                justify-content: center;
+                margin-top: 36px;
+            }
+
+            .hero-card {
+                max-width: 420px;
+            }
+
+            .hero-app-board {
+                min-height: 390px;
+            }
+        }
+
+        @media (max-width: 860px) {
+            nav ul {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: inline-flex;
+            }
+
+            nav {
+                position: fixed;
+                inset-inline: 0;
+                top: var(--header-height);
+                height: calc(100vh - var(--header-height));
+                background: var(--bg-main);
+                backdrop-filter: blur(10px);
+                padding: 18px 20px 26px;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 16px;
+                transform: translateX(100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: transform var(--transition),
+                            opacity var(--transition),
+                            visibility var(--transition);
+            }
+
+            nav.active {
+                transform: translateX(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            nav ul {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+                margin-top: 6px;
+            }
+
+            nav ul li a {
+                font-size: 0.88rem;
+            }
+
+            nav ul li:last-child a.btn {
+                width: 100%;
+                justify-content: center;
+                margin-top: 10px;
+            }
+
+            .theme-toggle {
+                width: 100%;
+                height: 44px;
+                border-radius: 12px;
+                justify-content: center;
+            }
+
+            .theme-toggle .theme-text {
+                display: inline;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --header-height: 68px;
+                --logo-max-width: 150px;
+            }
+
+            .hero {
+                padding-top: calc(var(--header-height) + 18px);
+                padding-bottom: 60px;
+                min-height: auto;
+            }
+
+            .hero-text h1 {
+                font-size: clamp(1.9rem, 6vw, 2.2rem);
+            }
+
+            .hero-icons-grid {
+                gap: 10px;
+            }
+
+            .products {
+                padding-top: 24px;
+                padding-bottom: 70px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 14px;
+            }
+
+            .product-card {
+                padding: 10px 10px 11px;
+            }
+
+            .product-image {
+                height: 100px;
+                margin-bottom: 10px;
+            }
+
+            .product-thumb {
+                width: 58px;
+                height: 58px;
+            }
+
+            .product-content h3 {
+                font-size: 0.86rem;
+            }
+
+            .product-content p {
+                font-size: 0.72rem;
+                min-height: 2.2em;
+            }
+
+            .price {
+                font-size: 0.92rem;
+            }
+
+            .original-price {
+                font-size: 0.68rem;
+            }
+
+            .product-meta {
+                font-size: 0.66rem;
+            }
+
+            .product-actions .btn {
+                padding-block: 6px;
+                font-size: 0.64rem;
+            }
+
+            .btn {
+                padding-inline: 18px;
+                padding-block: 9px;
+                font-size: 0.74rem;
+            }
+
+            .features {
+                padding: 64px 0 70px;
+            }
+
+            .cta {
+                padding: 64px 0 72px;
+            }
+
+            footer {
+                padding-top: 56px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            :root {
+                --header-height: 64px;
+                --logo-height: clamp(30px, 8vw, 36px);
+                --logo-max-width: 132px;
+            }
+
+            .container {
+                padding-inline: 16px;
+            }
+
+            .hero-text h1 {
+                font-size: clamp(1.7rem, 7vw, 2rem);
+            }
+
+            .hero-app-board {
+                min-height: 320px;
+                padding: 12px;
+                border-radius: 18px;
+            }
+
+            .hero-icons-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 9px;
+            }
+
+            .hero-metrics span {
+                font-size: 0.72rem;
+            }
+
+            .hero-chip-row {
+                gap: 8px;
+            }
+
+            .hero-chip {
+                font-size: 0.78rem;
+                padding: 6px 10px;
+                gap: 6px;
+            }
+
+           .products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
 
 
-    
-</style>
-    
-    
+            .product-card {
+                border-radius: 16px;
+            }
+
+            .product-badge {
+                font-size: 0.6rem;
+                padding-inline: 8px;
+            }
+
+            .feature-card {
+                padding: 18px 16px;
+            }
+
+            .footer-content {
+                gap: 24px;
+            }
+        }
+        /* Tombol CTA Navbar */
+.nav-cta {
+  padding: 10px 22px;
+  background: var(--bg-main);
+  color: var(--primary);
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.25s ease-in-out;
+  box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+}
+
+/* Hover Style */
+.nav-cta:hover {
+  transform: translateY(-1px);
+  color: var(--primary-dark);
+  box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+}
+
+/* Active (ditekan) */
+.nav-cta:active {
+  transform: scale(0.96);
+  box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+}
+
+/* Responsif mobile */
+@media (max-width: 768px) {
+  .nav-cta {
+    padding: 9px 18px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+}
+
+    </style>
 </head>
-<body class="">
+<body>
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5M9V2HKQ"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
 
-    <div id="toast" class="neu rounded-2xl p-4 sm:p-5 flex items-center gap-4 border-2 border-transparent z-[99999]">
-        <div class="border-2 border-green-500 text-green-500 rounded-full h-10 w-10 flex items-center justify-center shrink-0 text-lg shadow-sm">
-            <i class="fas fa-check"></i>
-        </div>
-        <div class="flex-1 text-left">
-            <h4 class="text-[var(--text)] font-bold text-lg m-0 leading-tight" id="toastTitle">Success</h4>
-            <p class="text-[var(--text)] opacity-70 text-sm mt-1 mb-0 font-medium" id="toastMsg">Action completed!</p>
-        </div>
-        <button onclick="document.getElementById('toast').classList.remove('show')" class="text-[var(--text)] opacity-40 hover:opacity-100 hover:text-red-500 text-xl transition-all mb-auto">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="#home" class="logo" aria-label="Jashub Store">
+                    <img src="logo.jpeg" alt="Jashub Logo" class="logo-img">
+                </a>
 
-    
+                <button class="mobile-menu-btn" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
 
-    
-    <header class="w-full max-w-6xl mx-auto p-4 sm:p-6 flex justify-between items-center shrink-0">
-        <div class="flex items-center gap-3">
-            <button onclick="toggleTheme()" id="darkModeBtn" class="neu-btn h-10 w-10 sm:h-12 sm:w-12 rounded-full text-sm sm:text-lg">
-                <i class="fas fa-moon dark-icon"></i>
-                <i class="fas fa-sun light-icon hidden text-yellow-500"></i>
-            </button>
-            <button onclick="goBackSmart()" id="backInboxBtn" class="neu-btn hidden px-4 h-10 sm:h-12 rounded-xl text-xs sm:text-sm font-bold text-[var(--accent-1)]">
-    <i class="fas fa-arrow-left sm:mr-2"></i> <span class="hidden sm:inline" data-i18n="back_home">Back to Home</span>
-</button>
-        </div>
-        
-        <div class="relative shrink-0" id="langDropdownContainer">
-            <div class="neu-btn px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-between gap-2 cursor-pointer text-xs sm:text-sm" onclick="toggleLangMenu()">
-                <span id="currentLangText">English</span>
-                <i class="fas fa-chevron-down opacity-50 text-[10px] sm:text-xs"></i>
-            </div>
-            <div id="langMenu" class="absolute right-0 top-full mt-2 neu p-2 w-40 z-[99999] hidden flex flex-col gap-1 max-h-64 overflow-y-auto border-t border-l border-white/20">
-                <div class="px-3 py-2 rounded-lg cursor-pointer text-xs sm:text-sm font-semibold hover:bg-[var(--accent-1)] hover:text-white" onclick="setLang('ar', 'Arabic')">Arabic</div>
-                <div class="px-3 py-2 rounded-lg cursor-pointer text-xs sm:text-sm font-semibold hover:bg-[var(--accent-1)] hover:text-white" onclick="setLang('zh', 'Chinese')">Chinese</div>
-                <div class="px-3 py-2 rounded-lg cursor-pointer text-xs sm:text-sm font-semibold hover:bg-[var(--accent-1)] hover:text-white" onclick="setLang('nl', 'Dutch')">Dutch</div>
-                <div class="px-3 py-2 rounded-lg cursor-pointer text-xs sm:text-sm font-semibold hover:bg-[var(--accent-1)] hover:text-white" onclick="setLang('en', 'English')">English</div>
-                <div class="px-3 py-2 rounded-lg cursor-pointer text-xs sm:text-sm font-semibold hover:bg-[var(--accent-1)] hover:text-white" onclick="setLang('fr', 'French')">French</div>
-                <div class="px-3 py-2 rounded-lg cursor-pointer text-xs sm:text-sm font-semibold hover:bg-[var(--accent-1)] hover:text-white" onclick="setLang('de', 'German')">German</div>
-                <div class="px-3 py-2 rounded-lg cursor-pointer text-xs sm:text-sm font-semibold hover:bg-[var(--accent-1)] hover:text-white" onclick="setLang('hi', 'Hindi')">Hindi</div>
-                <div class="px-3 py-2 rounded-lg cursor-pointer text-xs sm:text-sm font-semibold hover:bg-[var(--accent-1)] hover:text-white" onclick="setLang('id', 'Indonesian')">Indonesian</div>
-                <div class="px-3 py-2 rounded-lg cursor-pointer text-xs sm:text-sm font-semibold hover:bg-[var(--accent-1)] hover:text-white" onclick="setLang('it', 'Italian')">Italian</div>
-                <div class="px-3 py-2 rounded-lg cursor-pointer text-xs sm:text-sm font-semibold hover:bg-[var(--accent-1)] hover:text-white" onclick="setLang('ja', 'Japanese')">Japanese</div>
-                <div class="px-3 py-2 rounded-lg cursor-pointer text-xs sm:text-sm font-semibold hover:bg-[var(--accent-1)] hover:text-white" onclick="setLang('ko', 'Korean')">Korean</div>
-                <div class="px-3 py-2 rounded-lg cursor-pointer text-xs sm:text-sm font-semibold hover:bg-[var(--accent-1)] hover:text-white" onclick="setLang('no', 'Norwegian')">Norwegian</div>
-                <div class="px-3 py-2 rounded-lg cursor-pointer text-xs sm:text-sm font-semibold hover:bg-[var(--accent-1)] hover:text-white" onclick="setLang('pl', 'Polish')">Polish</div>
-                <div class="px-3 py-2 rounded-lg cursor-pointer text-xs sm:text-sm font-semibold hover:bg-[var(--accent-1)] hover:text-white" onclick="setLang('pt', 'Portuguese')">Portuguese</div>
-                <div class="px-3 py-2 rounded-lg cursor-pointer text-xs sm:text-sm font-semibold hover:bg-[var(--accent-1)] hover:text-white" onclick="setLang('ru', 'Russian')">Russian</div>
-                <div class="px-3 py-2 rounded-lg cursor-pointer text-xs sm:text-sm font-semibold hover:bg-[var(--accent-1)] hover:text-white" onclick="setLang('es', 'Spanish')">Spanish</div>
-                <div class="px-3 py-2 rounded-lg cursor-pointer text-xs sm:text-sm font-semibold hover:bg-[var(--accent-1)] hover:text-white" onclick="setLang('sv', 'Swedish')">Swedish</div>
-                <div class="px-3 py-2 rounded-lg cursor-pointer text-xs sm:text-sm font-semibold hover:bg-[var(--accent-1)] hover:text-white" onclick="setLang('th', 'Thai')">Thai</div>
-                <div class="px-3 py-2 rounded-lg cursor-pointer text-xs sm:text-sm font-semibold hover:bg-[var(--accent-1)] hover:text-white" onclick="setLang('tr', 'Turkish')">Turkish</div>
-                <div class="px-3 py-2 rounded-lg cursor-pointer text-xs sm:text-sm font-semibold hover:bg-[var(--accent-1)] hover:text-white" onclick="setLang('vi', 'Vietnamese')">Vietnamese</div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#features">Keunggulan</a></li>
+                        <li><a href="#products">Produk</a></li>
+                        <li><a href="#contact">Kontak</a></li>
+                        <li><a href="#products" class="btn btn-primary">Beli Sekarang</a></li>
+                    </ul>
+                    <button class="nav-cta" onclick="window.location.href='twibbon.html'">
+        Buat Twibbon
+      </button>
+                    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Aktifkan dark mode" title="Toggle dark mode">
+                        <i class="fas fa-moon" id="themeToggleIcon" aria-hidden="true"></i>
+                        <span class="theme-text" id="themeToggleText">Dark Mode</span>
+                    </button>
+                </nav>
             </div>
         </div>
     </header>
 
-    
-    <div class="w-full flex justify-center mb-8 sm:mb-10 shrink-0 mt-2 sm:mt-6 px-4 min-h-[80px] sm:min-h-[96px]">
-        <a href="/admin" class="flex justify-center items-center gap-3 font-bold text-2xl sm:text-3xl tracking-wider text-center" title="Admin Panel">
-            <img src="https://i.ibb.co.com/My1CwWpb/logotmail2-1.png" class="h-20 sm:h-24 object-contain transition-transform hover:scale-105 duration-300">
-        </a>
-    </div>
-    
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay-ring"></div>
+        <div class="container">
+            <div class="hero-inner">
+                <div class="hero-text">
+                    <div class="hero-kicker">
+                        <span class="hero-kicker-dot"></span>
+                        <span>Premium Apps • Garansi • Proses Cepat</span>
+                    </div>
+                    <h1>
+                        Aplikasi <span class="hero-highlight">Premium</span> Berkualitas,
+                        Harga Tetap Masuk Akal
+                    </h1>
+                    <p>
+                        Jashub Store menyediakan berbagai aplikasi premium dengan kualitas terbaik dan harga yang sangat
+                        terjangkau. Dapatkan akses ke aplikasi favorit Anda tanpa harus merogoh kocek dalam-dalam.
+                    </p>
+                    <div class="hero-metrics">
+                        <span><i class="fas fa-shield-alt"></i> Garansi hingga 6 bulan</span>
+                        <span><i class="fas fa-bolt"></i> Aktivasi ±1–12 jam</span>
+                        <span><i class="fas fa-star"></i> Ratusan produk pilihan</span>
+                    </div>
+                    <div class="hero-buttons">
+                        <a href="#products" class="btn btn-primary">
+                            Lihat Produk
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#features" class="btn btn-secondary">
+                            Pelajari Lebih
+                        </a>
+                    </div>
+                    <p class="hero-note">Semua transaksi via WhatsApp resmi Jashub Store.</p>
+                </div>
 
-    <main class="w-full max-w-5xl mx-auto px-4 flex flex-col items-center flex-1">
-        
-        
-        <div class="w-full max-w-2xl shrink-0 relative mt-4 sm:mt-8">
-            <div id="view-mode">
-                <div class="neu p-4 sm:p-8 md:p-10 mb-6 relative border-2 border-dashed border-[var(--accent-1)]/30">
-                    <h2 class="text-center font-bold text-sm sm:text-lg mb-4 sm:mb-6" data-i18n="title">Your Temporary Email Address</h2>
-                    <div class="flex flex-row items-center gap-2 sm:gap-4">
-                        <div class="neu-inset flex-1 flex justify-between items-center px-3 sm:px-5 py-3 sm:py-4 cursor-pointer overflow-hidden" onclick="copyItem('email')">
-                            <span id="currentEmail" class="font-bold text-xs sm:text-base truncate text-[var(--accent-1)] w-full tracking-wide">Loading...</span>
-                            <i class="fas fa-chevron-down opacity-50 text-xs sm:text-sm ml-2 shrink-0"></i>
+                <div class="hero-image">
+                    <div class="hero-card">
+                        <div class="hero-app-board" aria-label="Daftar ikon aplikasi premium">
+                            <div class="hero-app-board-overlay"></div>
+                            <div class="hero-icons-grid" id="heroIconsGrid"></div>
                         </div>
-                        <div class="flex items-center gap-2 sm:gap-4 shrink-0">
-                            <button onclick="copyItem('email')" class="neu-btn h-10 w-10 sm:h-14 sm:w-14 text-[var(--accent-1)]"><i class="far fa-copy text-sm sm:text-xl"></i></button>
-                            <div class="border-l-2 border-dotted border-[var(--shadow-dark)] h-6 sm:h-8"></div>
-                            <button onclick="showQR()" class="neu-btn h-10 w-10 sm:h-14 sm:w-14 text-[var(--accent-3)]"><i class="fas fa-qrcode text-sm sm:text-xl"></i></button>
+                        <div class="hero-chip-row">
+                            <span class="hero-chip"><i class="fas fa-music"></i> Spotify, Apple Music</span>
+                            <span class="hero-chip"><i class="fas fa-pen-nib"></i> Canva, PicsArt</span>
+                            <span class="hero-chip"><i class="fas fa-film"></i> Netflix, Disney+, Vidio</span>
+                            <span class="hero-chip"><i class="fas fa-robot"></i> ChatGPT, Gemini, Perplexity</span>
                         </div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-3 gap-2 sm:gap-4 mb-6">
-                    <button onclick="forceRefresh()" class="neu-btn py-3 sm:py-4 flex flex-row items-center justify-center text-[var(--accent-1)]">
-                        <i id="refreshIcon" class="fas fa-sync-alt text-xs sm:text-lg"></i>
-                        <span class="text-xs sm:text-base font-semibold ml-1 sm:ml-2" data-i18n="refresh">Refresh</span>
-                    </button>
-                    <button onclick="toggleNewMode()" class="neu-btn py-3 sm:py-4 flex flex-row items-center justify-center text-[var(--accent-2)]">
-                        <i class="far fa-plus-square text-xs sm:text-lg"></i>
-                        <span class="text-xs sm:text-base font-semibold ml-1 sm:ml-2" data-i18n="new">New</span>
-                    </button>
-                    <button onclick="generateNew()" class="neu-btn py-3 sm:py-4 flex flex-row items-center justify-center text-red-500">
-                        <i class="far fa-trash-alt text-xs sm:text-lg"></i>
-                        <span class="text-xs sm:text-base font-semibold ml-1 sm:ml-2" data-i18n="delete">Delete</span>
-                    </button>
-                </div>
-            </div>
-
-           <div id="create-mode" class="hidden">
-                <div class="neu p-4 sm:p-8 md:p-10 mb-6 relative border-2 border-dashed border-[var(--accent-2)]/30">
-                    <h2 class="text-center font-bold text-sm sm:text-lg mb-4 sm:mb-6" data-i18n="create_title">Create Custom Email</h2>
-                    
-                    <div class="flex flex-row items-stretch gap-3 sm:gap-6 w-full">
-                        
-                        <div class="flex-1 w-full flex flex-col gap-3 sm:gap-4 min-w-0 justify-between">
-                            <input type="text" id="customUser" class="neu-inset w-full px-3 sm:px-5 h-12 sm:h-14 border-none outline-none bg-transparent font-semibold text-[var(--text)] placeholder:text-[var(--text)] placeholder:opacity-60 text-xs sm:text-base rounded-xl sm:rounded-2xl" placeholder="Enter Username (Min 3 chars)">
-                            
-                            <div class="relative w-full h-12 sm:h-14">
-                                <input type="hidden" id="domainSelect" value="">
-                                <div id="customDropdownBtn" class="neu-inset w-full h-full px-3 sm:px-5 cursor-pointer font-semibold text-xs sm:text-base flex justify-between items-center opacity-80 rounded-xl sm:rounded-2xl" onclick="toggleCustomDropdown()">
-                                    <span id="customDropdownLabel" class="truncate">Loading...</span>
-                                    <i class="fas fa-chevron-down opacity-50 text-xs sm:text-sm pointer-events-none shrink-0 ml-2"></i>
-                                </div>
-                                <div id="customDropdownMenu" class="absolute left-0 top-full mt-3 neu p-2 w-full z-[9999] hidden flex flex-col gap-1 max-h-60 overflow-y-auto border-t border-l border-[var(--shadow-light)]/50 rounded-xl sm:rounded-2xl shadow-2xl bg-[var(--bg)]"></div>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-row items-stretch gap-2 sm:gap-4 justify-center shrink-0">
-                            <button onclick="createCustom()" class="neu-btn w-12 sm:w-20 rounded-xl sm:rounded-2xl"><i class="fas fa-chevron-right text-lg sm:text-xl text-[var(--accent-1)]"></i></button>
-                            <div class="border-l-2 border-dotted border-[var(--shadow-dark)] hidden sm:block my-2"></div>
-                            <button onclick="generateCustomRandom()" class="neu-btn w-12 sm:w-20 rounded-xl sm:rounded-2xl">
-                                 <i class="fas fa-random text-lg sm:text-xl text-[var(--accent-2)]"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-                <button onclick="toggleNewMode()" class="neu-btn w-full py-3 sm:py-4 mb-6 text-[var(--text)] opacity-70 hover:opacity-100 hover:text-red-500 font-bold text-sm sm:text-base rounded-xl sm:rounded-2xl" data-i18n="cancel">Cancel</button>
-            </div>
-        </div>
-
-       <div class="w-full max-w-2xl flex flex-col relative mb-10 shrink-0 mt-4">
-            <div class="neu-inset p-2 sm:p-4 overflow-y-auto min-h-[300px] max-h-[600px] flex flex-col w-full transition-all duration-300" id="inboxListView">
-                <div id="inbox" class="flex-1 flex flex-col w-full min-h-[280px]">
-                    <div class="flex-1 flex flex-col justify-center items-center opacity-50 m-auto h-full">
-                        <i class="fas fa-circle-notch fa-spin text-3xl sm:text-4xl mb-4 text-[var(--accent-1)]"></i>
-                        <p class="font-bold text-sm sm:text-lg" data-i18n="no_msg">No Messages</p>
-                        <p class="text-xs sm:text-sm text-center mt-1" data-i18n="waiting">Waiting for Incoming Messages</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="hidden flex-col w-full transition-all duration-300" id="emailDetailView">
-                
-                <div class="neu-inset p-2 sm:p-3 rounded-2xl mb-4 sm:mb-6 flex justify-between items-center w-full border border-[var(--shadow-light)]/20">
-                    <button onclick="closeEmailDetail()" class="px-3 sm:px-4 py-2 text-xs sm:text-sm font-bold text-[var(--text)] opacity-60 hover:opacity-100 transition-all flex items-center focus:outline-none">
-                        <i class="fas fa-chevron-left mr-2"></i> <span data-i18n="back_to_inbox">Back to Inbox</span>
-                    </button>
-                    <div class="flex items-center gap-2 text-[var(--accent-1)] font-bold text-xs sm:text-sm tracking-wide px-3 sm:px-4 py-2">
-                        <i class="fas fa-envelope-open-text opacity-80"></i>
-                        <span data-i18n="detail_email">Email Details</span>
-                    </div>
-                </div>
-
-                <div class="neu-inset p-4 sm:p-6 rounded-[24px] mb-5 flex flex-col gap-3 sm:gap-4 relative overflow-hidden border border-[var(--shadow-light)]/20">
-                    <div class="absolute top-0 left-0 w-1.5 h-full bg-[var(--accent-1)] opacity-90 shadow-[0_0_10px_var(--accent-1)]"></div>
-                    <div class="flex flex-col sm:flex-row sm:justify-between items-start gap-1 pl-2">
-                        <strong class="opacity-60 text-[10px] sm:text-xs uppercase tracking-widest shrink-0 w-16" data-i18n="lbl_from">From:</strong> 
-                        <span class="font-bold text-sm sm:text-base break-all text-[var(--accent-1)] sm:text-right w-full" id="detailSenderName">Loading...</span>
-                    </div>
-                    <div class="border-b border-[var(--shadow-dark)]/20 my-0.5 ml-2"></div>
-                    <div class="flex flex-col sm:flex-row sm:justify-between items-start gap-1 pl-2">
-                        <strong class="opacity-60 text-[10px] sm:text-xs uppercase tracking-widest shrink-0 w-16" data-i18n="lbl_subject">Subject:</strong> 
-                        <span class="font-bold text-sm sm:text-base break-words sm:text-right w-full text-[var(--text)]" id="detailSubject">Loading...</span>
-                    </div>
-                    <div class="border-b border-[var(--shadow-dark)]/20 my-0.5 ml-2"></div>
-                    <div class="flex flex-col sm:flex-row sm:justify-between items-start gap-1 pl-2">
-                        <strong class="opacity-60 text-[10px] sm:text-xs uppercase tracking-widest shrink-0 w-16" data-i18n="lbl_time">Time:</strong> 
-                        <span class="font-bold text-xs sm:text-sm opacity-80 sm:text-right w-full text-[var(--text)]" id="detailDate">Loading...</span>
-                    </div>
-                </div>
-
-                <div class="neu-inset p-3 sm:p-5 rounded-[24px] min-h-[300px] max-h-[60vh] overflow-y-auto w-full flex flex-col border border-[var(--shadow-light)]/20">
-                    <div class="bg-white text-black p-4 sm:p-6 rounded-[16px] shadow-sm flex-1 email-wrapper w-full">
-                        <div id="detailHtmlContent" class="w-full text-sm"></div>
                     </div>
                 </div>
             </div>
         </div>
-        
-    </main>
+    </section>
 
-    
-    <div id="qrOverlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[99999] hidden flex justify-center items-center p-4 opacity-0 transition-opacity duration-150 ease-out" onclick="closeQR(event)">
-        <div id="qrContent" class="neu p-5 sm:p-6 rounded-3xl relative transform scale-95 transition-transform duration-150 ease-out flex flex-col items-center justify-center max-w-sm w-full" onclick="event.stopPropagation()">
-            <button onclick="closeQR(event)" class="absolute -top-4 -right-4 bg-[var(--bg)] text-red-500 h-10 w-10 rounded-full flex items-center justify-center z-50 shadow-[4px_4px_8px_var(--shadow-dark),-4px_-4px_8px_var(--shadow-light)] cursor-pointer hover:text-red-400"><i class="fas fa-times text-xl"></i></button>
-            <div class="neu-inset p-3 bg-white rounded-2xl mb-4 mt-2 flex items-center justify-center">
-                <img id="qrImage" src="" alt="QR" class="w-48 h-48 sm:w-56 sm:h-56 rounded-xl">
+    <!-- Products -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="products-header">
+                <div class="section-title">
+                    <h2>Produk Unggulan Kami</h2>
+                    <p>Temukan aplikasi premium favorit Anda dengan harga terbaik.</p>
+                </div>
+
+                <div class="products-filter">
+                    <button class="filter-btn active" data-filter="all">Semua</button>
+                    <button class="filter-btn" data-filter="video">Video Editor</button>
+                    <button class="filter-btn" data-filter="music">Music & Audio</button>
+                    <button class="filter-btn" data-filter="design">Design</button>
+                    <button class="filter-btn" data-filter="utility">Utility</button>
+                </div>
+
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="productSearch" placeholder="Cari produk...">
+                    </div>
+                </div>
             </div>
-            <p class="font-bold text-[var(--accent-1)] text-sm sm:text-base break-all text-center px-2" id="qrEmailText"></p>
-        </div>
-    </div>
-    
 
-    <footer class="pb-6 pt-4 text-center text-[10px] sm:text-xs opacity-60 shrink-0 font-semibold tracking-wider">
-        <p>Copyright &copy; 2026 PremiumMurah Mail. All rights reserved.</p>
+            <div class="products-grid"></div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Mengapa Memilih Jashub Store?</h2>
+                <p>Kami memberikan pengalaman berbelanja aplikasi premium terbaik dengan berbagai keunggulan.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3>Harga Terjangkau</h3>
+                    <p>Dapatkan aplikasi premium dengan harga yang jauh lebih murah dibandingkan membeli langsung.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Garansi Aman</h3>
+                    <p>Kami memberikan garansi penggantian jika terjadi masalah dengan akun yang Anda beli.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Proses Cepat</h3>
+                    <p>Pembelian dan pengiriman akun dilakukan secara instan setelah pembayaran dikonfirmasi.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Support 24/7</h3>
+                    <p>Tim customer service kami siap membantu Anda kapan saja dengan respon yang cepat.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Kompatibel</h3>
+                    <p>Aplikasi yang kami jual kompatibel dengan berbagai perangkat Android dan iOS.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Kualitas Premium</h3>
+                    <p>Semua aplikasi yang kami jual adalah versi premium dengan fitur lengkap tanpa batasan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Siap Memulai Pengalaman Premium?</h2>
+                <p>Dapatkan akses ke aplikasi premium favorit Anda dengan harga terjangkau hanya di Jashub Store.</p>
+                <a href="#products" class="btn btn-secondary">
+                    Beli Sekarang
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Jashub Store</h3>
+                    <p>Penyedia aplikasi premium berkualitas dengan harga terjangkau. Dapatkan pengalaman terbaik menggunakan aplikasi favorit Anda.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/x.shybb?igsh=eWM0cGUwc2hycWR6" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/6281324919799" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.tiktok.com/@x.shybb?_t=ZS-90TQvwsJJGK&_r=1" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Produk</h3>
+                    <ul>
+                        <li><a href="#products">Video Editor</a></li>
+                        <li><a href="#products">Music & Audio</a></li>
+                        <li><a href="#products">Design Tools</a></li>
+                        <li><a href="#products">Utility Apps</a></li>
+                        <li><a href="#products">Semua Produk</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Bantuan</h3>
+                    <ul>
+                        <li><a href="#">Cara Pembelian</a></li>
+                        <li><a href="#">Panduan Login</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Kontak</h3>
+                    <ul>
+                        <li><i class="fas fa-globe"></i> jashub.web.id</li>
+                        <li><i class="fas fa-envelope"></i> jashubpremium@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> 6281324919799</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Jashub Store. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
-    
-
-    
-
     <script>
-        // 1. SETTINGAN & VARIABEL AWAL
-        // 1. SETTINGAN & VARIABEL AWAL
-        const forcedEmail = "davidcool819gfq@sekok.tech";
-        const sysDomains = ["apklab.live","appkita.cloud","awanin.cloud","eduan.my.id","emoh.my.id","gmaile.my.id","premur.shop","sekok.tech","velotech.site","zynode.cloud"];
-        // Taruh di bagian paling atas <script>
-        const netflixAccessPass = "jalanjalan01";
-        const sysAppName = "PremiumMurah Mail"; // 👈 Ambil nama app dari database
-        const defaultDomain = "";
-        const baseUrl = window.location.origin;
-        const fetchSec = parseInt("2") * 1000 || 2000;
-        const minLen = 3;
-        const maxLen = 15;
-        const soundEnabled = true;
-        let activeEmail = "";
-        let currentMessages = [];
-        let currentLangCode = "en";
-        let firstLoadDone = false;
-        let fetchInterval;
+        const products = [
+            {id: "1", code: "am", name: "Alight Motion 1 Tahun", category: "video", price: "Rp 5.000", originalPrice: "-", description: "Private Akun, Garansi 6 Bulan, Support Android & iOS, Include Cara Login", stock: "221", badge: "HOT", image: "https://play-lh.googleusercontent.com/OU0BlP8C9-V7ECl2crma7B48nzDbK7liSLjn0j_fpTlyWG6qyEE-mw_KFZ9aOXF0a3w"},
+            {id: "2", code: "appmus", name: "Apple Music Individual 1 Bulan", category: "music", price: "Rp 8.500", originalPrice: "-", description: "No Garansi, Reg Indonesia, Support Android Only", stock: "13", badge: "MUSIC", image: "https://www.apple.com/v/apple-music/ae/images/shared/og__ckjrh2mu8b2a_image.png?202507232359"},
+            {id: "3", code: "appmushead", name: "Apple Music FamHead 1 Bulan", category: "music", price: "Rp 8.500", originalPrice: "-", description: "No Garansi, Reg Indonesia, Support Android Only, Bisa Invite 5 Member", stock: "20", badge: "FAMILY", image: "https://www.apple.com/v/apple-music/ae/images/shared/og__ckjrh2mu8b2a_image.png?202507232359"},
+            {id: "4", code: "bstation", name: "BStation Private 1 Bulan", category: "entertainment", price: "Rp 29.500", originalPrice: "-", description: "Full Garansi", stock: "5", badge: "ENTERTAINMENT", image: "https://toploker.com/assets/images/perusahaan/profile/1725252601453567.png"},
+            {id: "5", code: "canva", name: "Canva Edu Lifetime", category: "design", price: "Rp 8.500", originalPrice: "-", description: "Via Invit, Bergaransi 5 Bulan", stock: "344", badge: "LIFETIME", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGGeJK7Q7pSOzEx_PRPk-AVFDUYyg6HAbjJw&s"},
+            {id: "6", code: "cc28", name: "CapCut Pro 28 Days Member", category: "video", price: "Rp 7.000", originalPrice: "-", description: "Private Akun, Garansi 7 Day, New Method Full Seat", stock: "72", badge: "VIDEO", image: "https://img.utdstc.com/icon/9c4/58d/9c458dc566d565f67010dd63299a838474526f43f3ac00fca211b970daf7d42d:200"},
+            {id: "7", code: "cc35", name: "CapCut Pro 35 Day Member FullGar", category: "video", price: "Rp 8.000", originalPrice: "-", description: "Full Garansi, Private Akun", stock: "50", badge: "FULL GARANSI", image: "https://img.utdstc.com/icon/9c4/58d/9c458dc566d565f67010dd63299a838474526f43f3ac00fca211b970daf7d42d:200"},
+            {id: "8", code: "cc6b", name: "CapCut Pro 6 Bulan Individual", category: "video", price: "Rp 113.000", originalPrice: "-", description: "No Garansi, Private Akun", stock: "10", badge: "LONG TERM", image: "https://img.utdstc.com/icon/9c4/58d/9c458dc566d565f67010dd63299a838474526f43f3ac00fca211b970daf7d42d:200"},
+            {id: "9", code: "cc7", name: "CapCut Pro 7 Day", category: "video", price: "Rp 4.500", originalPrice: "-", description: "Private Akun, Bergaransi", stock: "124", badge: "VIDEO", image: "https://img.utdstc.com/icon/9c4/58d/9c458dc566d565f67010dd63299a838474526f43f3ac00fca211b970daf7d42d:200"},
+            {id: "10", code: "ccgar", name: "CapCut Pro 28 Days Member FullGar", category: "video", price: "Rp 7.500", originalPrice: "-", description: "Private Akun, Full Garansi", stock: "39", badge: "FULL GARANSI", image: "https://img.utdstc.com/icon/9c4/58d/9c458dc566d565f67010dd63299a838474526f43f3ac00fca211b970daf7d42d:200"},
+            {id: "11", code: "chatgpt1", name: "AI Chat GPT+ 1 Bulan", category: "ai", price: "Rp 14.000", originalPrice: "-", description: "Full Garansi, Sharing 8 User", stock: "14", badge: "AI", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMdM9MEQ0ExL1PmInT3U5I8v63YXBEdoIT0Q&s"},
+            {id: "12", code: "chatgpt7", name: "AI Chat GPT+ 1 Minggu", category: "ai", price: "Rp 8.500", originalPrice: "-", description: "Full Garansi, Sharing 8 User", stock: "9", badge: "AI", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMdM9MEQ0ExL1PmInT3U5I8v63YXBEdoIT0Q&s"},
+            {id: "13", code: "cowner", name: "Canva Pro Owner 30 Day", category: "design", price: "Rp 6.500", originalPrice: "-", description: "No Garansi", stock: "31", badge: "DESIGN", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGGeJK7Q7pSOzEx_PRPk-AVFDUYyg6HAbjJw&s"},
+            {id: "14", code: "duolingo", name: "Duolingo Super 1 Bulan", category: "education", price: "Rp 4.500", originalPrice: "-", description: "Private Akun, Garansi Login", stock: "53", badge: "EDUCATION", image: "https://upload.wikimedia.org/wikipedia/commons/0/05/Duolingo_logo.svg"},
+            {id: "15", code: "exp", name: "VPN Express 30 Day", category: "utility", price: "Rp 7.500", originalPrice: "-", description: "Private Akun, All Device", stock: "23", badge: "VPN", image: "https://cdn.vpninfo.dk/wp-content/uploads/2018/04/ExpressVPN-logo-1.png"},
+            {id: "16", code: "gpt", name: "AI ChatGPT Plus Private FullGar 1 Bulan", category: "ai", price: "Rp 29.500", originalPrice: "-", description: "Bergaransi, Akun Seller, Private Akun", stock: "29", badge: "AI", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMdM9MEQ0ExL1PmInT3U5I8v63YXBEdoIT0Q&s"},
+            {id: "17", code: "gpthead", name: "AI ChatGPT Head 1 Bulan FullGar", category: "ai", price: "Rp 69.000", originalPrice: "-", description: "Full Garansi, Bisa Invite 4 Member.", stock: "5", badge: "AI", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMdM9MEQ0ExL1PmInT3U5I8v63YXBEdoIT0Q&s"},
+            {id: "18", code: "gptinv", name: "AI Chat GPT Invite 1 Bulan FullGar", category: "ai", price: "Rp 24.500", originalPrice: "-", description: "Full Garansi, Private Akun, Member Paket Business, Akun Buyer", stock: "19", badge: "AI", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMdM9MEQ0ExL1PmInT3U5I8v63YXBEdoIT0Q&s"},
+            {id: "19", code: "grok", name: "AI Grok Super 15 Day", category: "ai", price: "Rp 8.500", originalPrice: "-", description: "Garansi Login, Private Akun", stock: "46", badge: "AI", image: "logo.jpeg"},
+            {id: "20", code: "hbo", name: "HBO Max Sharing 1 Bulan", category: "entertainment", price: "Rp 14.000", originalPrice: "-", description: "Bergaransi, Plan Ultimate", stock: "16", badge: "STREAMING", image: "https://play-lh.googleusercontent.com/WBH8B97jBYuKXhY-wmsjvHPg_tbJbgFg_N2cmAks7i92xuuJ9oLnoeBTfOEibBnrhEJM"},
+            {id: "21", code: "hbopriv", name: "HBO Max Ultimate Private 1 Bulan", category: "entertainment", price: "Rp 64.000", originalPrice: "-", description: "Garansi Backfree, Akun Seller, Plan Ultimate", stock: "9", badge: "PREMIUM", image: "https://play-lh.googleusercontent.com/WBH8B97jBYuKXhY-wmsjvHPg_tbJbgFg_N2cmAks7i92xuuJ9oLnoeBTfOEibBnrhEJM"},
+            {id: "22", code: "hma", name: "VPN HMA 1 Bulan", category: "utility", price: "Rp 7.000", originalPrice: "-", description: "Private Akun, Full Garansi", stock: "15", badge: "VPN", image: "https://i.pinimg.com/474x/0f/3d/23/0f3d234572358e98fb27fd74c20ab3ac.jpg"},
+            {id: "23", code: "iqiyi", name: "iQIYI VIP Standar Private 1 Bulan", category: "entertainment", price: "Rp 19.500", originalPrice: "-", description: "Region Indonesia, Private Akun, Garansi Backfree", stock: "13", badge: "STREAMING", image: "logo.jpeg"},
+            {id: "24", code: "iqiyiprem", name: "iQIYI VIP Premium Private 1 Bulan", category: "entertainment", price: "Rp 25.500", originalPrice: "-", description: "Region Indonesia, Private Akun, Garansi Backfree", stock: "26", badge: "STREAMING", image: "logo.jpeg"},
+            {id: "25", code: "lokbasic", name: "Loklok VIP Basic 40 Day", category: "entertainment", price: "Rp 37.500", originalPrice: "-", description: "Private Akun, Garansi Backfree", stock: "2", badge: "STREAMING", image: "logo.jpeg"},
+            {id: "26", code: "lokstd", name: "Loklok VIP Standar 30 Day", category: "entertainment", price: "Rp 64.000", originalPrice: "-", description: "Private Akun, Garansi Backfree", stock: "0", badge: "STREAMING", image: "logo.jpeg"},
+            {id: "27", code: "netpriv", name: "Netflix Premium 28 Day Private", category: "entertainment", price: "Rp 174.000", originalPrice: "-", description: "Private Akun, Full Garansi", stock: "0", badge: "NETFLIX", image: "https://images.ctfassets.net/y2ske730sjqp/5QQ9SVIdc1tmkqrtFnG9U1/de758bba0f65dcc1c6bc1f31f161003d/BrandAssets_Logos_02-NSymbol.jpg?w=940"},
+            {id: "28", code: "perplexity", name: "Perplexity Pro Sharing 1 Bulan", category: "ai", price: "Rp 14.000", originalPrice: "-", description: "Sharing Akun, Full Garansi", stock: "0", badge: "AI", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJqHmImBXbu2JKGmj_V912C9VPmCOjF0i4ow&s"},
+            {id: "29", code: "picsart", name: "PicsArt Pro 1 Bulan", category: "design", price: "Rp 7.000", originalPrice: "-", description: "Garansi Login, Private Akun", stock: "0", badge: "PHOTO", image: "https://i.pinimg.com/280x280_RS/5f/d1/85/5fd1852c99c37bb190598ce41a730b23.jpg"},
+            {id: "30", code: "prime1b", name: "Prime Video 1 Bulan", category: "entertainment", price: "Rp 10.500", originalPrice: "-", description: "Private Akun, Bergaransi, Include Email Akses", stock: "131", badge: "STREAMING", image: "https://play-lh.googleusercontent.com/04rBJNzGde7ZS3Il2UTM-xZ1HueDTTiHiYzGtl2Ie_INZM-JK-n1EVKI5J74ZFgCGPg"},
+            {id: "31", code: "scribd", name: "Scribd Premium 1 Bulan", category: "education", price: "Rp 7.000", originalPrice: "-", description: "Private Akun, Bergaransi, Ada Limit Download", stock: "19", badge: "EDUCATION", image: "https://www.rentoday.id/uploads/dsense_produk/20240918151646-2024-09-18dsense_produk151450.jpg"},
+            {id: "32", code: "spo1b", name: "Spotify FamPlan 1 Bulan FullGar", category: "music", price: "Rp 18.500", originalPrice: "-", description: "Private Akun, Full Garansi, All Device, Bisa Perpanjang di Akun yang sama", stock: "75", badge: "POPULER", image: "https://www.figma.com/community/file/1183467274732585056/spotify-logo"},
+            {id: "33", code: "spo2b", name: "Spotify FamPlan 2 Bulan FullGar", category: "music", price: "Rp 27.500", originalPrice: "-", description: "Private Akun, Full Garansi, All Device, Bisa Perpanjang di Akun yang sama", stock: "58", badge: "POPULER", image: "https://www.figma.com/community/file/1183467274732585056/spotify-logo"},
+            {id: "34", code: "spo3b", name: "Spotify FamPlan 3 Bulan FullGar", category: "music", price: "Rp 41.500", originalPrice: "-", description: "Private Akun, Full Garansi, All Device, Bisa Perpanjang di Akun yang sama", stock: "24", badge: "POPULER", image: "https://www.figma.com/community/file/1183467274732585056/spotify-logo"},
+            {id: "35", code: "spoind1b", name: "Spotify IndPlan 1 Bulan NoGar", category: "music", price: "Rp 9.500", originalPrice: "-", description: "Private Akun, No Garansi, All Device", stock: "20", badge: "INDIVIDUAL", image: "https://www.figma.com/community/file/1183467274732585056/spotify-logo"},
+            {id: "36", code: "surf", name: "VPN Surfshark Private 2 Bulan", category: "utility", price: "Rp 27.000", originalPrice: "-", description: "Garansi Login", stock: "9", badge: "VPN", image: "https://images-eds-ssl.xboxlive.com/image?url=4rt9.lXDC4H_93laV1_eHM0OYfiFeMI2p9MWie0CvL99U4GA1gf6_kayTt_kBblFwHwo8BW8JXlqfnYxKPmmBQL6rQ.t1ROrV3aQLfeHkx_2ABcK3ZHy88sIRHoJaupmPT3f8accy0r5xIyvFCuS6TLxNxvVTcM51fBRkgZRcN0-&format=source"},
+            {id: "37", code: "vid1b", name: "Vidio Platinum All Device 1 Bulan", category: "entertainment", price: "Rp 30.500", originalPrice: "-", description: "All Device, Private Akun, Bergaransi", stock: "13", badge: "BEST SELLER", image: "https://cdn.unipin.com/images/icon_product_pages/1599529891-icon-Vidio.png"},
+            {id: "38", code: "vidmob", name: "Vidio Platinum Mobile 1 Bulan", category: "entertainment", price: "Rp 25.000", originalPrice: "-", description: "Mobile Only, Garansi Backfree, Private Akun", stock: "35", badge: "MOBILE", image: "https://cdn.unipin.com/images/icon_product_pages/1599529891-icon-Vidio.png"},
+            {id: "39", code: "vidtv", name: "Vidio Platinum TV 1 Tahun", category: "entertainment", price: "Rp 4.500", originalPrice: "-", description: "Garansi 1 Bulan, TV Only, Private Akun", stock: "127", badge: "TV", image: "https://cdn.unipin.com/images/icon_product_pages/1599529891-icon-Vidio.png"},
+            {id: "40", code: "vision", name: "Vision+ Premium + Bein 1 Bulan", category: "entertainment", price: "Rp 19.500", originalPrice: "-", description: "Garansi Backfree, All Device", stock: "14", badge: "LOCAL", image: "https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,f_auto,q_auto:best,w_640/v1634025439/01hfn7s5h05npnkfwt7eczf5t7.jpg"},
+            {id: "41", code: "viu12b", name: "Viu 12 Bulan", category: "entertainment", price: "Rp 4.500", originalPrice: "-", description: "Private Akun, All Device, Garansi 1 bulan (hanya berlaku untuk kendala backfree)", stock: "122", badge: "STREAMING", image: "https://yt3.googleusercontent.com/ytc/AIdro_mGgWUT-KZejIMSOL4h8Mu5_y3g6rIw7qcg8b3NwsBpHA=s900-c-k-c0x00ffffff-no-rj"},
+            {id: "42", code: "viu1b", name: "Viu 1 Bulan", category: "entertainment", price: "Rp 4.200", originalPrice: "-", description: "Private Akun, All Device, Garansi 1 bulan (hanya berlaku untuk kendala backfree)", stock: "146", badge: "STREAMING", image: "https://yt3.googleusercontent.com/ytc/AIdro_mGgWUT-KZejIMSOL4h8Mu5_y3g6rIw7qcg8b3NwsBpHA=s900-c-k-c0x00ffffff-no-rj"},
+            {id: "43", code: "viu3b", name: "Viu 3 Bulan", category: "entertainment", price: "Rp 4.500", originalPrice: "-", description: "Private Akun, All Device, Garansi 1 bulan (hanya berlaku untuk kendala backfree)", stock: "137", badge: "STREAMING", image: "https://yt3.googleusercontent.com/ytc/AIdro_mGgWUT-KZejIMSOL4h8Mu5_y3g6rIw7qcg8b3NwsBpHA=s900-c-k-c0x00ffffff-no-rj"},
+            {id: "44", code: "viu6b", name: "Viu 6 Bulan", category: "entertainment", price: "Rp 4.500", originalPrice: "-", description: "Private Akun, All Device, Garansi 1 bulan (hanya berlaku untuk kendala backfree)", stock: "125", badge: "STREAMING", image: "https://yt3.googleusercontent.com/ytc/AIdro_mGgWUT-KZejIMSOL4h8Mu5_y3g6rIw7qcg8b3NwsBpHA=s900-c-k-c0x00ffffff-no-rj"},
+            {id: "45", code: "viulife", name: "Viu Premium Lifetime", category: "entertainment", price: "Rp 5.500", originalPrice: "-", description: "Private Akun, All Device, Garansi 1 bulan (hanya berlaku untuk kendala backfree)", stock: "35", badge: "LIFETIME", image: "https://yt3.googleusercontent.com/ytc/AIdro_mGgWUT-KZejIMSOL4h8Mu5_y3g6rIw7qcg8b3NwsBpHA=s900-c-k-c0x00ffffff-no-rj"},
+            {id: "46", code: "wetv", name: "We TV Private 1 Bulan", category: "entertainment", price: "Rp 24.500", originalPrice: "-", description: "Private Akun, Bergaransi", stock: "0", badge: "STREAMING", image: "https://img.lazcdn.com/g/p/138758cff3d19a3c2e4d91d6a8b268bb.jpg_720x720q80.jpg"},
+            {id: "47", code: "wink", name: "WINK Private 7D Android", category: "video", price: "Rp 8.000", originalPrice: "-", description: "Private Akun, Garansi Backfree, Android Only", stock: "0", badge: "VIDEO", image: "logo.jpeg"},
+            {id: "48", code: "yt1b", name: "YouTube IndPlan 1 Bulan", category: "entertainment", price: "Rp 16.500", originalPrice: "-", description: "Include Youtube Music, Bergaransi", stock: "54", badge: "STREAMING", image: "https://upload.wikimedia.org/wikipedia/commons/6/62/YouTube_social_white_square_%282024%29.svg"},
+            {id: "49", code: "yt3b", name: "YouTube IndPlan 3 Bulan", category: "entertainment", price: "Rp 18.500", originalPrice: "-", description: "No Garansi, Langsung 3 Bulan", stock: "0", badge: "STREAMING", image: "https://upload.wikimedia.org/wikipedia/commons/6/62/YouTube_social_white_square_%282024%29.svg"},
+            {id: "50", code: "z7", name: "Zoom Meeting Pro 7 Day", category: "utility", price: "Rp 5.000", originalPrice: "-", description: "Private Akun, 100 Peserta, Full Garansi.", stock: "30", badge: "MEETING", image: "https://smb-padiumkm-images-public-prod.oss-ap-southeast-5.aliyuncs.com/product/image/30082024/656b3694164693f3807fece9/66d133bde856606d2e4c87ca/ccb30537da7ef90b07828a353c3ef3.jpg?x-oss-process=image/resize,m_pad,w_432,h_432/quality,Q_70"},
+            {id: "51", code: "zoom", name: "Zoom Meeting Pro 14 Day", category: "utility", price: "Rp 5.500", originalPrice: "-", description: "Private Akun, 100 Peserta, Full Garansi.", stock: "84", badge: "MEETING", image: "https://smb-padiumkm-images-public-prod.oss-ap-southeast-5.aliyuncs.com/product/image/30082024/656b3694164693f3807fece9/66d133bde856606d2e4c87ca/ccb30537da7ef90b07828a353c3ef3.jpg?x-oss-process=image/resize,m_pad,w_432,h_432/quality,Q_70"}
+        ];
 
-        const escapeHTML = (str) => str ? String(str).replace(/[&<>'"]/g, tag => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'}[tag])) : '';
+        const productsGrid = document.querySelector('.products-grid');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const searchInput = document.getElementById('productSearch');
+        const nav = document.querySelector('nav');
+        const header = document.getElementById('header');
+        const themeToggle = document.getElementById('themeToggle');
+        const themeToggleIcon = document.getElementById('themeToggleIcon');
+        const themeToggleText = document.getElementById('themeToggleText');
+        const themeColorMeta = document.querySelector('meta[name="theme-color"]');
 
-        // 2. ENGINE TMAIL UTAMA (HARUS DI ATAS BIAR SIAP DIPANGGIL CAPTCHA)
-        function startSmartFetch() {
-            if (!fetchInterval) fetchInterval = setInterval(fetchInbox, fetchSec);
+        let currentFilter = 'all';
+        let currentSearchTerm = '';
+
+        function parsePriceToNumber(priceStr) {
+            const n = parseInt(String(priceStr).replace(/[^\d]/g, ''), 10);
+            return isNaN(n) ? 0 : n;
         }
 
-        function stopSmartFetch() {
-            clearInterval(fetchInterval);
-            fetchInterval = null;
-        }
+        function applyTheme(theme) {
+            const targetTheme = theme === 'dark' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', targetTheme);
+            localStorage.setItem('jashub-theme', targetTheme);
 
-        async function fetchInbox() {
-            if (!activeEmail) return;
-            try {
-                const isInit = !window.firstLoadDone;
-                const res = await fetch("/api/inbox/" + encodeURIComponent(activeEmail) + "?t=" + new Date().getTime() + (isInit ? "&init=1" : ""), { cache: "no-store" });
-                
-                if (res.status === 403 || res.status === 429) { /* ... handle banned ... */ return; }
+            if (themeColorMeta) {
+                themeColorMeta.setAttribute('content', targetTheme === 'dark' ? '#292d32' : '#e0e5ec');
+            }
 
-                const emails = await res.json();
-                const container = document.getElementById('inbox');
-                currentMessages = emails;
-                window.firstLoadDone = true;
+            if (themeToggleIcon) {
+                themeToggleIcon.className = targetTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            }
 
-                // 🦎 LOGIKA BUNGLON NETFLIX (RESPONSIVE HP)
-                if (netflixCategory && emails.length > 0) {
-                    const latest = emails[0];
-                    const bodyText = latest.body || "";
-                    
-                    // Container pembungkus yang center di HP & Desktop
-                    container.innerHTML = '<div class="flex flex-col items-center justify-center p-4 sm:p-6 min-h-[320px] w-full animate-fade-in">';
+            if (themeToggleText) {
+                themeToggleText.textContent = targetTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+            }
 
-                    if (netflixCategory === 'otp') {
-                        // 🔑 Ekstrak 4-6 angka OTP
-                        const otpMatch = bodyText.match(/\b\d{4,6}\b/);
-                        const otp = otpMatch ? otpMatch[0] : "Belum Ada";
-                        container.innerHTML += `
-                            <h3 class="text-white/50 text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] mb-6">Your Security Code</h3>
-                            <div class="net-card-inset w-full max-w-[280px] py-8 sm:py-10 text-5xl sm:text-7xl font-black text-red-600 tracking-tighter shadow-2xl flex justify-center items-center">
-                                ${otp}
-                            </div>
-                            <button onclick="copyToClipboard('${otp}')" class="mt-10 net-card w-full max-w-[200px] py-4 text-[10px] font-bold text-white uppercase tracking-widest hover:border-red-600 active:scale-95 transition-all">
-                                <i class="fas fa-copy mr-2"></i> Copy Code
-                            </button>`;
-                    } else {
-                        // 📺 Ekstrak Link Update Household (HH)
-                        const linkMatch = bodyText.match(/href="([^"]*update-household[^"]*)"/i);
-                        const url = linkMatch ? linkMatch[1] : "#";
-                        container.innerHTML += `
-                            <h3 class="text-white/50 text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] mb-8 text-center px-4">Household Verification</h3>
-                            <a href="${url}" target="_blank" class="net-card bg-red-600 w-full max-w-[300px] py-5 text-center text-white font-black uppercase tracking-widest text-sm sm:text-base hover:scale-105 active:scale-95 transition-all shadow-[0_10px_20px_rgba(229,9,20,0.3)]">
-                                Update Now
-                            </a>
-                            <p class="mt-8 text-[9px] sm:text-[10px] text-white/30 text-center max-w-[250px] leading-relaxed italic">Tap button above to sync your TV. Valid for 15 minutes.</p>`;
-                    }
-                    container.innerHTML += '</div>';
-                } else {
-                    // 📑 Tampilan Normal TMail (Tetap Responsive)
-                    if(!emails || emails.length === 0) {
-                        container.innerHTML = `<div class="flex-1 flex flex-col justify-center items-center opacity-40 m-auto h-full min-h-[250px]"><i class="fas fa-circle-notch fa-spin text-3xl mb-4 text-[var(--accent-1)]"></i><p class="font-bold text-sm sm:text-lg">No New Messages</p></div>`;
-                    } else {
-                        let htmlList = "";
-                        emails.forEach((m, index) => {
-                            htmlList += `<div onclick="openMessage(${index})" class="neu p-4 sm:p-5 mb-3 flex flex-col md:flex-row justify-between md:items-center gap-2 border-l-4 border-[var(--accent-1)] cursor-pointer hover:translate-x-1 transition-transform">
-                                <div class="flex-1 overflow-hidden">
-                                    <div class="font-bold text-sm sm:text-base truncate">${escapeHTML(m.from)}</div>
-                                    <div class="text-xs sm:text-sm opacity-60 truncate">${escapeHTML(m.subject) || 'No Subject'}</div>
-                                </div>
-                                <div class="text-[9px] sm:text-[10px] font-bold text-[var(--accent-1)] opacity-80 shrink-0">${new Date(m.date).toLocaleTimeString()}</div>
-                            </div>`;
-                        });
-                        container.innerHTML = htmlList;
-                    }
-                }
-            } catch(e) { console.error("Inbox Error:", e); }
-        }
-
-        // 3. FUNGSI LOGIKA APLIKASI (PILIH/BUAT EMAIL)
-        // 🔥 NAMA VARIABEL DI DALAM SINI SUDAH DIGANTI BIAR GAK ERROR SYNTAX!
-        let netflixCategory = null; 
-
-        async function runApplicationLogic() {
-            const currentPath = window.location.pathname.substring(1).toLowerCase();
-            
-            // 🛡️ Data dari Server (Backend processed)
-            const forbiddenIdsRaw = "".toLowerCase();
-            const forbiddenArr = forbiddenIdsRaw.split(',').map(item => item.trim()).filter(item => item !== "");
-            
-            let target = forcedEmail || (currentPath.includes('@') ? currentPath : null);
-
-            if (target) {
-                const decoded = decodeURIComponent(target);
-                const userPart = decoded.split('@')[0].toLowerCase();
-                const domainPart = decoded.split('@')[1] ? decoded.split('@')[1].toLowerCase() : '';
-
-                // 🚪 1. CEK GERBANG NETFLIX
-                try {
-                    const res = await fetch('/api/check-managed/' + encodeURIComponent(decoded));
-                    const status = await res.json();
-
-                    if (status.isManaged && !status.isAdmin) {
-                        showNetflixGate(decoded);
-                        return; 
-                    }
-                } catch (e) { console.log("Managed check skip"); }
-
-                // 🛑 2. CEK DOMAIN & ID TERLARANG
-                const isDomainValid = !domainPart || (typeof sysDomains !== 'undefined' && sysDomains.includes(domainPart));
-                const isNotForbidden = !forbiddenArr.includes(userPart);
-
-                if (!isDomainValid || !isNotForbidden) {
-                    window.location.href = '/';
-                    return;
-                }
-
-                const isAllowed = await checkRateLimit();
-                if (isAllowed) {
-                    updateUI(decoded);
-                } else {
-                    window.location.href = '/';
-                }
-
-            } else {
-                await generateNew();
+            if (themeToggle) {
+                themeToggle.setAttribute(
+                    'aria-label',
+                    targetTheme === 'dark' ? 'Aktifkan light mode' : 'Aktifkan dark mode'
+                );
+                themeToggle.setAttribute('title', targetTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
             }
         }
 
-        // 🔥 FUNGSIONALITAS VVIP NETFLIX BY ZDNAZF (ULTIMATE VERSION - NO BUG) 🔥
+        function initTheme() {
+            const savedTheme = localStorage.getItem('jashub-theme');
+            applyTheme(savedTheme || 'light');
+        }
 
-       // 🔥 FUNGSIONALITAS VVIP NETFLIX BY ZDNAZF (FIX DOUBLE BUTTON & ULTIMATE VVIP) 🔥
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        }
 
-        function showNetflixGate(email) {
-            document.body.setAttribute('data-netflix', 'true');
-            document.body.setAttribute('data-netflix-mode', 'gate'); 
-            document.querySelectorAll('main > div').forEach(el => el.classList.add('hidden'));
-            
-            var oldGate = document.getElementById('netflixGateUI');
-            if (oldGate) oldGate.remove();
-            
-            var gate = document.createElement('div');
-            gate.id = 'netflixGateUI';
-            gate.className = 'flex flex-col items-center justify-center min-h-[75vh] w-full max-w-lg mx-auto py-10 relative animate-fade-in';
-            
-            var avatarUrl = 'https://mir-s3-cdn-cf.behance.net/project_modules/disp/366be133850498.56ba69ac36858.png';
-            var netflixLogo = 'https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg';
+        function createOrderText(product) {
+            const orderID = Math.floor(1000 + Math.random() * 9000);
+            const tanggal = new Date().toLocaleDateString('id-ID');
+            const totalNum = parsePriceToNumber(product.price);
+            const totalFormatted = totalNum.toLocaleString('id-ID');
+            const text =
+`╭────〔 PESANAN 〕────
+┊ ID : ${orderID}
+┊ Tgl : ${tanggal}
+┊ Produk : ${product.name.toUpperCase()}
+┊ Total : ${totalFormatted}
+╰┈┈┈┈┈┈┈┈
+╭────〔 INFO 〕────
+┊ Proses setelah pembayaran.
+┊ Proses aktivasi 1-12 jam.
+┊ Website : jashub.web.id
+╰──────────────
+Ketik .payment untuk melakukan pembayaran.`;
+            return text;
+        }
 
-            gate.innerHTML = `
-                <style>
-                    @keyframes popInProfile {
-                        0% { opacity: 0; transform: scale(0.8); }
-                        100% { opacity: 1; transform: scale(1); }
-                    }
-                    .prof-1 { opacity: 0; animation: popInProfile 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.2s; }
-                    .prof-2 { opacity: 0; animation: popInProfile 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.4s; }
-                    .prof-3 { opacity: 0; animation: popInProfile 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.6s; }
-                    .filter-biru-muda { filter: hue-rotate(0deg) saturate(1.3) brightness(1.2); }
-                    .filter-kuning-gold { filter: hue-rotate(-135deg) saturate(2) brightness(1.3); }
-                    .filter-merah-terang { filter: hue-rotate(185deg) saturate(3) brightness(1.1); }
-                </style>
-                
-                <div id="netflixSpinner" class="fixed inset-0 z-[9999] bg-[#141414] flex flex-col items-center justify-center transition-opacity duration-700">
-                    <div class="w-14 h-14 border-4 border-[#333333] border-t-[#E50914] rounded-full animate-spin shadow-[0_0_15px_rgba(229,9,20,0.5)]"></div>
-                </div>
+        function openWhatsAppWithOrder(product) {
+            const orderText = createOrderText(product);
+            const url = `https://wa.me/6281324919799?text=${encodeURIComponent(orderText)}`;
+            window.open(url, '_blank');
+        }
 
-                <div id="netflixContent" class="w-full flex flex-col items-center opacity-0 scale-90 transition-all duration-1000 transform pointer-events-none mt-8">
-                    <img src="${netflixLogo}" class="h-8 sm:h-12 net-logo mb-8 sm:mb-12 relative z-10 object-contain">
-                    <h2 class="text-2xl sm:text-4xl font-normal mb-8 sm:mb-10 tracking-wider text-center text-white">Who's watching?</h2>
-                                        
-                    <div class="flex flex-row flex-wrap justify-center gap-4 sm:gap-8 w-full px-4 relative z-10">
-                        <div onclick="enterNetflixMode('${email}', 'otp')" class="flex flex-col items-center cursor-pointer group w-24 sm:w-32 prof-1">
-                            <div class="w-full aspect-square bg-[#1a1a1a] rounded-md overflow-hidden border-[3px] border-transparent group-hover:border-white transition-all duration-300 shadow-lg">
-                                <img src="${avatarUrl}" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 filter-biru-muda">
-                            </div>
-                            <span class="mt-3 font-semibold text-gray-400 group-hover:text-white transition-colors text-[10px] sm:text-sm text-center">OTP Login</span>
+        function getProductIcon(category) {
+            switch(category) {
+                case 'video': return 'video';
+                case 'music': return 'music';
+                case 'design': return 'pen-nib';
+                case 'utility': return 'tools';
+                default: return 'cube';
+            }
+        }
+
+        function getAssetImageForProduct(product) {
+            const productName = (product?.name || '').toLowerCase();
+            const code = (product?.code || '').toLowerCase();
+
+            const assetByKeyword = [
+                { match: ['alight motion', ' am '], file: 'assets/img/am.png' },
+                { match: ['apple music', 'appmus'], file: 'assets/img/musik%20aple.png' },
+                { match: ['bstation'], file: 'assets/img/BStation.png' },
+                { match: ['canva'], file: 'assets/img/canva.jpg' },
+                { match: ['capcut'], file: 'assets/img/capcut.webp' },
+                { match: ['chatgpt', 'gpt', 'gemini'], file: 'assets/img/chatgpt.png' },
+                { match: ['grok'], file: 'assets/img/AI%20Grok.png' },
+                { match: ['perplexity', 'perplexi'], file: 'assets/img/perplexi.jpg' },
+                { match: ['picsart', 'picsrat'], file: 'assets/img/picsrat.jpg' },
+                { match: ['scribd'], file: 'assets/img/scribd.jpg' },
+                { match: ['netflix'], file: 'assets/img/netflix.jpg' },
+                { match: ['prime video', 'prime vidio'], file: 'assets/img/prime%20vidio.png' },
+                { match: ['vidio'], file: 'assets/img/vidio%20paltinum.webp' },
+                { match: ['viu'], file: 'assets/img/Viu.png' },
+                { match: ['wetv', 'we tv'], file: 'assets/img/We%20TV.png' },
+                { match: ['loklok'], file: 'assets/img/Loklok.webp' },
+                { match: ['iqiyi'], file: 'assets/img/iQIYI.png' },
+                { match: ['hbo'], file: 'assets/img/HBO%20Max.webp' },
+                { match: ['wink'], file: 'assets/img/WINK.webp' },
+                { match: ['duolingo', 'duolinggo', 'duo'], file: 'assets/img/duolinggo.png' },
+                { match: ['vision+'], file: 'assets/img/vision+.webp' },
+                { match: ['youtube'], file: 'assets/img/youtube.webp' },
+                { match: ['zoom'], file: 'assets/img/zoom.webp' },
+                { match: ['expressvpn', 'exp'], file: 'assets/img/ExpressVPN-logo-1.png' },
+                { match: ['hidemyass', 'hma', 'hime'], file: 'assets/img/vpn%20hime.jpg' },
+                { match: ['surfshark', 'shark'], file: 'assets/img/vpn%20shartk.png' },
+                { match: ['spotify', 'spo'], file: 'assets/img/Spotify.png' }
+            ];
+
+            for (const rule of assetByKeyword) {
+                const found = rule.match.some(k => productName.includes(k) || code.includes(k));
+                if (found) return rule.file;
+            }
+
+            return 'assets/img/logo.png';
+        }
+
+        function useLocalAssetImages() {
+            products.forEach(product => {
+                product.image = getAssetImageForProduct(product);
+            });
+        }
+
+        function createHeroFallbackTile(category, name = 'Aplikasi') {
+            const tile = document.createElement('div');
+            tile.className = 'hero-app-tile hero-app-fallback';
+            tile.innerHTML = `<i class="fas fa-${getProductIcon(category)}" aria-hidden="true"></i>`;
+            tile.setAttribute('aria-label', name);
+            tile.title = name;
+            return tile;
+        }
+
+        function renderHeroIconGrid() {
+            const heroIconsGrid = document.getElementById('heroIconsGrid');
+            if (!heroIconsGrid) return;
+
+            const maxIcons = window.matchMedia('(max-width: 576px)').matches ? 20 : 25;
+            const seen = new Set();
+            const uniqueProductsWithImage = products.filter(product => {
+                const imageUrl = (product.image || '').trim();
+                if (!imageUrl || seen.has(imageUrl)) return false;
+                seen.add(imageUrl);
+                return true;
+            });
+
+            heroIconsGrid.innerHTML = '';
+            const selectedProducts = uniqueProductsWithImage.slice(0, maxIcons);
+
+            selectedProducts.forEach(product => {
+                const tile = document.createElement('div');
+                tile.className = 'hero-app-tile';
+                tile.title = product.name;
+                tile.setAttribute('aria-label', product.name);
+
+                const img = document.createElement('img');
+                img.src = product.image;
+                img.alt = product.name;
+                img.loading = 'lazy';
+                img.decoding = 'async';
+                img.referrerPolicy = 'no-referrer';
+
+                img.addEventListener('error', () => {
+                    tile.replaceWith(createHeroFallbackTile(product.category, product.name));
+                }, { once: true });
+
+                tile.appendChild(img);
+                heroIconsGrid.appendChild(tile);
+            });
+
+            if (selectedProducts.length < maxIcons) {
+                const fallbackSource = products.length ? products : [{ category: 'utility', name: 'Aplikasi Premium' }];
+                for (let i = selectedProducts.length; i < maxIcons; i += 1) {
+                    const product = fallbackSource[i % fallbackSource.length];
+                    heroIconsGrid.appendChild(createHeroFallbackTile(product.category, product.name));
+                }
+            }
+        }
+
+        function renderProducts(filter = 'all', searchTerm = '') {
+            productsGrid.innerHTML = '';
+            let filteredProducts = filter === 'all'
+                ? products
+                : products.filter(p => p.category === filter);
+
+            if (searchTerm) {
+                filteredProducts = filteredProducts.filter(p =>
+                    p.name.toLowerCase().includes(searchTerm) ||
+                    p.description.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            filteredProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.setAttribute('data-category', product.category);
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        ${product.image
+                            ? `<img src="${product.image}" alt="${product.name}" class="product-thumb" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='assets/img/logo.png';">`
+                            : `<div class="product-icon"><i class="fas fa-${getProductIcon(product.category)}"></i></div>`
+                        }
+                    </div>
+                    <div class="product-content">
+                        <h3>${product.name}</h3>
+                        <p>${product.description}</p>
+                        <div class="product-price-row">
+                            <span class="price">${product.price}</span>
+                            <span class="original-price">${product.originalPrice}</span>
                         </div>
-                        <div onclick="enterNetflixMode('${email}', 'hh')" class="flex flex-col items-center cursor-pointer group w-24 sm:w-32 prof-2">
-                            <div class="w-full aspect-square bg-[#1a1a1a] rounded-md overflow-hidden border-[3px] border-transparent group-hover:border-white transition-all duration-300 shadow-lg">
-                                <img src="${avatarUrl}" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 filter-kuning-gold">
-                            </div>
-                            <span class="mt-3 font-semibold text-gray-400 group-hover:text-white transition-colors text-[10px] sm:text-sm text-center">House Hold</span>
-                        </div>
-                        <div onclick="promptResetPass('${email}')" class="flex flex-col items-center cursor-pointer group w-24 sm:w-32 prof-3">
-                            <div class="w-full aspect-square bg-[#1a1a1a] rounded-md overflow-hidden border-[3px] border-transparent group-hover:border-white transition-all duration-300 shadow-lg">
-                                <img src="${avatarUrl}" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 filter-merah-terang">
-                            </div>
-                            <span class="mt-3 font-semibold text-gray-400 group-hover:text-white transition-colors text-[10px] sm:text-sm text-center tracking-wide">Reset Password</span>
-                            <div class="mt-1"><i class="fas fa-lock text-[8px] sm:text-[10px] text-gray-500 group-hover:text-white transition-colors"></i></div>
+                        <div class="product-actions">
+                            <a href="#" class="btn btn-primary order-btn" data-product-id="${product.id}">Pesan Sekarang</a>
                         </div>
                     </div>
-                </div>
-            `;
-            
-            document.querySelector('main').appendChild(gate);
-            setTimeout(function() {
-                var s = document.getElementById('netflixSpinner');
-                var c = document.getElementById('netflixContent');
-                if (s && c) {
-                    s.classList.add('opacity-0');
-                    setTimeout(function() { 
-                        s.classList.add('hidden'); 
-                        c.classList.remove('opacity-0', 'scale-90', 'pointer-events-none'); 
-                        c.classList.add('opacity-100', 'scale-100'); 
-                    }, 700);
-                }
-            }, 800);
-        }
-
-        window.promptResetPass = function(email) {
-            Swal.fire({
-                title: 'Password Required',
-                text: 'Area terbatas! Masukkan kunci akses untuk melanjutkan.',
-                input: 'text', inputPlaceholder: 'Masukkan Password Akses...',
-                background: '#141414', color: '#ffffff', confirmButtonColor: '#E50914',
-                showCancelButton: true, cancelButtonColor: '#333333', confirmButtonText: 'Buka Akses',
-                customClass: {
-                    popup: 'border border-red-600/30 rounded-2xl shadow-[0_0_30px_rgba(229,9,20,0.3)]',
-                    input: 'bg-[#0a0a0a] border border-gray-700 text-center rounded-xl text-white focus:ring-1 focus:ring-red-600'
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    if (result.value === netflixAccessPass) {
-                        showToast("Akses Diterima!", "Success");
-                        enterNetflixMode(email, 'reset'); 
-                    } else {
-                        Swal.fire({ title: 'Access Denied', text: 'Password Salah!', icon: 'error', background: '#141414', color: '#ffffff', confirmButtonColor: '#E50914' });
-                    }
-                }
+                `;
+                productsGrid.appendChild(productCard);
             });
-        };
 
-        // 🔥 FUNGSIONALITAS VVIP NETFLIX BY ZDNAZF (CLEAN & SMART VERSION) 🔥
-
-        // 1. FUNGSI MASUK KE INBOX NETFLIX (Udah bersih dari tombol back liar!)
-        function enterNetflixMode(email, category) {
-        if(window.triggerLoading) triggerLoading();
-            netflixCategory = category; 
-            document.body.setAttribute('data-netflix-mode', 'inbox'); 
-            
-            if(typeof sendTrafficLog === 'function') sendTrafficLog("Netflix Choice", "User memilih [" + category + "] untuk " + email);
-            
-            // 🎬 Spinner Transisi Biar Sinematik
-            const content = document.getElementById('netflixContent');
-            const spinner = document.getElementById('netflixSpinner');
-            if (content) content.classList.add('opacity-0', 'scale-90', 'pointer-events-none');
-            if (spinner) { 
-                spinner.classList.remove('hidden'); 
-                setTimeout(() => spinner.classList.remove('opacity-0'), 10); 
-            }
-
-            setTimeout(() => {
-                const gate = document.getElementById('netflixGateUI');
-                if (gate) gate.remove(); 
-                
-                const mainDivs = document.querySelectorAll('main > div');
-                if (mainDivs.length >= 2) mainDivs[1].classList.remove('hidden'); 
-
-                // 🔥 UPDATE TEKS TOMBOL HEADER JADI "BACK" (Biar Simple)
-                const btnText = document.querySelector('#backHomeBtn span');
-                if (btnText) btnText.innerText = currentLangCode === 'id' ? 'Kembali' : 'Back';
-
-                // 📧 BANNER EMAIL MONITORING (Line Red Aktif)
-                const inboxContainer = mainDivs[1];
-                let vvipBanner = document.getElementById('netflixVvipBanner');
-                if(!vvipBanner) {
-                    vvipBanner = document.createElement('div');
-                    vvipBanner.id = 'netflixVvipBanner';
-                    vvipBanner.className = 'w-full max-w-2xl mx-auto mb-6 flex flex-col items-center gap-3 animate-fade-in mt-4 px-4';
-                    inboxContainer.prepend(vvipBanner);
-                }
-                
-                vvipBanner.innerHTML = `
-                    <div class="p-4 sm:p-5 rounded-2xl flex justify-between items-center w-full border-l-4 border-red-600 bg-[#0a0a0a] shadow-[0_10px_20px_rgba(0,0,0,0.5)]">
-                        <div class="flex flex-col overflow-hidden mr-4 text-left">
-                            <div class="flex items-center gap-2 mb-1">
-                                <i class="fas fa-crown text-red-500 text-[10px] animate-pulse"></i>
-                                <span class="text-[9px] sm:text-[10px] font-bold text-red-500 uppercase tracking-widest opacity-80">Monitoring Email</span>
-                            </div>
-                            <span class="font-bold text-sm sm:text-base truncate text-white tracking-wide">${email}</span>
-                        </div>
-                        <div class="flex gap-2 shrink-0">
-                            <button onclick="navigator.clipboard.writeText('${email}'); if(typeof showToast === 'function') showToast('Email disalin!', 'Netflix');" class="px-3 sm:px-4 py-2 rounded-xl text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-red-500 transition-all text-[10px] sm:text-xs font-bold flex items-center gap-2"><i class="fas fa-copy text-red-500"></i> <span class="hidden sm:inline">COPY</span></button>
-                            <button onclick="promptChangeEmail()" class="px-3 sm:px-4 py-2 rounded-xl text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-red-500 transition-all text-[10px] sm:text-xs font-bold flex items-center gap-2"><i class="fas fa-edit text-red-500"></i> <span class="hidden sm:inline" data-i18n="change_email">EDIT</span></button>
-                        </div>
-                    </div>`;
-
-                if (typeof setLang === 'function') setLang(currentLangCode, document.getElementById('currentLangText')?.innerText || 'ID');
-                if (typeof showToast === 'function') showToast("Mode " + category.toUpperCase() + " Aktif!", "Netflix");
-                
-                activeEmail = email.toLowerCase().trim();
-                if(document.getElementById('currentEmail')) document.getElementById('currentEmail').innerText = activeEmail;
-                currentMessages = []; 
-                firstLoadDone = false; 
-                if(typeof fetchInbox === 'function') fetchInbox(); 
-            }, 1000);
-        }
-
-        // 🔒 FUNGSI KEAMANAN PIN UNTUK RESET PASSWORD
-        window.promptResetPin = function(email) {
-            Swal.fire({
-                title: 'PIN Required',
-                text: 'Masukkan PIN rahasia untuk akses Reset Password',
-                input: 'password',
-                inputAttributes: {
-                    autocapitalize: 'off',
-                    autocorrect: 'off'
-                },
-                background: '#141414',
-                color: '#ffffff',
-                confirmButtonColor: '#E50914',
-                showCancelButton: true,
-                cancelButtonColor: '#333333',
-                confirmButtonText: 'Access',
-                customClass: {
-                    popup: 'border border-red-600/30 rounded-2xl shadow-[0_0_20px_rgba(229,9,20,0.2)]',
-                    input: 'bg-[#0a0a0a] border border-gray-700 text-center text-xl tracking-[0.5em] focus:ring-1 focus:ring-red-600 rounded-xl text-white'
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    const enteredPin = result.value;
-                    
-                    // GANTI "123456" DENGAN PIN RAHASIA LU
-                    if (enteredPin === "123456") {
-                        enterNetflixMode(email, 'reset');
-                    } else {
-                        Swal.fire({
-                            title: 'Access Denied',
-                            text: 'PIN Salah!',
-                            icon: 'error',
-                            background: '#141414',
-                            color: '#ffffff',
-                            confirmButtonColor: '#E50914',
-                            customClass: { popup: 'rounded-2xl border border-red-600/30' }
-                        });
-                    }
-                }
-            });
-        };
-
-        // 2. FUNGSI GANTI EMAIL (LINE RED SWEETALERT)
-        window.promptChangeEmail = function() {
-            const currentMail = document.getElementById('currentEmail') ? document.getElementById('currentEmail').innerText : '';
-            Swal.fire({
-                title: currentLangCode === 'id' ? 'Ganti Target Email' : 'Change Target Email',
-                input: 'email',
-                inputValue: currentMail,
-                inputPlaceholder: 'email@domain.com',
-                background: '#141414',
-                color: '#ffffff',
-                showCancelButton: true,
-                confirmButtonColor: '#E50914',
-                cancelButtonColor: '#333333',
-                confirmButtonText: 'GO!',
-                customClass: {
-                    popup: 'border-l-4 border-red-600 rounded-2xl',
-                    input: 'bg-[#0a0a0a] border-none text-white focus:ring-1 focus:ring-red-600 rounded-xl'
-                }
-            }).then((result) => {
-                if (result.isConfirmed && result.value) {
-                    window.location.href = '/' + result.value.trim().toLowerCase();
-                }
-            });
-        };
-
-        // 3. FUNGSI NAVIGASI PINTAR (GO BACK SMART)
-        window.goBackSmart = function(action = 'back') {
-            const isNetflixMode = document.body.getAttribute('data-netflix') === 'true';
-            const currentSubMode = document.body.getAttribute('data-netflix-mode');
-            const mainDivs = document.querySelectorAll('main > div');
-
-            if (isNetflixMode) {
-                // 🔙 JIKA DI INBOX: Balik ke Layar Pilihan (Gate)
-                if (currentSubMode === 'inbox' || action === 'edit') {
-                    if (mainDivs.length >= 2) mainDivs[1].classList.add('hidden'); 
-                    
-                    const vvipBanner = document.getElementById('netflixVvipBanner');
-                    if (vvipBanner) vvipBanner.remove();
-
-                    if(typeof stopSmartFetch === 'function') stopSmartFetch();
-
-                    showNetflixGate(typeof activeEmail !== 'undefined' ? activeEmail : ''); 
-                    
-                    // Balikin Teks Tombol Merah Header
-                    const btnText = document.querySelector('#backHomeBtn span');
-                    if (btnText) btnText.innerText = currentLangCode === 'id' ? 'Kembali ke Beranda' : 'Back to Home';
-                } 
-                // 🏠 JIKA DI GATE: Balik ke Beranda TMAIL Putih
-                else {
-                    window.location.href = '/'; 
-                }
-            } else {
-                window.location.href = '/'; 
-            }
-        };
-
-        // --- PINTU GERBANG UTAMA ---
-        window.initTMailApp = function() {
-            console.log("TMail Engine Starting...");
-            startSmartFetch();
-            runApplicationLogic(); 
-        };
-
-        // 🛡️ LOGIKA BUKA GERBANG CAPTCHA
-        window.onCaptchaSuccess = function(token) {
-            const gate = document.getElementById('captchaGate');
-            if (gate) {
-                console.log("Captcha Success! Breaking the gate...");
-                gate.classList.add('opacity-0');
-                gate.style.pointerEvents = 'none';
-                
-                // 🔥 PANGGIL ENGINE SEKARANG (Setalah centang ijo)
-                window.initTMailApp();
-
-                setTimeout(() => { gate.remove(); }, 500); 
-            }
-        };
-
-        // 4. FUNGSI UI & UTILITY
-        function toggleTheme() {
-            const mode = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', mode);
-            localStorage.setItem('darkmode', mode === 'dark' ? 'enabled' : 'disabled');
-            document.querySelectorAll('.dark-icon').forEach(el => el.classList.toggle('hidden'));
-            document.querySelectorAll('.light-icon').forEach(el => el.classList.toggle('hidden'));
-        }
-
-        if(localStorage.getItem('darkmode') === 'enabled' || (localStorage.getItem('darkmode') === null && false)) {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            document.querySelectorAll('.dark-icon').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.light-icon').forEach(el => el.classList.remove('hidden'));
-        }
-
-        function showToast(msg, title="Success") {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastTitle').innerText = title;
-            document.getElementById('toastMsg').innerText = msg;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
-        }
-        function forceRefresh() { const icon = document.getElementById('refreshIcon'); if(icon) icon.classList.add('fa-spin'); setTimeout(() => { window.location.reload(); }, 300); }
-        
-        const i18n = {
-            en: { title: "Your Temporary Email Address", refresh: "Refresh", new: "New", delete: "Delete", create_title: "Create Custom Email", cancel: "Cancel", no_msg: "No Messages", waiting: "Waiting for Incoming Messages", detail_email: "Email Details", copied: "Email ID Copied to Clipboard", input_placeholder: "Enter Username", err_len: "Username must be", chars: "chars", err_title: "Error", back_to_inbox: "Back to Inbox", lbl_from: "From:", lbl_subject: "Subject:", lbl_time: "Time:", netflix_title: "Choose Your Need", netflix_otp: "Login OTP Code", netflix_hh: "Update Netflix House Hold", back_home: "Back to Home" },
-            id: { title: "Alamat Email Sementara Anda", refresh: "Segarkan", new: "Baru", delete: "Hapus", create_title: "Buat Email Sementara Sendiri", cancel: "Batal", no_msg: "Tidak Ada Pesan", waiting: "Menunggu Pesan Masuk", detail_email: "Detail Email", copied: "Email Berhasil Disalin", input_placeholder: "Masukkan Username", err_len: "Panjang username harus", chars: "karakter", err_title: "Gagal", back_to_inbox: "Kembali", lbl_from: "Dari:", lbl_subject: "Subjek:", lbl_time: "Waktu:", netflix_title: "Pilih Kebutuhan Anda", netflix_otp: "Login Kode OTP", netflix_hh: "Update Netflix House Hold", back_home: "Kembali ke Beranda" },
-            ar: { title: "عنوان بريدك الإلكتروني المؤقت", refresh: "تحديث", new: "جديد", delete: "حذف", create_title: "قم بإنشاء بريد مؤقت خاص بك", cancel: "إلغاء", no_msg: "لا توجد رسائل", waiting: "في انتظار الرسائل الواردة", detail_email: "تفاصيل البريد", copied: "تم نسخ البريد", input_placeholder: "أدخل اسم المستخدم", err_len: "يجب أن يكون اسم المستخدم", chars: "حرفاً", err_title: "خطأ", back_to_inbox: "عودة", lbl_from: "من:", lbl_subject: "الموضوع:", lbl_time: "الوقت:", netflix_title: "اختر حاجتك", netflix_otp: "رمز الدخول", netflix_hh: "تحديث التلفزيون", back_home: "العودة للرئيسية" },
-            es: { title: "Tu Dirección de Correo Temporal", refresh: "Actualizar", new: "Nuevo", delete: "Borrar", create_title: "Crea tu propio correo temporal", cancel: "Cancelar", no_msg: "Sin Mensajes", waiting: "Esperando mensajes entrantes", detail_email: "Detalles del correo", copied: "Correo copiado", input_placeholder: "Ingresa el nombre de usuario", err_len: "El usuario debe tener", chars: "caracteres", err_title: "Error", back_to_inbox: "Volver", lbl_from: "De:", lbl_subject: "Asunto:", lbl_time: "Hora:", netflix_title: "Elige tu necesidad", netflix_otp: "Código OTP", netflix_hh: "Actualizar TV", back_home: "Volver al inicio" },
-            fr: { title: "Votre adresse e-mail temporaire", refresh: "Rafraîchir", new: "Nouveau", delete: "Supprimer", create_title: "Créez votre propre e-mail", cancel: "Annuler", no_msg: "Aucun message", waiting: "En attente de messages", detail_email: "Détails de l'e-mail", copied: "E-mail copié", input_placeholder: "Entrez le nom d'utilisateur", err_len: "Le nom d'utilisateur doit contenir", chars: "caractères", err_title: "Erreur", back_to_inbox: "Retour", lbl_from: "De :", lbl_subject: "Sujet :", lbl_time: "Heure :", netflix_title: "Choisissez votre besoin", netflix_otp: "Code OTP", netflix_hh: "Mettre à jour la TV", back_home: "Retour à l'accueil" },
-            de: { title: "Ihre temporäre E-Mail-Adresse", refresh: "Aktualisieren", new: "Neu", delete: "Löschen", create_title: "Erstelle deine eigene Temp Mail", cancel: "Abbrechen", no_msg: "Keine Nachrichten", waiting: "Warten auf eingehende Nachrichten", detail_email: "E-Mail-Details", copied: "E-Mail kopiert", input_placeholder: "Benutzernamen eingeben", err_len: "Benutzername muss", chars: "Zeichen lang sein", err_title: "Fehler", back_to_inbox: "Zurück", lbl_from: "Von:", lbl_subject: "Betreff:", lbl_time: "Zeit:", netflix_title: "Wählen Sie Ihren Bedarf", netflix_otp: "OTP-Code", netflix_hh: "TV aktualisieren", back_home: "Zurück zur Startseite" },
-            ru: { title: "Ваш Временный Email", refresh: "Обновить", new: "Новый", delete: "Удалить", create_title: "Создайте свой Temp Mail", cancel: "Отмена", no_msg: "Нет сообщений", waiting: "Ожидание сообщений", detail_email: "Детали Email", copied: "Email скопирован", input_placeholder: "Введите имя пользователя", err_len: "Имя пользователя должно содержать", chars: "символов", err_title: "Ошибка", back_to_inbox: "Назад", lbl_from: "От:", lbl_subject: "Тема:", lbl_time: "Время:", netflix_title: "Выберите необходимость", netflix_otp: "Код OTP", netflix_hh: "Обновить ТВ", back_home: "На главную" },
-            hi: { title: "आपका अस्थायी ईमेल पता", refresh: "ताज़ा करें", new: "नया", delete: "हटाएं", create_title: "अपना खुद का टेम्प मेल बनाएं", cancel: "रद्द करें", no_msg: "कोई संदेश नहीं", waiting: "संदेशों की प्रतीक्षा है", detail_email: "ईमेल विवरण", copied: "ईमेल कॉपी किया गया", input_placeholder: "उपयोगकर्ता नाम दर्ज करें", err_len: "उपयोगकर्ता नाम", chars: "अक्षर का होना चाहिए", err_title: "त्रुटि", back_to_inbox: "वापस", lbl_from: "से:", lbl_subject: "विषय:", lbl_time: "समय:", netflix_title: "अपनी आवश्यकता चुनें", netflix_otp: "OTP कोड", netflix_hh: "टीवी अपडेट करें", back_home: "होम पर वापस" },
-            pt: { title: "Seu endereço de e-mail temporário", refresh: "Atualizar", new: "Novo", delete: "Excluir", create_title: "Crie seu próprio Temp Mail", cancel: "Cancelar", no_msg: "Sem mensagens", waiting: "Aguardando mensagens", detail_email: "Detalhes do e-mail", copied: "E-mail copiado", input_placeholder: "Digite o nome de usuário", err_len: "O nome de usuário deve ter", chars: "caracteres", err_title: "Erro", back_to_inbox: "Voltar", lbl_from: "De:", lbl_subject: "Assunto:", lbl_time: "Tempo:", netflix_title: "Escolha sua necessidade", netflix_otp: "Código OTP", netflix_hh: "Atualizar TV", back_home: "Voltar ao Início" },
-            it: { title: "Il tuo indirizzo email temporaneo", refresh: "Aggiorna", new: "Nuovo", delete: "Elimina", create_title: "Crea la tua Temp Mail", cancel: "Annulla", no_msg: "Nessun messaggio", waiting: "In attesa di messaggi", detail_email: "Dettagli Email", copied: "Email copiata", input_placeholder: "Inserisci l'username", err_len: "L'username deve avere", chars: "caratteri", err_title: "Errore", back_to_inbox: "Indietro", lbl_from: "Da:", lbl_subject: "Oggetto:", lbl_time: "Tempo:", netflix_title: "Scegli la tua necessità", netflix_otp: "Codice OTP", netflix_hh: "Aggiorna TV", back_home: "Torna alla Home" },
-            tr: { title: "Geçici E-posta Adresiniz", refresh: "Yenile", new: "Yeni", delete: "Sil", create_title: "Kendi geçici e-postanızı oluşturun", cancel: "İptal", no_msg: "Mesaj Yok", waiting: "Gelen mesajlar bekleniyor", detail_email: "E-posta Detayları", copied: "E-posta Kopyalandı", input_placeholder: "Kullanıcı adı girin", err_len: "Kullanıcı adı", chars: "karakter olmalıdır", err_title: "Hata", back_to_inbox: "Geri", lbl_from: "Kimden:", lbl_subject: "Konu:", lbl_time: "Zaman:", netflix_title: "İhtiyacınızı seçin", netflix_otp: "OTP Kodu", netflix_hh: "TV Güncelle", back_home: "Ana Sayfaya Dön" },
-            pl: { title: "Twój tymczasowy adres e-mail", refresh: "Odśwież", new: "Nowy", delete: "Usuń", create_title: "Utwórz własny Temp Mail", cancel: "Anuluj", no_msg: "Brak wiadomości", waiting: "Oczekiwanie na wiadomości", detail_email: "Szczegóły e-maila", copied: "Skopiowano e-mail", input_placeholder: "Wprowadź nazwę użytkownika", err_len: "Nazwa użytkownika musi mieć", chars: "znaków", err_title: "Błąd", back_to_inbox: "Wróć", lbl_from: "Od:", lbl_subject: "Temat:", lbl_time: "Czas:", netflix_title: "Wybierz swoją potrzebę", netflix_otp: "Kod OTP", netflix_hh: "Zaktualizuj TV", back_home: "Powrót do strony głównej" },
-            no: { title: "Din midlertidige e-postadresse", refresh: "Oppdater", new: "Ny", delete: "Slett", create_title: "Lag din egen Temp Mail", cancel: "Avbryt", no_msg: "Ingen meldinger", waiting: "Venter på innkommende meldinger", detail_email: "E-postdetaljer", copied: "E-post kopiert", input_placeholder: "Skriv inn brukernavn", err_len: "Brukernavnet må være", chars: "tegn", err_title: "Feil", back_to_inbox: "Tilbake", lbl_from: "Fra:", lbl_subject: "Emne:", lbl_time: "Tid:", netflix_title: "Velg ditt behov", netflix_otp: "OTP Kode", netflix_hh: "Oppdater TV", back_home: "Tilbake til Hjem" },
-            vi: { title: "Địa chỉ Email Tạm thời của Bạn", refresh: "Làm mới", new: "Mới", delete: "Xóa", create_title: "Tạo Temp Mail của riêng bạn", cancel: "Hủy", no_msg: "Không có tin nhắn", waiting: "Đang chờ tin nhắn đến", detail_email: "Chi tiết Email", copied: "Đã sao chép Email", input_placeholder: "Nhập tên người dùng", err_len: "Tên người dùng phải có", chars: "ký tự", err_title: "Lỗi", back_to_inbox: "Quay lại", lbl_from: "Từ:", lbl_subject: "Chủ đề:", lbl_time: "Thời gian:", netflix_title: "Chọn nhu cầu của bạn", netflix_otp: "Mã OTP", netflix_hh: "Cập nhật TV", back_home: "Trang chủ" },
-            ja: { title: "一時的なメールアドレス", refresh: "更新", new: "新規", delete: "削除", create_title: "カスタムメールを作成", cancel: "キャンセル", no_msg: "メッセージなし", waiting: "受信メッセージを待機中", detail_email: "メールの詳細", copied: "メールIDをコピーしました", input_placeholder: "ユーザー名を入力", err_len: "ユーザー名は", chars: "文字である必要があります", err_title: "エラー", back_to_inbox: "戻る", lbl_from: "送信元:", lbl_subject: "件名:", lbl_time: "時間:", netflix_title: "目的を選択", netflix_otp: "OTP コード", netflix_hh: "TVを更新", back_home: "ホームへ戻る" },
-            zh: { title: "您的临时电子邮件地址", refresh: "刷新", new: "新建", delete: "删除", create_title: "创建自定义邮箱", cancel: "取消", no_msg: "没有消息", waiting: "等待接收消息", detail_email: "邮件详情", copied: "邮箱ID已复制", input_placeholder: "输入用户名", err_len: "用户名必须是", chars: "个字符", err_title: "错误", back_to_inbox: "返回", lbl_from: "发件人:", lbl_subject: "主题:", lbl_time: "时间:", netflix_title: "选择您的需求", netflix_otp: "OTP 代码", netflix_hh: "更新电视", back_home: "返回首页" },
-            ko: { title: "임시 이메일 주소", refresh: "새로고침", new: "새로 만들기", delete: "삭제", create_title: "맞춤 이메일 만들기", cancel: "취소", no_msg: "메시지 없음", waiting: "수신 메시지 대기 중", detail_email: "이메일 세부정보", copied: "이메일 ID가 복사되었습니다", input_placeholder: "사용자 이름 입력", err_len: "사용자 이름은", chars: "자여야 합니다", err_title: "오류", back_to_inbox: "뒤로", lbl_from: "보낸 사람:", lbl_subject: "제목:", lbl_time: "시간:", netflix_title: "필요한 항목 선택", netflix_otp: "OTP 코드", netflix_hh: "TV 업데이트", back_home: "홈으로 돌아가기" },
-            nl: { title: "Uw Tijdelijke E-mailadres", refresh: "Vernieuwen", new: "Nieuw", delete: "Verwijderen", create_title: "Maak Aangepaste E-mail", cancel: "Annuleren", no_msg: "Geen Berichten", waiting: "Wachten op Inkomende Berichten", detail_email: "E-mail Details", copied: "E-mail ID Gekopieerd", input_placeholder: "Voer Gebruikersnaam In", err_len: "Gebruikersnaam moet", chars: "tekens lang zijn", err_title: "Fout", back_to_inbox: "Terug", lbl_from: "Van:", lbl_subject: "Onderwerp:", lbl_time: "Tijd:", netflix_title: "Kies uw behoefte", netflix_otp: "OTP Code", netflix_hh: "TV Bijwerken", back_home: "Terug naar Home" },
-            sv: { title: "Din Tillfälliga E-postadress", refresh: "Uppdatera", new: "Ny", delete: "Radera", create_title: "Skapa Anpassad E-post", cancel: "Avbryt", no_msg: "Inga Meddelanden", waiting: "Väntar på Inkommande Meddelanden", detail_email: "E-postdetaljer", copied: "E-post-ID Kopierat", input_placeholder: "Ange Användarnamn", err_len: "Användarnamn måste vara", chars: "tecken", err_title: "Fel", back_to_inbox: "Tillbaka", lbl_from: "Från:", lbl_subject: "Ämne:", lbl_time: "Tid:", netflix_title: "Välj ditt behov", netflix_otp: "OTP Kod", netflix_hh: "Uppdatera TV", back_home: "Tillbaka till Hem" },
-            th: { title: "ที่อยู่อีเมลชั่วคราวของคุณ", refresh: "รีเฟรช", new: "ใหม่", delete: "ลบ", create_title: "สร้างอีเมลที่กำหนดเอง", cancel: "ยกเลิก", no_msg: "ไม่มีข้อความ", waiting: "กำลังรอข้อความเข้า", detail_email: "รายละเอียดอีเมล", copied: "คัดลอก ID อีเมลแล้ว", input_placeholder: "ป้อนชื่อผู้ใช้", err_len: "ชื่อผู้ใช้ต้องมี", chars: "ตัวอักษร", err_title: "ข้อผิดพลาด", back_to_inbox: "กลับ", lbl_from: "จาก:", lbl_subject: "หัวข้อ:", lbl_time: "เวลา:", netflix_title: "เลือกความต้องการของคุณ", netflix_otp: "รหัส OTP", netflix_hh: "อัปเดตทีวี", back_home: "กลับสู่หน้าแรก" }
-        };
-
-        function toggleLangMenu() { document.getElementById('langMenu').classList.toggle('hidden'); }
-        function setLang(langCode, langName) {
-            currentLangCode = langCode;
-            document.getElementById('currentLangText').innerText = langName;
-            document.getElementById('langMenu').classList.add('hidden');
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if(i18n[langCode] && i18n[langCode][key]) el.innerText = i18n[langCode][key];
-            });
-            if(currentMessages.length === 0 && document.getElementById('inbox')) {
-                document.getElementById('inbox').innerHTML = `<div class="flex-1 flex flex-col justify-center items-center opacity-50 m-auto h-full min-h-[250px]"><i class="fas fa-circle-notch fa-spin text-3xl sm:text-4xl mb-4 text-[var(--accent-1)]"></i><p class="font-bold text-sm sm:text-lg" data-i18n="no_msg">${i18n[langCode].no_msg}</p><p class="text-xs sm:text-sm text-center mt-1" data-i18n="waiting">${i18n[langCode].waiting}</p></div>`;
-            }
-        }
-
-        // 🟢 JALANKAN TRANSLATE OTOMATIS SAAT WEB PERTAMA KALI DIBUKA 🟢
-        window.addEventListener('DOMContentLoaded', () => {
-            const langNames = { ar:'Arabic', zh:'Chinese', nl:'Dutch', en:'English', fr:'French', de:'German', hi:'Hindi', id:'Indonesian', it:'Italian', ja:'Japanese', ko:'Korean', no:'Norwegian', pl:'Polish', pt:'Portuguese', ru:'Russian', es:'Spanish', sv:'Swedish', th:'Thai', tr:'Turkish', vi:'Vietnamese' };
-            setLang(currentLangCode, langNames[currentLangCode] || 'English');
-        });
-        
-        // 🟢 JS BUAT DROPDOWN NEUMORPHISM & BUKA TUTUP DI LUAR 🟢
-        document.addEventListener('click', (e) => { 
-            // Tutup menu bahasa
-            if (!document.getElementById('langDropdownContainer')?.contains(e.target)) document.getElementById('langMenu')?.classList.add('hidden'); 
-            
-            // Tutup menu custom user frontend
-            const btn = document.getElementById('customDropdownBtn');
-            const menu = document.getElementById('customDropdownMenu');
-            if (btn && menu && !btn.contains(e.target) && !menu.contains(e.target)) menu.classList.add('hidden');
-        });
-
-        function toggleCustomDropdown() {
-            document.getElementById('customDropdownMenu').classList.toggle('hidden');
-        }
-
-        function selectCustomDomain(domain) {
-            document.getElementById('customDropdownLabel').innerText = domain;
-            document.getElementById('domainSelect').value = domain; 
-            document.getElementById('customDropdownMenu').classList.add('hidden');
-        }
-
-        function showQR() {
-            // 🟢 LOGIKA QR BERWARNA (Item buat Dark Mode, Putih buat Light Mode) 🟢
-            const primColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-1').trim().replace('#', '');
-            let bgColor = 'ffffff'; // Default putih
-            if (document.documentElement.getAttribute('data-theme') === 'dark') bgColor = '000000'; // Item pas darkmode
-            
-            document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${baseUrl}/${activeEmail}&color=${primColor}&bgcolor=${bgColor}`;
-            document.getElementById('qrEmailText').innerText = activeEmail;
-            document.getElementById('qrOverlay').classList.remove('hidden');
-            setTimeout(() => { document.getElementById('qrOverlay').classList.remove('opacity-0'); document.getElementById('qrContent').classList.remove('scale-95'); }, 10);
-        }
-
-        function closeQR(e) {
-            if(e) e.stopPropagation();
-            document.getElementById('qrOverlay').classList.add('opacity-0'); 
-            document.getElementById('qrContent').classList.add('scale-95');
-            setTimeout(() => { document.getElementById('qrOverlay').classList.add('hidden'); }, 150);
-        }
-        
-
-        
-        function openMessage(index) {
-            const m = currentMessages[index];
-            if(!m) return;
-            
-            let contentHtml = "";
-            if (m.html) { 
-                contentHtml = m.html; 
-            } else if (m.text) { 
-                contentHtml = `<pre class="whitespace-pre-wrap font-sans text-sm">${m.text}</pre>`; 
-            } else if (m.body) { 
-                contentHtml = String(m.body).includes('<') ? m.body : `<pre class="whitespace-pre-wrap font-sans text-sm">${m.body}</pre>`; 
-            } else if (m.content) { 
-                contentHtml = m.content; 
-            } else { 
-                contentHtml = `<i class="text-red-500 font-bold">Pesan kosong / error render.</i>`; 
-            }
-            
-            // Masukin data ke Kotak Baca (Inline)
-            // Format nama pengirim: email@domain.com (Nama)
-            let senderDisplay = m.from || 'Tidak diketahui';
-            const matchFormat = senderDisplay.match(/(.*)<(.*)>/);
-            if (matchFormat) {
-                let namaSender = matchFormat[1].replace(/"/g, '').trim();
-                let emailSender = matchFormat[2].trim();
-                senderDisplay = namaSender ? `${emailSender} (${namaSender})` : emailSender;
-            }
-
-            document.getElementById('detailSenderName').innerText = senderDisplay;
-            document.getElementById('detailSubject').innerText = m.subject || '(Tidak ada subjek)';
-            document.getElementById('detailDate').innerText = new Date(m.date).toLocaleString('id-ID');
-            document.getElementById('detailHtmlContent').innerHTML = contentHtml;
-            
-            // Transisi Neumorphism
-            const listObj = document.getElementById('inboxListView');
-            const detailObj = document.getElementById('emailDetailView');
-            
-            if(listObj && detailObj) {
-                listObj.classList.add('hidden');
-                listObj.classList.remove('block');
-                
-                detailObj.classList.remove('hidden');
-                detailObj.classList.add('flex');
-            }
-            
-            // Stop auto-refresh biar layar nggak kedip pas baca
-            if (typeof stopSmartFetch === 'function') stopSmartFetch();
-        }
-
-        function closeEmailDetail() {
-            const listObj = document.getElementById('inboxListView');
-            const detailObj = document.getElementById('emailDetailView');
-            if(listObj && detailObj) {
-                detailObj.classList.add('hidden');
-                detailObj.classList.remove('flex');
-                listObj.classList.remove('hidden');
-                listObj.classList.add('flex'); // Pake flex biar center-nya tetep dapet
-            }
-            if (typeof startSmartFetch === 'function') startSmartFetch();
-        }
-
-        function toggleNewMode() {
-            document.getElementById('view-mode').classList.toggle('hidden');
-            document.getElementById('create-mode').classList.toggle('hidden');
-            
-            const menu = document.getElementById('customDropdownMenu');
-            const hiddenInput = document.getElementById('domainSelect');
-            const label = document.getElementById('customDropdownLabel');
-            
-            if(menu && menu.innerHTML.trim() === '') { 
-                sysDomains.forEach(d => { 
-                    menu.innerHTML += `<div onclick="selectCustomDomain('${d}')" class="px-4 py-3 rounded-xl cursor-pointer text-sm sm:text-base font-semibold hover:bg-[var(--accent-1)] hover:text-white transition-all duration-200">${d}</div>`; 
-                }); 
-                const initialDomain = sysDomains.includes(defaultDomain) ? defaultDomain : sysDomains[0];
-                if(label) label.innerText = initialDomain;
-                if(hiddenInput) hiddenInput.value = initialDomain;
-            }
-        }
-
-        // 🚀 FUNGSI SENSOR: Anti-Cache Cloudflare & Anti-Refresh!
-        async function checkRateLimit() {
-            try {
-                // 🔥 ANTI-CACHE: Paksa minta data fresh ke server tiap kali klik!
-                const res = await fetch('/api/check-limit?t=' + new Date().getTime(), {
-                    cache: 'no-store',
-                    headers: { 'Cache-Control': 'no-cache' }
+            document.querySelectorAll('.order-btn').forEach(btn => {
+                btn.addEventListener('click', e => {
+                    e.preventDefault();
+                    const id = e.currentTarget.getAttribute('data-product-id');
+                    const prod = products.find(p => p.id === id);
+                    if (prod) openWhatsAppWithOrder(prod);
                 });
-                const data = await res.json(); 
-
-                if (res.status === 429) {
-                    const unitMap = { 'menit': 'Minute', 'jam': 'Hour', 'hari': 'Day' };
-                    let u = unitMap[data.unit] || 'Hour';
-                    if (parseInt(data.duration) > 1) u += 's';
-
-                    // 🔥 KASIH AWAIT: Biar halaman tertahan sampe user klik "Understood"
-                    await Swal.fire({
-                        title: 'Limit Reached!',
-                        html: `TMAIL limits new email creation.<br><br><div class="neu-inset p-3 rounded-xl bg-orange-500/10 text-xs font-bold uppercase tracking-widest text-orange-600">Quota: ${data.max} Email per ${data.duration} ${u}</div><br>Please wait a moment before trying again.`,
-                        icon: 'warning',
-                        confirmButtonText: 'Understood',
-                        background: 'var(--bg)',
-                        color: 'var(--text)',
-                        customClass: { popup: 'neu-swal-popup', confirmButton: 'neu-swal-button' }
-                    });
-                    return false;
-                }
-                return true;
-            } catch(e) { 
-                console.error("Rate limit check failed:", e);
-                return true; 
-            }
+            });
         }
 
-        async function createCustom() {
-            try {
-                // 🛑 CEK SENSOR DULU SEBELUM BIKIN EMAIL
-                const isAllowed = await checkRateLimit();
-                if (!isAllowed) return;
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                currentFilter = button.getAttribute('data-filter');
+                renderProducts(currentFilter, currentSearchTerm);
+            });
+        });
 
-                const user = document.getElementById('customUser').value.toLowerCase().trim();
-                const dom = document.getElementById('domainSelect').value;
-                const rawForbidden = "".toLowerCase();
-                const forbiddenList = rawForbidden.split(',').map(item => item.trim()).filter(item => item !== "");
+        searchInput.addEventListener('input', function() {
+            currentSearchTerm = this.value.toLowerCase();
+            renderProducts(currentFilter, currentSearchTerm);
+        });
 
-                if (!user || user.length < 3) {
-                    Swal.fire({ title: 'Waduh!', text: 'Username minimal ' + 3 + ' karakter bro.', icon: 'warning', background: 'var(--bg)', color: 'var(--text)', customClass: { popup: 'neu-swal-popup', confirmButton: 'neu-swal-button' } });
-                    return; 
-                }
+        mobileMenuBtn.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            mobileMenuBtn.innerHTML = nav.classList.contains('active')
+                ? '<i class="fas fa-times"></i>'
+                : '<i class="fas fa-bars"></i>';
+        });
 
-                if (forbiddenList.includes(user)) {
-                    Swal.fire({ title: 'ID Dilarang!', text: "Nama '" + user + "' dilarang oleh Admin.", icon: 'error', confirmButtonText: 'Oke', background: 'var(--bg)', color: 'var(--text)', customClass: { popup: 'neu-swal-popup', confirmButton: 'neu-swal-button' } });
-                    return; 
-                }
-
-                updateUI(user + '@' + dom);
-                toggleNewMode(); 
-            } catch (err) { console.error("Gagal proses email custom:", err); }
-        }
-
-        // Jangan lupa diubah jadi async function ya!
-        async function generateNew() {
-            try {
-                // 🛑 CEK SENSOR DULU SEBELUM GENERATE
-                const isAllowed = await checkRateLimit();
-                if (!isAllowed) return;
-
-                const rawForbidden = "".toLowerCase();
-                const forbiddenList = rawForbidden.split(',').map(item => item.trim()).filter(item => item !== "");
-                const names = ['alex', 'chris', 'john', 'mike', 'david', 'sarah', 'emily', 'jess', 'luke', 'ryan', 'zack', 'budi', 'joko', 'tina', 'andi'];
-                const words = ['pro', 'cool', 'max', 'sky', 'blue', 'star', 'dev', 'app', 'web', 'net', 'hub', 'zone'];
-                const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-                
-                let rndName;
-                let attempts = 0; 
-                do {
-                    let uniqueStr = '';
-                    for(let i=0; i<3; i++) uniqueStr += chars.charAt(Math.floor(Math.random() * chars.length));
-                    rndName = names[Math.floor(Math.random()*names.length)] + words[Math.floor(Math.random()*words.length)] + Math.floor(Math.random()*999) + uniqueStr;
-                    attempts++;
-                } while (forbiddenList.includes(rndName.toLowerCase()) && attempts < 15);
-
-                const dDom = (typeof defaultDomain !== 'undefined') ? defaultDomain : "";
-                const listDom = (typeof sysDomains !== 'undefined') ? sysDomains : (typeof activeDomains !== 'undefined' ? activeDomains : []);
-                let targetDomain = dDom !== "" ? dDom : (listDom && listDom.length > 0 ? listDom[Math.floor(Math.random() * listDom.length)] : "sintaks.biz.id");
-                
-                updateUI(rndName.toLowerCase() + "@" + targetDomain);
-            } catch (err) { console.error("Gagal bikin email otomatis:", err); }
-        }
-        // 🚀 UPDATE: Tombol acak sekarang lapor Satpam dulu!
-        async function generateCustomRandom() {
-            // 🛑 CEK SENSOR DULU
-            const isAllowed = await checkRateLimit();
-            if (!isAllowed) return;
-
-            const domain = document.getElementById('domainSelect').value;
-            const names = ['alex', 'chris', 'john', 'mike', 'david', 'sarah', 'emily', 'jess', 'luke', 'ryan', 'zack', 'budi', 'joko', 'tina', 'andi'];
-            const words = ['pro', 'cool', 'max', 'sky', 'blue', 'star', 'dev', 'app', 'web', 'net', 'hub', 'zone'];
-            const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-            let rndStr = '';
-            for(let i = 0; i < 3; i++) rndStr += chars.charAt(Math.floor(Math.random() * chars.length));
-            const rndName = names[Math.floor(Math.random() * names.length)] + words[Math.floor(Math.random() * words.length)] + Math.floor(Math.random() * 999) + rndStr;
-            
-            updateUI(rndName.toLowerCase() + '@' + domain);
-            toggleNewMode();
-        }
-
-        // Jangan lupa diubah jadi async function ya!
-        async function generateNew() {
-            try {
-                // 🛑 CEK SENSOR DULU SEBELUM GENERATE
-                const isAllowed = await checkRateLimit();
-                if (!isAllowed) return;
-
-                const rawForbidden = "".toLowerCase();
-                const forbiddenList = rawForbidden.split(',').map(item => item.trim()).filter(item => item !== "");
-                const names = ['alex', 'chris', 'john', 'mike', 'david', 'sarah', 'emily', 'jess', 'luke', 'ryan', 'zack', 'budi', 'joko', 'tina', 'andi'];
-                const words = ['pro', 'cool', 'max', 'sky', 'blue', 'star', 'dev', 'app', 'web', 'net', 'hub', 'zone'];
-                const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-                
-                let rndName;
-                let attempts = 0; 
-                do {
-                    let uniqueStr = '';
-                    for(let i=0; i<3; i++) uniqueStr += chars.charAt(Math.floor(Math.random() * chars.length));
-                    rndName = names[Math.floor(Math.random()*names.length)] + words[Math.floor(Math.random()*words.length)] + Math.floor(Math.random()*999) + uniqueStr;
-                    attempts++;
-                } while (forbiddenList.includes(rndName.toLowerCase()) && attempts < 15);
-
-                const dDom = (typeof defaultDomain !== 'undefined') ? defaultDomain : "";
-                const listDom = (typeof sysDomains !== 'undefined') ? sysDomains : (typeof activeDomains !== 'undefined' ? activeDomains : []);
-                let targetDomain = dDom !== "" ? dDom : (listDom && listDom.length > 0 ? listDom[Math.floor(Math.random() * listDom.length)] : "sintaks.biz.id");
-                
-                updateUI(rndName.toLowerCase() + "@" + targetDomain);
-            } catch (err) { console.error("Gagal bikin email otomatis:", err); }
-        }
-
-        async function updateUI(email) {
-    // 🔥 START LOADING BAR (Biar makin sinematik)
-    if(window.triggerLoading) triggerLoading(); 
-
-    activeEmail = email.toLowerCase().trim();
-    document.getElementById('currentEmail').innerText = activeEmail;
-    window.history.pushState({}, "", "/" + activeEmail);
-    currentMessages = [];
-    firstLoadDone = false; 
-    
-    try {
-        const res = await fetch('/api/check-managed/' + encodeURIComponent(activeEmail));
-        const status = await res.json();
-        
-        if (status.isManaged && !status.isAdmin) {
-            showNetflixGate(activeEmail);
-            if(window.finishLoading) finishLoading(); // ✅ SELESAI
-            return; 
-        }
-    } catch (e) { console.log("Managed check fail"); }
-
-    fetchInbox();
-}
-
-    async function fetchInbox() {
-            if (!activeEmail) return;
-            try {
-                // 🛑 TAMBAHAN: Parameter buat deteksi ini request pertama (Biar terminal gak nyepam)
-                const isInit = !window.firstLoadDone;
-                const initParam = isInit ? "&init=1" : "";
-                
-                const res = await fetch("/api/inbox/" + encodeURIComponent(activeEmail) + "?t=" + new Date().getTime() + initParam, { cache: "no-store", headers: { 'Cache-Control': 'no-cache' } });
-                
-                // 🛑 CEK JIKA KENA BANNED (403) ATAU RATE LIMIT (429)
-                if (res.status === 403 || res.status === 429) {
-                    if (typeof stopSmartFetch === 'function') stopSmartFetch(); // Matiin mesin fetch
-                    
-                    const isRateLimit = res.status === 429;
-                    const titleText = isRateLimit ? 'Limit Tercapai!' : 'Akses Diblokir!';
-                    const descText = isRateLimit ? 'Terlalu banyak generate email. Harap tunggu sebentar.' : 'IP Anda telah diblokir secara permanen oleh sistem.';
-                    
-                    // 🔥 OPERASI SENYAP: Hapus semua isi body dan ganti layar gelap total 🔥
-                    document.body.innerHTML = `
-                    <div class="fixed inset-0 bg-[#0f1113] z-[999999] flex justify-center items-center backdrop-blur-xl">
-                        <div class="neu p-8 sm:p-12 flex flex-col justify-center items-center text-center max-w-sm w-full mx-4 rounded-[40px] border border-red-500/10 shadow-[0_0_80px_rgba(239,68,68,0.15)]">
-                            
-                            <div class="mb-8 relative">
-                                <div class="absolute inset-0 blur-2xl opacity-20 ${isRateLimit ? 'bg-orange-500' : 'bg-red-500'}"></div>
-                                <i class="fas ${isRateLimit ? 'fa-stopwatch text-orange-500' : 'fa-ban text-red-500'} text-7xl relative z-10 drop-shadow-2xl"></i>
-                            </div>
-                            
-                            <h1 class="font-black text-2xl sm:text-3xl ${isRateLimit ? 'text-orange-500' : 'text-red-500'} tracking-tighter mb-3">${titleText}</h1>
-                            
-                            <p class="text-sm sm:text-base text-gray-400 font-medium leading-relaxed mb-8">${descText}</p>
-                            
-                            <div class="px-5 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em]">
-                                TMAIL Security Layer Active
-                            </div>
-                        </div>
-                    </div>`;
-                    
-                    // Kasih style dikit biar body-nya beneran item pekat
-                    document.body.style.backgroundColor = "#0f1113";
-                    document.body.style.overflow = "hidden";
-                    
-                    return; // Stop eksekusi script lain!
-                }
-
-                const emails = await res.json();
-                const container = document.getElementById('inbox');
-
-                if(!emails || emails.length === 0) {
-                    currentMessages = [];
-                    window.firstLoadDone = true; 
-                    container.innerHTML = `<div class="flex-1 flex flex-col justify-center items-center opacity-50 m-auto h-full min-h-[250px]"><i class="fas fa-circle-notch fa-spin text-3xl sm:text-4xl mb-4 text-[var(--accent-1)]"></i><p class="font-bold text-sm sm:text-lg" data-i18n="no_msg">${i18n[currentLangCode].no_msg}</p><p class="text-xs sm:text-sm text-center mt-1" data-i18n="waiting">${i18n[currentLangCode].waiting}</p></div>`;
-                } else {
-                    const isNewEmail = window.firstLoadDone && (
-                        emails.length > currentMessages.length || 
-                        (currentMessages.length > 0 && emails[0].date !== currentMessages[0].date)
-                    );
-
-                    if (isNewEmail) {
-                        showToast(currentLangCode === 'id' ? "Email Baru Masuk!" : "New Email Arrived!", "Inbox");
-                        if (soundEnabled) {
-                            const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
-                            audio.play().catch(e => console.warn("Browser nge-blokir suara auto-play."));
-                        }
-                    }
-                    
-                    currentMessages = emails;
-                    window.firstLoadDone = true; 
-                    
-                    let htmlList = "";
-                    emails.forEach((m, index) => {
-                        htmlList += `<div onclick="openMessage(${index})" class="neu p-4 sm:p-5 mb-3 flex flex-col md:flex-row justify-between md:items-center gap-2 border-l-4 border-[var(--accent-1)] cursor-pointer hover:scale-[1.01] transition-transform"><div class="flex-1 overflow-hidden"><div class="font-bold text-sm sm:text-base truncate">${escapeHTML(m.from)}</div><div class="text-xs sm:text-sm opacity-80 truncate">${escapeHTML(m.subject) || 'Buka pesan...'}</div></div><div class="text-[10px] sm:text-xs font-bold text-[var(--accent-1)] shrink-0">${new Date(m.date).toLocaleTimeString()}</div></div>`;
-                    });
-                    container.innerHTML = htmlList;
-                }
-            } catch(e) {
-                console.error("Gagal load inbox:", e);
-            }
-        }
-
-        function copyItem(type) {
-            navigator.clipboard.writeText(activeEmail);
-            showToast(currentLangCode === 'id' ? "Email ID Disalin ke Clipboard" : "Email ID Copied to Clipboard");
-            
-            // 🔥 Lapor pas user nge-copy email
-            sendTrafficLog("Copy Email", activeEmail);
-        }
-
-// --- FUNGSI PELAPOR KE DATABASE D1 ---
-        async function sendTrafficLog(action, detail) {
-            try {
-                await fetch('/api/log-action', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: action, detail: detail })
-                });
-            } catch(e) {}
-        }
-
-        // Paste ini di bawah fungsi sendTrafficLog ya Bos:
-
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text);
-    
-    // Lapor Admin pake cara penggabungan teks biasa biar gak merah/error backtick
-    sendTrafficLog("Copy Action", "User menyalin kode/link Netflix: " + text);
-    
-    showToast("Berhasil disalin!", "Success");
-}
-
-        // Sensor deteksi user pindah tab (Biar server gak jebol narik data terus)
-        document.addEventListener("visibilitychange", () => {
-            if (document.hidden) {
-                stopSmartFetch(); 
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 90) {
+                header.classList.add('scrolled');
             } else {
-                const gate = document.getElementById('captchaGate');
-                if(!gate || gate.style.display === 'none') {
-                    if (activeEmail) fetchInbox(); 
-                    startSmartFetch(); 
-                }
+                header.classList.remove('scrolled');
             }
         });
 
-        // 4. TRIGGER AWAL (THE GATED START)
-        const isCaptchaEnabled = false;
-        if (!isCaptchaEnabled) {
-            window.initTMailApp(); 
-        } else {
-            const gate = document.getElementById('captchaGate');
-            if(gate) gate.style.display = 'flex';
-        }
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
 
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            useLocalAssetImages();
+            renderHeroIconGrid();
+            renderProducts();
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.feature-card, .product-card');
+                elements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.style.opacity = "1";
+                        element.style.transform = "translateY(0)";
+                    }
+                });
+            };
+
+            document.querySelectorAll('.feature-card, .product-card').forEach(element => {
+                element.style.opacity = "0";
+                element.style.transform = "translateY(12px)";
+                element.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+            });
+
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll();
+        });
+
+        let heroGridResizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(heroGridResizeTimer);
+            heroGridResizeTimer = setTimeout(renderHeroIconGrid, 140);
+        });
     </script>
-
-    
-
-
-    
 </body>
 </html>
-    
